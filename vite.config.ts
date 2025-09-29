@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/VoxelForge/", // Reemplaza "VoxelForge" con el nombre exacto de tu repositorio
+  base: "/", // Cambiado para dominio personalizado
   build: {
     outDir: "dist",
     assetsDir: "assets",

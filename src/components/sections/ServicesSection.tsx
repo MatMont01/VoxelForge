@@ -195,22 +195,22 @@ export const ServicesSection = () => {
                 )`,
                 backdropFilter: "blur(20px)",
               }}
-              onMouseEnter={(e) => {
-                gsap.to(e.currentTarget, {
-                  scale: 1.02,
-                  rotationY: 5,
-                  duration: 0.3,
-                  ease: "power2.out",
-                });
-              }}
-              onMouseLeave={(e) => {
-                gsap.to(e.currentTarget, {
-                  scale: 1,
-                  rotationY: 0,
-                  duration: 0.3,
-                  ease: "power2.out",
-                });
-              }}
+              // onMouseEnter={(e) => {
+              //   gsap.to(e.currentTarget, {
+              //     scale: 1.02,
+              //     rotationY: 5,
+              //     duration: 0.3,
+              //     ease: "power2.out",
+              //   });
+              // }}
+              // onMouseLeave={(e) => {
+              //   gsap.to(e.currentTarget, {
+              //     scale: 1,
+              //     rotationY: 0,
+              //     duration: 0.3,
+              //     ease: "power2.out",
+              //   });
+              // }}
             >
               {/* Badge */}
               <div className="absolute top-4 right-4">
@@ -257,7 +257,9 @@ export const ServicesSection = () => {
                   variant="outline"
                   size="sm"
                   className="w-full group-hover:bg-[#ea9216] group-hover:text-white group-hover:border-[#ea9216] transition-all duration-300"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     console.log("Botón Solicitar Cotización clickeado!");
                     alert("Botón funcionando - redirigiendo a contacto");
                     scrollToSection("#contact");
@@ -410,7 +412,9 @@ export const ServicesSection = () => {
               <Button
                 size="lg"
                 className="text-lg px-8 py-4"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
                   console.log(
                     "Botón Solicitar Cotización Personalizada clickeado!"
                   );
