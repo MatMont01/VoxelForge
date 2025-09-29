@@ -257,13 +257,8 @@ export const ServicesSection = () => {
                   size="sm"
                   className="w-full group-hover:bg-[#ea9216] group-hover:text-white group-hover:border-[#ea9216] transition-all duration-300"
                   onClick={() => {
-                    const contactSection = document.getElementById("contact");
-                    if (contactSection) {
-                      contactSection.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      });
-                    }
+                    const element = document.getElementById("contact");
+                    element?.scrollIntoView({ behavior: "smooth" });
                   }}
                 >
                   Solicitar Cotización
@@ -414,13 +409,8 @@ export const ServicesSection = () => {
                 size="lg"
                 className="text-lg px-8 py-4"
                 onClick={() => {
-                  const contactSection = document.getElementById("contact");
-                  if (contactSection) {
-                    contactSection.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    });
-                  }
+                  const element = document.getElementById("contact");
+                  element?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
                 Solicitar Cotización Personalizada
