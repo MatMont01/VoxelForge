@@ -40,7 +40,7 @@ function App() {
         ) : (
           <>
             <CustomCursor />
-            <Router>
+            <Router basename={import.meta.env.DEV ? "/" : "/VoxelForge"}>
               <div className="App">
                 <Routes>
                   <Route path="/" element={<HomePage />} />

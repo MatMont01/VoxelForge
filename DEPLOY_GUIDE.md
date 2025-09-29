@@ -79,6 +79,15 @@ _(Reemplaza "MatMont01" con tu nombre de usuario de GitHub)_
 
 ## 🛠️ Solución de Problemas
 
+### ✅ Página blanca después de la carga (SOLUCIONADO)
+
+- **Problema**: SPA routing no funciona en GitHub Pages
+- **Solución implementada**:
+  - ✅ Configurado `basename` dinámico en Router
+  - ✅ Añadido archivo `404.html` para redirección SPA
+  - ✅ Script de redirección en `index.html`
+  - ✅ Configuración optimizada de Vite
+
 ### Error 404 en GitHub Pages
 
 - Verifica que el nombre del repositorio en `vite.config.ts` sea exacto
@@ -86,8 +95,8 @@ _(Reemplaza "MatMont01" con tu nombre de usuario de GitHub)_
 
 ### Rutas no funcionan
 
-- Si usas React Router, las rutas pueden necesitar configuración adicional
-- GitHub Pages no soporta SPA routing por defecto
+- ✅ Ya configurado: basename dinámico para desarrollo y producción
+- ✅ Ya implementado: sistema de redirección SPA
 
 ### Imágenes no cargan
 
