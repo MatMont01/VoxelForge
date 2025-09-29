@@ -82,7 +82,7 @@ export const ServicesSection = () => {
         "Materiales premium",
         "Acabado profesional",
         "Entrega garantizada",
-        "Cotización personalizada"
+        "Cotización personalizada",
       ],
       badge: "Popular",
     },
@@ -96,7 +96,7 @@ export const ServicesSection = () => {
         "Diseño exclusivo",
         "Múltiples revisiones",
         "Archivo STL incluido",
-        "Asesoría completa"
+        "Asesoría completa",
       ],
       badge: "Premium",
     },
@@ -110,7 +110,7 @@ export const ServicesSection = () => {
         "Entrega rápida",
         "Múltiples iteraciones",
         "Consultoría incluida",
-        "Precio competitivo"
+        "Precio competitivo",
       ],
       badge: "Rápido",
     },
@@ -259,7 +259,8 @@ export const ServicesSection = () => {
                   onClick={() =>
                     window.open(
                       "https://wa.me/59167784792?text=Hola, me interesa una cotización para el servicio de " +
-                        service.title + ". ¿Podrían ayudarme con el proceso de cotización?",
+                        service.title +
+                        ". ¿Podrían ayudarme con el proceso de cotización?",
                       "_blank"
                     )
                   }
@@ -295,16 +296,17 @@ export const ServicesSection = () => {
                   ¿Cómo Cotizamos?
                 </span>
               </div>
-              
+
               <h3 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
                 Nuestro Proceso de{" "}
                 <span className="bg-gradient-to-r from-[#ea9216] to-orange-600 bg-clip-text text-transparent">
                   Cotización
                 </span>
               </h3>
-              
+
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                Cada proyecto es único, por eso personalizamos cada cotización según tus necesidades específicas
+                Cada proyecto es único, por eso personalizamos cada cotización
+                según tus necesidades específicas
               </p>
             </div>
 
@@ -318,7 +320,8 @@ export const ServicesSection = () => {
                   Envías tu Diseño
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                  Comparte con nosotros el archivo STL o el enlace del diseño que quieres imprimir
+                  Comparte con nosotros el archivo STL o el enlace del diseño
+                  que quieres imprimir
                 </p>
               </div>
 
@@ -330,7 +333,8 @@ export const ServicesSection = () => {
                   Laminamos
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                  Procesamos tu diseño para calcular tiempo de impresión y cantidad de material necesario
+                  Procesamos tu diseño para calcular tiempo de impresión y
+                  cantidad de material necesario
                 </p>
               </div>
 
@@ -342,7 +346,8 @@ export const ServicesSection = () => {
                   Consultoría
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                  Discutimos contigo el tipo de material, dureza, color y acabado que necesitas
+                  Discutimos contigo el tipo de material, dureza, color y
+                  acabado que necesitas
                 </p>
               </div>
 
@@ -354,7 +359,8 @@ export const ServicesSection = () => {
                   Precio Final
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                  Te damos el precio exacto basado en todos los factores analizados
+                  Te damos el precio exacto basado en todos los factores
+                  analizados
                 </p>
               </div>
             </div>
@@ -368,22 +374,34 @@ export const ServicesSection = () => {
                 <div className="flex items-start">
                   <div className="w-3 h-3 bg-[#ea9216] rounded-full mr-4 mt-2 flex-shrink-0"></div>
                   <div>
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-1">Tiempo de Impresión</h5>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">Complejidad y tamaño del diseño</p>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-1">
+                      Tiempo de Impresión
+                    </h5>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      Complejidad y tamaño del diseño
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <div className="w-3 h-3 bg-[#ea9216] rounded-full mr-4 mt-2 flex-shrink-0"></div>
                   <div>
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-1">Material Consumido</h5>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">Cantidad de filamento necesario</p>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-1">
+                      Material Consumido
+                    </h5>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      Cantidad de filamento necesario
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <div className="w-3 h-3 bg-[#ea9216] rounded-full mr-4 mt-2 flex-shrink-0"></div>
                   <div>
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-1">Tipo de Material</h5>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">PLA, PETG, ABS, etc.</p>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-1">
+                      Tipo de Material
+                    </h5>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      PLA, PETG, ABS, etc.
+                    </p>
                   </div>
                 </div>
               </div>
