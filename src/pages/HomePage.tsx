@@ -1,6 +1,7 @@
 import { Header } from "../components/layout/NewHeader";
 import { Footer } from "../components/layout/Footer";
 import { HeroSection } from "../components/sections/NewHeroSection";
+import { VoxelMeaningSection } from "../components/sections/VoxelMeaningSection";
 import { ServicesSection } from "../components/sections/ServicesSection";
 import { LivePrintingSection } from "../components/sections/LivePrintingSection";
 import { EquipmentSection } from "../components/sections/EquipmentSection";
@@ -14,6 +15,7 @@ export const HomePage = () => {
       <Header />
       <main>
         <HeroSection />
+        <VoxelMeaningSection />
         <ServicesSection />
         <LivePrintingSection />
         <EquipmentSection />

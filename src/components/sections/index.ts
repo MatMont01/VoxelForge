@@ -5,3 +5,4 @@ export * from "./PortfolioSection";
 export * from "./AboutSection";
 export * from "./ContactSection";
 export * from "./LivePrintingSection";
+export * from "./VoxelMeaningSection";
