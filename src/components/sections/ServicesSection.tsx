@@ -13,7 +13,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DESIGN_WEBSITES } from "../../constants";
 import { Button } from "../ui/Button";
-import { scrollToSection } from "../../utils/helpers";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -257,7 +256,15 @@ export const ServicesSection = () => {
                   variant="outline"
                   size="sm"
                   className="w-full group-hover:bg-[#ea9216] group-hover:text-white group-hover:border-[#ea9216] transition-all duration-300"
-                  onClick={() => scrollToSection("#contact")}
+                  onClick={() => {
+                    const contactSection = document.getElementById("contact");
+                    if (contactSection) {
+                      contactSection.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                    }
+                  }}
                 >
                   Solicitar Cotización
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
@@ -406,7 +413,15 @@ export const ServicesSection = () => {
               <Button
                 size="lg"
                 className="text-lg px-8 py-4"
-                onClick={() => scrollToSection("#contact")}
+                onClick={() => {
+                  const contactSection = document.getElementById("contact");
+                  if (contactSection) {
+                    contactSection.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }}
               >
                 Solicitar Cotización Personalizada
                 <ArrowRight className="w-5 h-5 ml-2" />

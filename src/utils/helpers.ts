@@ -28,9 +28,30 @@ export const formatEmail = (
 };
 
 export const scrollToSection = (sectionId: string) => {
-  const element = document.getElementById(sectionId.replace("#", ""));
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" });
+  try {
+    const id = sectionId.replace("#", "");
+    const element = document.getElementById(id);
+
+    if (element) {
+      // Usar scrollIntoView con configuración más específica
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    } else {
+      // Intentar buscar por selector CSS si no encuentra por ID
+      const elementBySelector = document.querySelector(sectionId);
+      if (elementBySelector) {
+        elementBySelector.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
+        });
+      }
+    }
+  } catch (error) {
+    console.error("Error al hacer scroll a la sección:", error);
   }
 };
 
