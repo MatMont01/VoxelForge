@@ -2,6 +2,7 @@ import { Header } from "../components/layout/NewHeader";
 import { Footer } from "../components/layout/Footer";
 import { HeroSection } from "../components/sections/NewHeroSection";
 import { ServicesSection } from "../components/sections/ServicesSection";
+import { LivePrintingSection } from "../components/sections/LivePrintingSection";
 import { EquipmentSection } from "../components/sections/EquipmentSection";
 import { PortfolioSection } from "../components/sections/PortfolioSection";
 import { AboutSection } from "../components/sections/AboutSection";
@@ -14,6 +15,7 @@ export const HomePage = () => {
       <main>
         <HeroSection />
         <ServicesSection />
+        <LivePrintingSection />
         <EquipmentSection />
         <PortfolioSection />
         <AboutSection />

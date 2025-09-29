@@ -1,5 +1,459 @@
 @import "tailwindcss";
 
+/* Modo oscuro sutil - conserva colores vibrantes, mejora legibilidad */
+/* Solo cambios esenciales para contraste */
+html.dark {
+  color-scheme: dark;
+}
+
+/* Fondos principales - cambios mínimos para legibilidad */
+html.dark .bg-white {
+  background-color: #f8fafc !important; /* Blanco suave */
+}
+html.dark .bg-gray-50 {
+  background-color: #f1f5f9 !important; /* Gris muy claro */
+}
+html.dark .bg-gray-100 {
+  background-color: #e2e8f0 !important; /* Gris claro */
+}
+html.dark .bg-gray-200 {
+  background-color: #cbd5e0 !important; /* Gris medio-claro */
+}
+html.dark .bg-gray-300 {
+  background-color: #a0aec0 !important; /* Gris medio */
+}
+/* Mantener grises oscuros para elementos que los necesitan */
+html.dark .bg-gray-800 {
+  background-color: #2d3748 !important;
+}
+html.dark .bg-gray-900 {
+  background-color: #1a202c !important;
+}
+
+/* Texto - solo ajustes esenciales para contraste */
+html.dark .text-gray-900 {
+  color: #1a202c !important; /* Texto más oscuro */
+}
+html.dark .text-gray-800 {
+  color: #2d3748 !important;
+}
+html.dark .text-gray-700 {
+  color: #4a5568 !important;
+}
+html.dark .text-gray-600 {
+  color: #718096 !important;
+}
+html.dark .text-gray-500 {
+  color: #a0aec0 !important;
+}
+html.dark .text-gray-400 {
+  color: #cbd5e0 !important;
+}
+html.dark .text-gray-300 {
+  color: #e2e8f0 !important;
+}
+/* Mantener blanco para textos que lo necesitan */
+html.dark .text-white {
+  color: #f7fafc !important;
+}
+
+/* Bordes - ajustes sutiles */
+html.dark .border-gray-200 {
+  border-color: #cbd5e0 !important; /* Borde claro */
+}
+html.dark .border-gray-300 {
+  border-color: #a0aec0 !important; /* Borde medio */
+}
+html.dark .border-gray-700 {
+  border-color: #4a5568 !important; /* Para elementos que necesitan contraste */
+}
+
+/* Hover states - sutiles */
+html.dark [class*="hover:bg-gray-200"]:hover {
+  background-color: #cbd5e0 !important; /* Gris claro al hover */
+}
+html.dark [class*="hover:bg-gray-100"]:hover {
+  background-color: #e2e8f0 !important; /* Gris muy claro al hover */
+}
+html.dark [class*="hover:bg-gray-700"]:hover {
+  background-color: #4a5568 !important; /* Para elementos que necesitan ser más oscuros */
+}
+
+/* Gradientes - conservar colores vibrantes, solo ajustar bases */
+html.dark .from-gray-200 {
+  --tw-gradient-from: #e2e8f0 !important; /* Mantener claro */
+}
+html.dark .via-gray-300 {
+  --tw-gradient-via: #cbd5e0 !important; /* Mantener claro */
+}
+html.dark .to-gray-200 {
+  --tw-gradient-to: #e2e8f0 !important; /* Mantener claro */
+}
+
+html.dark .from-white {
+  --tw-gradient-from: #f8fafc !important; /* Blanco suave */
+}
+html.dark .via-white {
+  --tw-gradient-via: #f8fafc !important; /* Blanco suave */
+}
+html.dark .to-white {
+  --tw-gradient-to: #f8fafc !important; /* Blanco suave */
+}
+
+html.dark .from-gray-50 {
+  --tw-gradient-from: #f1f5f9 !important; /* Gris muy claro */
+}
+html.dark .via-gray-50 {
+  --tw-gradient-via: #f1f5f9 !important; /* Gris muy claro */
+}
+html.dark .to-gray-100 {
+  --tw-gradient-to: #e2e8f0 !important; /* Gris claro */
+}
+
+/* Backdrop blur para dark mode */
+html.dark [class*="bg-white/95"] {
+  background-color: rgba(248, 250, 252, 0.95) !important;
+}
+html.dark [class*="bg-white/90"] {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+
+/* Componentes específicos para mejor legibilidad */
+/* Footer - mantener oscuro pero legible */
+html.dark footer {
+  background: linear-gradient(135deg, #374151, #4b5563, #374151) !important;
+}
+
+/* Tarjetas y contenedores - solo sobrescribir gradientes grises */
+
+html.dark [class*="from-gray-900"] {
+  --tw-gradient-from: #f1f5f9 !important;
+}
+
+html.dark [class*="via-gray-900"] {
+  --tw-gradient-via: #e2e8f0 !important;
+}
+
+html.dark [class*="to-gray-900"] {
+  --tw-gradient-to: #f1f5f9 !important;
+}
+
+html.dark [class*="from-gray-800"] {
+  --tw-gradient-from: #f8fafc !important;
+}
+
+html.dark [class*="via-gray-800"] {
+  --tw-gradient-via: #f1f5f9 !important;
+}
+
+html.dark [class*="to-gray-800"] {
+  --tw-gradient-to: #f8fafc !important;
+}
+
+/* Texto específico para componentes */
+html.dark .text-gray-100 {
+  color: #1f2937 !important; /* Texto oscuro para contraste */
+}
+
+html.dark .text-gray-200 {
+  color: #374151 !important;
+}
+
+/* Shadow para dark mode */
+html.dark .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+html.dark .shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Asegurar contraste en elementos específicos */
+html.dark .bg-gray-700 {
+  background-color: #f9fafb !important;
+}
+
+html.dark .text-gray-400 {
+  color: #6b7280 !important; /* Gris medio para subtítulos */
+}
+
+html.dark .text-gray-500 {
+  color: #9ca3af !important; /* Gris medio-claro */
+}
+
+/* Elementos transparentes */
+html.dark [class*="bg-black/"] {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Botones y elementos interactivos */
+html.dark .hover\:bg-gray-800:hover {
+  background-color: #e5e7eb !important;
+}
+
+html.dark .focus\:ring-gray-500:focus {
+  --tw-ring-color: #d1d5db !important;
+}
+
+/* TEXTO BLANCO - Casos específicos para elementos sobre fondos coloridos */
+/* Solo cambiar text-white cuando el fondo también cambia */
+
+/* Para iconos y texto sobre gradientes coloridos (mantener blanco) */
+html.dark [class*="bg-gradient-to-r"] .text-white,
+html.dark [class*="from-blue-"] .text-white,
+html.dark [class*="from-purple-"] .text-white,
+html.dark [class*="from-pink-"] .text-white,
+html.dark [class*="from-orange-"] .text-white,
+html.dark [class*="from-red-"] .text-white,
+html.dark [class*="from-green-"] .text-white,
+html.dark [class*="from-teal-"] .text-white,
+html.dark [class*="from-yellow-"] .text-white {
+  color: #ffffff !important; /* Mantener blanco sobre colores vibrantes */
+}
+
+/* Para texto sobre fondos que SÍ cambian en dark mode */
+html.dark .bg-gray-900 .text-white,
+html.dark .bg-gray-800 .text-white,
+html.dark .bg-gray-700 .text-white {
+  color: #1f2937 !important; /* Texto oscuro sobre fondo claro */
+}
+
+/* Footer específico - texto oscuro sobre fondo claro */
+html.dark footer .text-white {
+  color: #1f2937 !important;
+}
+
+/* Para elementos con colores específicos de marca - mantener contraste */
+html.dark [style*="#313841"] .text-white,
+html.dark [style*="#3a4750"] .text-white {
+  color: #1f2937 !important;
+}
+
+/* Carrusel y elementos overlay */
+html.dark .absolute .text-white {
+  color: #1f2937 !important;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+/* Botones con color de marca - mantener blanco */
+html.dark [class*="bg-[#ea9216]"] .text-white,
+html.dark [class*="hover:bg-[#ea9216]"]:hover .text-white {
+  color: #ffffff !important;
+}
+
+/* Campos de formulario y inputs */
+html.dark input[class*="dark:bg-[#313841]"],
+html.dark textarea[class*="dark:bg-[#313841]"] {
+  background-color: #f8fafc !important;
+  color: #1f2937 !important;
+  border-color: #d1d5db !important;
+}
+
+html.dark input[class*="dark:text-white"],
+html.dark textarea[class*="dark:text-white"] {
+  color: #1f2937 !important;
+}
+
+/* Elementos con backgrounds específicos */
+html.dark [class*="dark:bg-[#313841]"] {
+  background-color: #f8fafc !important;
+}
+
+html.dark [class*="dark:bg-[#3a4750]"] {
+  background-color: #f1f5f9 !important;
+}
+
+/* Headers y navegación */
+html.dark header[class*="dark:bg-[#313841]"] {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+
+/* Elementos con transparencia */
+html.dark [class*="dark:bg-[#313841]/80"] {
+  background-color: rgba(248, 250, 252, 0.8) !important;
+}
+
+html.dark [class*="dark:bg-[#313841]/90"] {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+
+html.dark [class*="dark:bg-[#313841]/95"] {
+  background-color: rgba(248, 250, 252, 0.95) !important;
+}
+
+/* Borders específicos */
+html.dark [class*="dark:border-gray-700"] {
+  border-color: #d1d5db !important;
+}
+
+html.dark [class*="dark:border-gray-600"] {
+  border-color: #e5e7eb !important;
+}
+
+/* Hover states específicos */
+html.dark [class*="dark:hover:bg-gray-600"]:hover {
+  background-color: #e5e7eb !important;
+}
+
+html.dark [class*="dark:hover:bg-gray-700"]:hover {
+  background-color: #f3f4f6 !important;
+}
+
+/* Focus states */
+html.dark [class*="dark:focus:ring-gray-500"]:focus {
+  --tw-ring-color: #d1d5db !important;
+}
+
+/* TEXTO GRIS EN MODO OSCURO - Ajustar para mejor legibilidad */
+/* Texto gris claro → más oscuro para contraste */
+html.dark [class*="dark:text-gray-100"] {
+  color: #1f2937 !important; /* Muy oscuro */
+}
+
+html.dark [class*="dark:text-gray-200"] {
+  color: #374151 !important; /* Gris oscuro */
+}
+
+html.dark [class*="dark:text-gray-300"] {
+  color: #4b5563 !important; /* Gris medio-oscuro */
+}
+
+html.dark [class*="dark:text-gray-400"] {
+  color: #6b7280 !important; /* Gris medio */
+}
+
+html.dark [class*="dark:text-gray-500"] {
+  color: #9ca3af !important; /* Gris medio-claro */
+}
+
+/* Texto gris del modo claro también ajustar */
+html.dark .text-gray-300 {
+  color: #374151 !important; /* Más oscuro */
+}
+
+html.dark .text-gray-400 {
+  color: #4b5563 !important; /* Más oscuro */
+}
+
+html.dark .text-gray-500 {
+  color: #6b7280 !important; /* Medio */
+}
+
+html.dark .text-gray-600 {
+  color: #374151 !important; /* Oscuro para párrafos */
+}
+
+html.dark .text-gray-700 {
+  color: #1f2937 !important; /* Muy oscuro para títulos */
+}
+
+/* Elementos específicos problemáticos */
+/* Header y navegación */
+html.dark [class*="text-gray-700"][class*="dark:text-gray-300"] {
+  color: #374151 !important;
+}
+
+/* Footer - texto sobre fondo claro */
+html.dark footer [class*="dark:text-gray-100"],
+html.dark footer [class*="dark:text-gray-400"],
+html.dark footer [class*="dark:text-gray-500"] {
+  color: #374151 !important;
+}
+
+html.dark footer .text-gray-300,
+html.dark footer .text-gray-400 {
+  color: #4b5563 !important;
+}
+
+/* Hover states para elementos de navegación */
+html.dark [class*="dark:hover:text-gray-200"]:hover {
+  color: #1f2937 !important;
+}
+
+html.dark [class*="hover:text-gray-300"]:hover {
+  color: #374151 !important;
+}
+
+/* Botones ghost */
+html.dark button[class*="dark:text-gray-300"] {
+  color: #4b5563 !important;
+}
+
+/* Formularios - labels y placeholders */
+html.dark label[class*="dark:text-gray-300"] {
+  color: #374151 !important;
+}
+
+/* Elementos con hover específicos */
+html.dark [class*="dark:hover:bg-gray-700"]:hover {
+  background-color: #f3f4f6 !important;
+}
+
+html.dark [class*="dark:hover:bg-gray-800"]:hover {
+  background-color: #e5e7eb !important;
+}
+
+/* Casos específicos adicionales */
+/* Texto sobre tarjetas de servicios con gradientes */
+html.dark [class*="text-gray-200"] {
+  color: #1f2937 !important;
+}
+
+html.dark [class*="text-gray-300"] {
+  color: #374151 !important;
+}
+
+/* Elementos de precio y badges */
+html.dark .text-sm[class*="text-gray-300"] {
+  color: #4b5563 !important;
+}
+
+/* Elementos con iconos */
+html.dark [class*="text-xs"][class*="text-gray-400"] {
+  color: #6b7280 !important;
+}
+
+/* Hero section y subtítulos */
+html.dark [class*="text-xl"][class*="dark:text-gray-300"],
+html.dark [class*="text-lg"][class*="dark:text-gray-300"] {
+  color: #4b5563 !important;
+}
+
+/* Elementos de timeline y fechas */
+html.dark [class*="text-sm"][class*="dark:text-gray-300"] {
+  color: #6b7280 !important;
+}
+
+/* Elementos con scroll arrow */
+html.dark [class*="dark:text-gray-500"] {
+  color: #9ca3af !important;
+}
+
+/* Loader y elementos de progreso */
+html.dark .loader-text[class*="dark:text-gray-300"],
+html.dark .loader-text[class*="dark:text-gray-400"] {
+  color: #4b5563 !important;
+}
+
+/* Carrusel y elementos overlay */
+html.dark [class*="dark:text-gray-400"] {
+  color: #6b7280 !important;
+}
+
+/* Elementos específicos de contraste */
+html.dark .text-xs[class*="text-gray-400"] {
+  color: #9ca3af !important;
+}
+
+/* Asegurar que los hover de colores de marca funcionen */
+html.dark [class*="hover:text-[#ea9216]"]:hover {
+  color: #ea9216 !important;
+}
+
+html.dark [class*="dark:hover:text-[#ea9216]"]:hover {
+  color: #ea9216 !important;
+}
+
 /* Custom styles */
 html {
   scroll-behavior: smooth;
@@ -318,4 +772,49 @@ textarea:focus {
   .cursor-follower {
     display: none !important;
   }
+}
+
+/* Animaciones para LivePrintingSection */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+/* Gradientes animados */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.bg-gradient-animated {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
 }

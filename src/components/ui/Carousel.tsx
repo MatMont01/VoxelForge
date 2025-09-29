@@ -18,7 +18,7 @@ export const Carousel = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string>("");
   const carouselRef = useRef<HTMLDivElement>(null);
-  const intervalRef = useRef<number | undefined>();
+  const intervalRef = useRef<number | undefined>(undefined);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % items.length);

@@ -12,9 +12,9 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("darkMode");
-      return saved ? JSON.parse(saved) : false;
+      return saved ? JSON.parse(saved) : true; // Dark mode por defecto
     }
-    return false;
+    return true; // Dark mode por defecto
   });
 
   useEffect(() => {

@@ -108,7 +108,6 @@ export const Header = () => {
       );
     }
   };
-
   return (
     <header
       ref={headerRef}
