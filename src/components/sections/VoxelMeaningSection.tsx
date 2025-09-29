@@ -24,91 +24,107 @@ export const VoxelMeaningSection = () => {
         },
       });
 
-      tl.fromTo(".meaning-title", {
-        y: 100,
-        opacity: 0,
-        scale: 0.8,
-        rotationX: 45,
-      }, {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        rotationX: 0,
-        duration: 1.5,
-        ease: "elastic.out(1, 0.5)",
-        stagger: 0.2,
-      });
+      tl.fromTo(
+        ".meaning-title",
+        {
+          y: 100,
+          opacity: 0,
+          scale: 0.8,
+          rotationX: 45,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          rotationX: 0,
+          duration: 1.5,
+          ease: "elastic.out(1, 0.5)",
+          stagger: 0.2,
+        }
+      );
     }
 
     // Voxel explanation animation
     if (voxelRef.current) {
-      gsap.fromTo(voxelRef.current, {
-        x: -200,
-        opacity: 0,
-        rotationY: -45,
-      }, {
-        x: 0,
-        opacity: 1,
-        rotationY: 0,
-        duration: 1.8,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: voxelRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
+      gsap.fromTo(
+        voxelRef.current,
+        {
+          x: -200,
+          opacity: 0,
+          rotationY: -45,
         },
-      });
+        {
+          x: 0,
+          opacity: 1,
+          rotationY: 0,
+          duration: 1.8,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: voxelRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
     }
 
     // Forge explanation animation
     if (forgeRef.current) {
-      gsap.fromTo(forgeRef.current, {
-        x: 200,
-        opacity: 0,
-        rotationY: 45,
-      }, {
-        x: 0,
-        opacity: 1,
-        rotationY: 0,
-        duration: 1.8,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: forgeRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
+      gsap.fromTo(
+        forgeRef.current,
+        {
+          x: 200,
+          opacity: 0,
+          rotationY: 45,
         },
-      });
+        {
+          x: 0,
+          opacity: 1,
+          rotationY: 0,
+          duration: 1.8,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: forgeRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
     }
 
     // Unity section animation
     if (unityRef.current) {
       const unityCards = unityRef.current.querySelectorAll(".unity-card");
-      gsap.fromTo(unityCards, {
-        y: 100,
-        opacity: 0,
-        scale: 0.5,
-        rotationZ: 15,
-      }, {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        rotationZ: 0,
-        duration: 1.5,
-        stagger: 0.2,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: unityRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
+      gsap.fromTo(
+        unityCards,
+        {
+          y: 100,
+          opacity: 0,
+          scale: 0.5,
+          rotationZ: 15,
         },
-      });
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          rotationZ: 0,
+          duration: 1.5,
+          stagger: 0.2,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: unityRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
     }
 
     // 3D Cubes animation
     if (cubesRef.current) {
       const cubes = cubesRef.current.querySelectorAll(".floating-cube");
       gsap.set(cubes, { transformStyle: "preserve-3d" });
-      
+
       cubes.forEach((cube, i) => {
         gsap.to(cube, {
           rotationX: 360,
@@ -117,7 +133,7 @@ export const VoxelMeaningSection = () => {
           ease: "none",
           repeat: -1,
         });
-        
+
         gsap.to(cube, {
           y: -30,
           duration: 3 + i * 0.5,
@@ -142,7 +158,6 @@ export const VoxelMeaningSection = () => {
         repeat: -1,
       },
     });
-
   }, []);
 
   return (
@@ -153,7 +168,7 @@ export const VoxelMeaningSection = () => {
       {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#ea9216]/5 via-transparent to-blue-500/5"></div>
-        <div 
+        <div
           className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ea9216' fill-opacity='0.4'%3E%3Cpath d='M30 30l15-15v30l-15-15zm-15 0l15 15v-30l-15 15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -163,10 +178,22 @@ export const VoxelMeaningSection = () => {
 
       {/* Floating 3D Cubes */}
       <div ref={cubesRef} className="absolute inset-0 pointer-events-none">
-        <div className="floating-cube absolute top-20 left-10 w-8 h-8 bg-gradient-to-br from-[#ea9216]/30 to-orange-600/30 transform rotate-45" style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}></div>
-        <div className="floating-cube absolute top-40 right-20 w-6 h-6 bg-gradient-to-br from-blue-500/30 to-purple-600/30 transform rotate-45" style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}></div>
-        <div className="floating-cube absolute bottom-32 left-20 w-10 h-10 bg-gradient-to-br from-green-500/30 to-teal-600/30 transform rotate-45" style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}></div>
-        <div className="floating-cube absolute bottom-20 right-10 w-7 h-7 bg-gradient-to-br from-pink-500/30 to-red-600/30 transform rotate-45" style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}></div>
+        <div
+          className="floating-cube absolute top-20 left-10 w-8 h-8 bg-gradient-to-br from-[#ea9216]/30 to-orange-600/30 transform rotate-45"
+          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+        ></div>
+        <div
+          className="floating-cube absolute top-40 right-20 w-6 h-6 bg-gradient-to-br from-blue-500/30 to-purple-600/30 transform rotate-45"
+          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+        ></div>
+        <div
+          className="floating-cube absolute bottom-32 left-20 w-10 h-10 bg-gradient-to-br from-green-500/30 to-teal-600/30 transform rotate-45"
+          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+        ></div>
+        <div
+          className="floating-cube absolute bottom-20 right-10 w-7 h-7 bg-gradient-to-br from-pink-500/30 to-red-600/30 transform rotate-45"
+          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+        ></div>
       </div>
 
       {/* Particles */}
@@ -189,7 +216,9 @@ export const VoxelMeaningSection = () => {
         <div ref={titleRef} className="text-center mb-20">
           <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-[#ea9216]/20 to-blue-500/20 border border-[#ea9216]/30 mb-8">
             <Sparkles className="w-5 h-5 text-[#ea9216] mr-3 animate-pulse" />
-            <span className="text-[#ea9216] font-medium">El Significado Detrás del Nombre</span>
+            <span className="text-[#ea9216] font-medium">
+              El Significado Detrás del Nombre
+            </span>
           </div>
 
           <h2 className="text-5xl md:text-7xl font-bold mb-6">
@@ -201,10 +230,14 @@ export const VoxelMeaningSection = () => {
               VOXEL FORGE?
             </span>
           </h2>
-          
+
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Descubre el profundo significado detrás de nuestro nombre y cómo refleja nuestra 
-            <span className="text-[#ea9216] font-semibold"> filosofía de creación</span>
+            Descubre el profundo significado detrás de nuestro nombre y cómo
+            refleja nuestra
+            <span className="text-[#ea9216] font-semibold">
+              {" "}
+              filosofía de creación
+            </span>
           </p>
         </div>
 
@@ -226,10 +259,14 @@ export const VoxelMeaningSection = () => {
                   <div className="flex items-start">
                     <Layers className="w-6 h-6 text-blue-400 mr-4 mt-1 flex-shrink-0" />
                     <div>
-                      <h4 className="text-xl font-bold text-white mb-2">Pixel 3D</h4>
+                      <h4 className="text-xl font-bold text-white mb-2">
+                        Pixel 3D
+                      </h4>
                       <p className="text-gray-300 leading-relaxed">
-                        Un <strong className="text-blue-400">voxel</strong> es la unidad mínima de un objeto tridimensional, 
-                        como un pixel pero en 3D. Representa el <strong>fundamento digital</strong> de toda creación.
+                        Un <strong className="text-blue-400">voxel</strong> es
+                        la unidad mínima de un objeto tridimensional, como un
+                        pixel pero en 3D. Representa el{" "}
+                        <strong>fundamento digital</strong> de toda creación.
                       </p>
                     </div>
                   </div>
@@ -237,17 +274,23 @@ export const VoxelMeaningSection = () => {
                   <div className="flex items-start">
                     <Infinity className="w-6 h-6 text-purple-400 mr-4 mt-1 flex-shrink-0" />
                     <div>
-                      <h4 className="text-xl font-bold text-white mb-2">Infinitas Posibilidades</h4>
+                      <h4 className="text-xl font-bold text-white mb-2">
+                        Infinitas Posibilidades
+                      </h4>
                       <p className="text-gray-300 leading-relaxed">
-                        Cada voxel es una <strong className="text-purple-400">posibilidad infinita</strong>. 
-                        Combinados, crean mundos, objetos y sueños tangibles.
+                        Cada voxel es una{" "}
+                        <strong className="text-purple-400">
+                          posibilidad infinita
+                        </strong>
+                        . Combinados, crean mundos, objetos y sueños tangibles.
                       </p>
                     </div>
                   </div>
 
                   <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl p-6 border border-blue-500/20">
                     <p className="text-blue-200 italic text-center">
-                      "Cada impresión 3D comienza con miles de voxels que definen su forma digital"
+                      "Cada impresión 3D comienza con miles de voxels que
+                      definen su forma digital"
                     </p>
                   </div>
                 </div>
@@ -268,10 +311,13 @@ export const VoxelMeaningSection = () => {
                   <div className="flex items-start">
                     <Zap className="w-6 h-6 text-[#ea9216] mr-4 mt-1 flex-shrink-0" />
                     <div>
-                      <h4 className="text-xl font-bold text-white mb-2">Forja Creativa</h4>
+                      <h4 className="text-xl font-bold text-white mb-2">
+                        Forja Creativa
+                      </h4>
                       <p className="text-gray-300 leading-relaxed">
-                        <strong className="text-[#ea9216]">Forjar</strong> significa crear con maestría, 
-                        transformar materias primas en obras de arte funcionales con fuego y pasión.
+                        <strong className="text-[#ea9216]">Forjar</strong>{" "}
+                        significa crear con maestría, transformar materias
+                        primas en obras de arte funcionales con fuego y pasión.
                       </p>
                     </div>
                   </div>
@@ -279,17 +325,23 @@ export const VoxelMeaningSection = () => {
                   <div className="flex items-start">
                     <Sparkles className="w-6 h-6 text-yellow-400 mr-4 mt-1 flex-shrink-0" />
                     <div>
-                      <h4 className="text-xl font-bold text-white mb-2">Transformación</h4>
+                      <h4 className="text-xl font-bold text-white mb-2">
+                        Transformación
+                      </h4>
                       <p className="text-gray-300 leading-relaxed">
-                        Tomamos tus <strong className="text-yellow-400">ideas digitales</strong> y 
-                        las forjamos en realidad física, layer por layer.
+                        Tomamos tus{" "}
+                        <strong className="text-yellow-400">
+                          ideas digitales
+                        </strong>{" "}
+                        y las forjamos en realidad física, layer por layer.
                       </p>
                     </div>
                   </div>
 
                   <div className="bg-gradient-to-r from-[#ea9216]/10 to-red-500/10 rounded-xl p-6 border border-[#ea9216]/20">
                     <p className="text-orange-200 italic text-center">
-                      "En nuestra forja digital, cada filamento se convierte en una pieza única"
+                      "En nuestra forja digital, cada filamento se convierte en
+                      una pieza única"
                     </p>
                   </div>
                 </div>
@@ -301,12 +353,19 @@ export const VoxelMeaningSection = () => {
           <div ref={unityRef}>
             <div className="text-center mb-12">
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                VOXEL + FORGE = 
-                <span className="text-transparent bg-gradient-to-r from-[#ea9216] via-yellow-400 to-[#ea9216] bg-clip-text"> Creación Sin Límites</span>
+                VOXEL + FORGE =
+                <span className="text-transparent bg-gradient-to-r from-[#ea9216] via-yellow-400 to-[#ea9216] bg-clip-text">
+                  {" "}
+                  Creación Sin Límites
+                </span>
               </h3>
               <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
-                La unión perfecta entre la <strong className="text-blue-400">precisión digital</strong> y 
-                la <strong className="text-[#ea9216]">artesanía tradicional</strong>
+                La unión perfecta entre la{" "}
+                <strong className="text-blue-400">precisión digital</strong> y
+                la{" "}
+                <strong className="text-[#ea9216]">
+                  artesanía tradicional
+                </strong>
               </p>
             </div>
 
@@ -315,9 +374,12 @@ export const VoxelMeaningSection = () => {
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-6">
                   <Box className="w-8 h-8 text-white" />
                 </div>
-                <h4 className="text-xl font-bold text-white mb-4">Diseño Digital</h4>
+                <h4 className="text-xl font-bold text-white mb-4">
+                  Diseño Digital
+                </h4>
                 <p className="text-gray-300">
-                  Cada proyecto comienza como una colección de voxels en el espacio digital
+                  Cada proyecto comienza como una colección de voxels en el
+                  espacio digital
                 </p>
               </div>
 
@@ -325,9 +387,12 @@ export const VoxelMeaningSection = () => {
                 <div className="w-16 h-16 bg-gradient-to-br from-[#ea9216] to-orange-600 rounded-xl flex items-center justify-center mx-auto mb-6">
                   <Zap className="w-8 h-8 text-white" />
                 </div>
-                <h4 className="text-xl font-bold text-white mb-4">Proceso de Forja</h4>
+                <h4 className="text-xl font-bold text-white mb-4">
+                  Proceso de Forja
+                </h4>
                 <p className="text-gray-300">
-                  Nuestras impresoras 3D actúan como forjas modernas, creando layer por layer
+                  Nuestras impresoras 3D actúan como forjas modernas, creando
+                  layer por layer
                 </p>
               </div>
 
@@ -335,9 +400,12 @@ export const VoxelMeaningSection = () => {
                 <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center mx-auto mb-6">
                   <Sparkles className="w-8 h-8 text-white" />
                 </div>
-                <h4 className="text-xl font-bold text-white mb-4">Realidad Tangible</h4>
+                <h4 className="text-xl font-bold text-white mb-4">
+                  Realidad Tangible
+                </h4>
                 <p className="text-gray-300">
-                  El resultado final: tus ideas convertidas en objetos reales que puedes tocar
+                  El resultado final: tus ideas convertidas en objetos reales
+                  que puedes tocar
                 </p>
               </div>
             </div>
@@ -346,11 +414,15 @@ export const VoxelMeaningSection = () => {
           {/* Philosophy Section */}
           <div className="mt-20 text-center">
             <div className="bg-gradient-to-br from-gray-800/40 to-gray-900/40 backdrop-blur-2xl rounded-3xl p-12 border border-[#ea9216]/20 shadow-2xl">
-              <h3 className="text-3xl font-bold text-white mb-6">Nuestra Filosofía</h3>
+              <h3 className="text-3xl font-bold text-white mb-6">
+                Nuestra Filosofía
+              </h3>
               <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto mb-8">
-                En <strong className="text-[#ea9216]">VOXEL FORGE</strong>, no solo imprimimos objetos, 
-                <strong className="text-blue-400"> forjamos sueños</strong>. Cada voxel digital se convierte 
-                en una molécula de filamento, cada layer en un paso hacia la materialización de tu visión.
+                En <strong className="text-[#ea9216]">VOXEL FORGE</strong>, no
+                solo imprimimos objetos,
+                <strong className="text-blue-400"> forjamos sueños</strong>.
+                Cada voxel digital se convierte en una molécula de filamento,
+                cada layer en un paso hacia la materialización de tu visión.
               </p>
               <div className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#ea9216] to-orange-600 rounded-full text-white font-bold text-lg shadow-2xl hover:shadow-[#ea9216]/50 transition-all duration-300">
                 <Box className="w-6 h-6 mr-3" />
