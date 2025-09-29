@@ -151,7 +151,11 @@ export const Footer = () => {
               <span className="text-gray-400 dark:text-gray-500 text-sm">
                 en Santa Cruz de la Sierra, Bolivia
               </span>
-              <div className="w-6 h-4 bg-gradient-to-r from-yellow-400 via-green-500 to-red-500 rounded-sm"></div>
+              <div className="w-6 h-4 rounded-sm overflow-hidden flex flex-col">
+                <div className="h-1/3 bg-red-500"></div>
+                <div className="h-1/3 bg-yellow-400"></div>
+                <div className="h-1/3 bg-green-500"></div>
+              </div>
             </div>
           </div>
         </div>

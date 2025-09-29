@@ -221,12 +221,12 @@ export const VoxelMeaningSection = () => {
             </span>
           </div>
 
-          <h2 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="meaning-title inline-block bg-gradient-to-r from-white via-[#ea9216] to-white bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <span className="meaning-title inline-block bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent">
               ¿Qué es
             </span>
-            <br />
-            <span className="meaning-title inline-block bg-gradient-to-r from-[#ea9216] via-yellow-400 to-[#ea9216] bg-clip-text text-transparent">
+            <br className="mb-4" />
+            <span className="meaning-title inline-block bg-gradient-to-r from-[#ea9216] via-yellow-400 to-[#ea9216] bg-clip-text text-transparent mt-4">
               VOXEL FORGE?
             </span>
           </h2>

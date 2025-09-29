@@ -133,8 +133,28 @@ export const ServicesSection = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="py-20 bg-gray-100 dark:bg-[#313841]"
+      className="py-20 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-[#0a2e1a] dark:via-[#1a3d2e] dark:to-[#0a2e1a] relative overflow-hidden"
     >
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0 opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.1'%3E%3Cpath d='M90 90l15-15v30l-15-15zm-30-30l15-15v30l-15-15zm60 0l15-15v30l-15-15zm-30 60l15-15v30l-15-15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+      </div>
+
+      {/* Floating Service Icons */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-32 left-20 w-12 h-12 bg-gradient-to-br from-green-400/20 to-emerald-500/20 rounded-full animate-pulse"></div>
+        <div className="absolute top-48 right-32 w-8 h-8 bg-gradient-to-br from-teal-400/15 to-green-500/15 rounded-full animate-bounce"></div>
+        <div className="absolute bottom-36 left-32 w-16 h-16 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full"></div>
+        <div className="absolute bottom-24 right-20 w-10 h-10 bg-gradient-to-br from-green-500/15 to-emerald-400/15 rounded-full animate-pulse"></div>
+      </div>
+
+      {/* Green Ambient Light */}
+      <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-gradient-radial from-green-300/15 via-emerald-300/8 to-transparent rounded-full blur-3xl"></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/20 border border-[#ea9216]/20 mb-6">

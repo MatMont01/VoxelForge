@@ -92,17 +92,28 @@ export const PortfolioSection = () => {
     <section
       ref={sectionRef}
       id="portfolio"
-      className="py-20 bg-gradient-to-br from-white via-gray-50 to-white dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-purple-50 via-pink-50 to-purple-50 dark:from-[#2e0a2e] dark:via-[#4a1a4a] dark:to-[#2e0a2e] relative overflow-hidden"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0 opacity-25">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ea9216' fill-opacity='0.4'%3E%3Cpath d='M50 50l10-10v20l-10-10zm-20 0l10 10h-20l10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23a855f7' fill-opacity='0.1'%3E%3Cpath d='M70 70l18-18v36l-18-18zm-25-25l18-18v36l-18-18zm50 0l18-18v36l-18-18zm-25 50l18-18v36l-18-18z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
       </div>
+
+      {/* Creative Floating Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-32 left-28 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-pink-500/20 rounded-full animate-pulse"></div>
+        <div className="absolute top-48 right-32 w-12 h-12 bg-gradient-to-br from-pink-400/15 to-purple-500/15 rounded-lg animate-bounce transform rotate-45"></div>
+        <div className="absolute bottom-36 left-32 w-20 h-20 bg-gradient-to-br from-purple-500/10 to-violet-500/10 rounded-full"></div>
+        <div className="absolute bottom-24 right-28 w-14 h-14 bg-gradient-to-br from-pink-500/15 to-purple-400/15 rounded-lg animate-pulse transform -rotate-12"></div>
+      </div>
+
+      {/* Purple Creative Ambient Light */}
+      <div className="absolute top-1/3 left-1/3 w-[600px] h-[600px] bg-gradient-radial from-purple-400/10 via-pink-400/5 to-transparent rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">

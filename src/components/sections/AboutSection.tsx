@@ -288,17 +288,36 @@ export const AboutSection = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="py-20 bg-gradient-to-br from-gray-200 via-gray-300 to-gray-200 dark:from-[#3a4750] dark:via-[#313841] dark:to-[#3a4750] relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-[#1a1f3a] dark:via-[#2d1b69] dark:to-[#1a1f3a] relative overflow-hidden"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0 opacity-30">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ea9216' fill-opacity='0.3'%3E%3Ccircle cx='50' cy='50' r='3'/%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3Ccircle cx='80' cy='80' r='2'/%3E%3Ccircle cx='20' cy='80' r='1'/%3E%3Ccircle cx='80' cy='20' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ea9216' fill-opacity='0.1'%3E%3Cpath d='M50 50l10-10v20l-10-10zm40 40l10-10v20l-10-10zm40-40l10-10v20l-10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
       </div>
+
+      {/* Floating 3D Cubes */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="floating-cube absolute top-20 left-10 w-12 h-12 bg-gradient-to-br from-blue-500/20 to-indigo-600/20 transform rotate-45 animate-pulse"
+          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+        ></div>
+        <div
+          className="floating-cube absolute top-40 right-20 w-8 h-8 bg-gradient-to-br from-purple-500/20 to-pink-600/20 transform rotate-45 animate-bounce"
+          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+        ></div>
+        <div
+          className="floating-cube absolute bottom-32 left-20 w-16 h-16 bg-gradient-to-br from-indigo-500/15 to-blue-600/15 transform rotate-45"
+          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+        ></div>
+      </div>
+
+      {/* Ambient Light Effect */}
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-gradient-radial from-blue-400/10 via-purple-400/5 to-transparent rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">

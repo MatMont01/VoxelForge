@@ -74,17 +74,28 @@ export const EquipmentSection = () => {
     <section
       ref={sectionRef}
       id="equipment"
-      className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-[#3a4750] dark:via-[#313841] dark:to-[#3a4750] relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-cyan-50 via-blue-50 to-indigo-50 dark:from-[#0a1a2e] dark:via-[#16213e] dark:to-[#0a1a2e] relative overflow-hidden"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0 opacity-25">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ea9216' fill-opacity='0.3'%3E%3Ccircle cx='50' cy='50' r='4'/%3E%3Ccircle cx='25' cy='25' r='2'/%3E%3Ccircle cx='75' cy='75' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.12'%3E%3Cpath d='M80 80l20-20v40l-20-20zm-30-30l20-20v40l-20-20zm60 0l20-20v40l-20-20zm-30 60l20-20v40l-20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
       </div>
+
+      {/* Tech-themed Floating Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-28 left-24 w-14 h-14 bg-gradient-to-br from-blue-400/20 to-indigo-500/20 rounded-lg animate-pulse transform rotate-12"></div>
+        <div className="absolute top-44 right-28 w-10 h-10 bg-gradient-to-br from-cyan-400/15 to-blue-500/15 rounded-full animate-bounce"></div>
+        <div className="absolute bottom-32 left-28 w-18 h-18 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-lg transform -rotate-12"></div>
+        <div className="absolute bottom-20 right-24 w-12 h-12 bg-gradient-to-br from-blue-500/15 to-cyan-400/15 rounded-full animate-pulse"></div>
+      </div>
+
+      {/* Blue Tech Ambient Light */}
+      <div className="absolute top-1/4 right-1/3 w-[500px] h-[500px] bg-gradient-radial from-blue-400/12 via-indigo-400/6 to-transparent rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">

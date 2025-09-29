@@ -82,15 +82,47 @@ export const ContactSection = () => {
 
     setIsSubmitting(true);
 
-    // Simulate form submission (replace with actual implementation)
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
+    try {
+      // Crear el cuerpo del email con todos los datos del formulario
+      const emailBody = `
+Nuevo mensaje desde el formulario de contacto de VOXEL FORGE:
 
-      // Reset success message after 5 seconds
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }, 2000);
+DATOS DEL CLIENTE:
+- Nombre: ${formData.name}
+- Email: ${formData.email}
+- Asunto: ${formData.subject}
+
+MENSAJE:
+${formData.message}
+
+---
+Este mensaje fue enviado desde el formulario de contacto de voxelforge.com
+      `.trim();
+
+      // Crear la URL de mailto con todos los parámetros
+      const mailtoUrl = `mailto:${
+        CONTACT_INFO.email
+      }?subject=${encodeURIComponent(
+        `[VOXEL FORGE] ${formData.subject}`
+      )}&body=${encodeURIComponent(emailBody)}`;
+
+      // Abrir el cliente de correo del usuario
+      window.location.href = mailtoUrl;
+
+      // Mostrar mensaje de éxito después de un breve delay
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+
+        // Reset success message after 5 seconds
+        setTimeout(() => setIsSubmitted(false), 5000);
+      }, 1000);
+    } catch (error) {
+      console.error("Error al enviar el mensaje:", error);
+      setIsSubmitting(false);
+      // Aquí podrías mostrar un mensaje de error si es necesario
+    }
   };
 
   const contactMethods = [
@@ -131,17 +163,28 @@ export const ContactSection = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="py-20 bg-gradient-to-br from-white via-gray-50 to-white dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-orange-50 via-yellow-50 to-orange-50 dark:from-[#2d1a00] dark:via-[#3d2500] dark:to-[#2d1a00] relative overflow-hidden"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0 opacity-20">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ea9216' fill-opacity='0.4'%3E%3Cpath d='M50 50l5-5v10l-5-5zm-10 0l5 5h-10l5-5z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ea9216' fill-opacity='0.2'%3E%3Cpath d='M75 75l8-8v16l-8-8zm-20 0l8 8h-16l8-8zm20-20l8-8v16l-8-8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
       </div>
+
+      {/* Floating Communication Icons */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-24 left-16 w-10 h-10 bg-gradient-to-br from-orange-400/20 to-yellow-500/20 rounded-full animate-pulse"></div>
+        <div className="absolute top-36 right-24 w-6 h-6 bg-gradient-to-br from-yellow-400/15 to-orange-500/15 rounded-full animate-bounce"></div>
+        <div className="absolute bottom-40 left-24 w-14 h-14 bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-full"></div>
+        <div className="absolute bottom-20 right-16 w-8 h-8 bg-gradient-to-br from-yellow-500/15 to-orange-400/15 rounded-full animate-pulse"></div>
+      </div>
+
+      {/* Warm Ambient Light */}
+      <div className="absolute top-1/4 right-1/3 w-80 h-80 bg-gradient-radial from-orange-300/10 via-yellow-300/5 to-transparent rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">

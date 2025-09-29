@@ -51,17 +51,43 @@ export const HeroSection = () => {
     <section
       ref={heroRef}
       id="home"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300 dark:from-[#313841] dark:to-[#3a4750] relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-orange-50 to-slate-50 dark:from-[#0a0a0a] dark:via-[#1a1a1a] dark:to-[#0a0a0a] relative overflow-hidden"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0 opacity-30">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ea9216' fill-opacity='0.4'%3E%3Ccircle cx='20' cy='20' r='4'/%3E%3Ccircle cx='40' cy='40' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ea9216' fill-opacity='0.15'%3E%3Cpath d='M60 60l12-12v24l-12-12zm-20-20l12-12v24l-12-12zm40 0l12-12v24l-12-12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
       </div>
+
+      {/* 3D Floating Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="floating-cube absolute top-1/4 left-1/4 w-16 h-16 bg-gradient-to-br from-orange-400/30 to-red-500/30 transform rotate-45 animate-spin"
+          style={{
+            clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+            animationDuration: "20s",
+          }}
+        ></div>
+        <div
+          className="floating-cube absolute top-1/3 right-1/4 w-12 h-12 bg-gradient-to-br from-blue-400/25 to-purple-500/25 transform rotate-45 animate-bounce"
+          style={{
+            clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+            animationDelay: "2s",
+          }}
+        ></div>
+        <div
+          className="floating-cube absolute bottom-1/4 left-1/3 w-20 h-20 bg-gradient-to-br from-green-400/20 to-teal-500/20 transform rotate-45 animate-pulse"
+          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+        ></div>
+      </div>
+
+      {/* Spectacular Light Effects */}
+      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 w-[800px] h-[800px] bg-gradient-radial from-orange-300/20 via-yellow-300/10 to-transparent rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-gradient-radial from-blue-400/15 via-purple-400/8 to-transparent rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
