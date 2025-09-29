@@ -82,8 +82,8 @@ export const ServicesSection = () => {
         "Materiales premium",
         "Acabado profesional",
         "Entrega garantizada",
+        "Cotización personalizada"
       ],
-      price: "Desde Bs. 15",
       badge: "Popular",
     },
     {
@@ -96,8 +96,8 @@ export const ServicesSection = () => {
         "Diseño exclusivo",
         "Múltiples revisiones",
         "Archivo STL incluido",
+        "Asesoría completa"
       ],
-      price: "Costo adicional",
       badge: "Premium",
     },
     {
@@ -110,8 +110,8 @@ export const ServicesSection = () => {
         "Entrega rápida",
         "Múltiples iteraciones",
         "Consultoría incluida",
+        "Precio competitivo"
       ],
-      price: "Consultar precio",
       badge: "Rápido",
     },
   ];
@@ -250,27 +250,21 @@ export const ServicesSection = () => {
                 ))}
               </ul>
 
-              {/* Price and CTA */}
-              <div className="flex items-center justify-between pt-4 border-t border-gray-200/50 dark:border-gray-600/50">
-                <div className="flex flex-col">
-                  <span className="text-sm text-gray-300">Precio</span>
-                  <span className="text-xl font-bold bg-gradient-to-r from-[#ea9216] to-[#d68614] bg-clip-text text-transparent">
-                    {service.price}
-                  </span>
-                </div>
+              {/* CTA */}
+              <div className="pt-4 border-t border-gray-200/50 dark:border-gray-600/50">
                 <Button
                   variant="outline"
                   size="sm"
-                  className="group-hover:bg-[#ea9216] group-hover:text-white group-hover:border-[#ea9216] transition-all duration-300"
+                  className="w-full group-hover:bg-[#ea9216] group-hover:text-white group-hover:border-[#ea9216] transition-all duration-300"
                   onClick={() =>
                     window.open(
-                      "https://wa.me/59167784792?text=Hola, me interesa el servicio de " +
-                        service.title,
+                      "https://wa.me/59167784792?text=Hola, me interesa una cotización para el servicio de " +
+                        service.title + ". ¿Podrían ayudarme con el proceso de cotización?",
                       "_blank"
                     )
                   }
                 >
-                  Consultar
+                  Solicitar Cotización
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
               </div>
@@ -281,8 +275,141 @@ export const ServicesSection = () => {
           ))}
         </div>
 
+        {/* Cotization Process Section */}
+        <div className="mt-20 relative">
+          <div className="relative bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-12 border border-gray-200/50 dark:border-gray-700/30 shadow-2xl overflow-hidden">
+            {/* Background Effects */}
+            <div className="absolute inset-0 opacity-5">
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ea9216' fill-opacity='0.3'%3E%3Cpath d='M50 50l8-8v16l-8-8zm-20 0l8 8h-16l8-8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                }}
+              />
+            </div>
+
+            <div className="relative z-10 text-center mb-12">
+              <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-[#ea9216]/20 to-orange-500/20 border border-[#ea9216]/30 mb-6">
+                <Target className="w-5 h-5 text-[#ea9216] mr-3 animate-pulse" />
+                <span className="text-[#ea9216] font-medium">
+                  ¿Cómo Cotizamos?
+                </span>
+              </div>
+              
+              <h3 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                Nuestro Proceso de{" "}
+                <span className="bg-gradient-to-r from-[#ea9216] to-orange-600 bg-clip-text text-transparent">
+                  Cotización
+                </span>
+              </h3>
+              
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                Cada proyecto es único, por eso personalizamos cada cotización según tus necesidades específicas
+              </p>
+            </div>
+
+            {/* Process Steps */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl font-bold text-white">1</span>
+                </div>
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  Envías tu Diseño
+                </h4>
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                  Comparte con nosotros el archivo STL o el enlace del diseño que quieres imprimir
+                </p>
+              </div>
+
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-gradient-to-r from-[#ea9216] to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl font-bold text-white">2</span>
+                </div>
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  Laminamos
+                </h4>
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                  Procesamos tu diseño para calcular tiempo de impresión y cantidad de material necesario
+                </p>
+              </div>
+
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl font-bold text-white">3</span>
+                </div>
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  Consultoría
+                </h4>
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                  Discutimos contigo el tipo de material, dureza, color y acabado que necesitas
+                </p>
+              </div>
+
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl font-bold text-white">4</span>
+                </div>
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  Precio Final
+                </h4>
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                  Te damos el precio exacto basado en todos los factores analizados
+                </p>
+              </div>
+            </div>
+
+            {/* Key Factors */}
+            <div className="bg-gradient-to-r from-[#ea9216]/10 to-orange-500/10 rounded-2xl p-8 border border-[#ea9216]/20">
+              <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                Factores que Influyen en el Precio
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="flex items-start">
+                  <div className="w-3 h-3 bg-[#ea9216] rounded-full mr-4 mt-2 flex-shrink-0"></div>
+                  <div>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-1">Tiempo de Impresión</h5>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Complejidad y tamaño del diseño</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-3 h-3 bg-[#ea9216] rounded-full mr-4 mt-2 flex-shrink-0"></div>
+                  <div>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-1">Material Consumido</h5>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Cantidad de filamento necesario</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-3 h-3 bg-[#ea9216] rounded-full mr-4 mt-2 flex-shrink-0"></div>
+                  <div>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-1">Tipo de Material</h5>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">PLA, PETG, ABS, etc.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="text-center mt-8">
+              <Button
+                size="lg"
+                className="text-lg px-8 py-4"
+                onClick={() =>
+                  window.open(
+                    "https://wa.me/59167784792?text=¡Hola! Me gustaría solicitar una cotización. ¿Podrían explicarme el proceso paso a paso?",
+                    "_blank"
+                  )
+                }
+              >
+                Solicitar Cotización Personalizada
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </div>
+          </div>
+        </div>
+
         {/* Design Websites Section - Modernizada */}
-        <div className="relative bg-gradient-to-br from-gray-50/80 via-white/40 to-gray-100/80 dark:from-[#3a4750]/80 dark:via-[#313841]/40 dark:to-[#3a4750]/80 backdrop-blur-xl rounded-3xl p-10 border border-white/20 dark:border-gray-700/30 shadow-2xl overflow-hidden">
+        <div className="mt-20 relative bg-gradient-to-br from-gray-50/80 via-white/40 to-gray-100/80 dark:from-[#3a4750]/80 dark:via-[#313841]/40 dark:to-[#3a4750]/80 backdrop-blur-xl rounded-3xl p-10 border border-white/20 dark:border-gray-700/30 shadow-2xl overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
             <div
