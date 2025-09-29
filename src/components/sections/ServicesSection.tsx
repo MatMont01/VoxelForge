@@ -257,7 +257,11 @@ export const ServicesSection = () => {
                   variant="outline"
                   size="sm"
                   className="w-full group-hover:bg-[#ea9216] group-hover:text-white group-hover:border-[#ea9216] transition-all duration-300"
-                  onClick={() => scrollToSection("#contact")}
+                  onClick={() => {
+                    console.log("Botón Solicitar Cotización clickeado!");
+                    alert("Botón funcionando - redirigiendo a contacto");
+                    scrollToSection("#contact");
+                  }}
                 >
                   Solicitar Cotización
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
@@ -406,7 +410,13 @@ export const ServicesSection = () => {
               <Button
                 size="lg"
                 className="text-lg px-8 py-4"
-                onClick={() => scrollToSection("#contact")}
+                onClick={() => {
+                  console.log(
+                    "Botón Solicitar Cotización Personalizada clickeado!"
+                  );
+                  alert("Botón grande funcionando - redirigiendo a contacto");
+                  scrollToSection("#contact");
+                }}
               >
                 Solicitar Cotización Personalizada
                 <ArrowRight className="w-5 h-5 ml-2" />
