@@ -10,7 +10,7 @@ import {
   breathingAnimation,
   printerHeadAnimation,
 } from "../../utils/advancedAnimations";
-import logoCircular from "../../assets/VoxelForgeLogos/voxel-forge-logo-circular.png";
+import logoSolo from "../../assets/VoxelForgeLogos/voxel-forge-logo-solo.svg";
 import { isLowEndDevice } from "../../utils/perf";
 
 export const HeroSection = () => {
@@ -205,7 +205,7 @@ export const HeroSection = () => {
     <section
       ref={heroRef}
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841]"
+      className="min-h-screen pt-28 md:pt-32 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841]"
     >
       {/* Particle System */}
       <div
@@ -233,7 +233,7 @@ export const HeroSection = () => {
           <div className="mb-8">
             <img
               ref={logoRef}
-              src={logoCircular}
+              src={logoSolo}
               alt="Voxel Forge Logo"
               className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 drop-shadow-2xl"
             />
