@@ -84,12 +84,60 @@ export const Footer = () => {
               Servicios
             </h3>
             <ul className="space-y-2 text-gray-300 dark:text-gray-400">
-              <li>• Impresión 3D a pedido</li>
-              <li>• Diseños personalizados</li>
-              <li>• Prototipos rápidos</li>
-              <li>• Figuras y decoración</li>
-              <li>• Piezas funcionales</li>
-              <li>• Envíos a todo Bolivia</li>
+              <li>
+                •{" "}
+                <a
+                  href="/servicios"
+                  className="hover:text-[#ea9216] transition-colors"
+                >
+                  Impresión 3D a pedido
+                </a>
+              </li>
+              <li>
+                •{" "}
+                <a
+                  href="/servicios"
+                  className="hover:text-[#ea9216] transition-colors"
+                >
+                  Diseños personalizados
+                </a>
+              </li>
+              <li>
+                •{" "}
+                <a
+                  href="/servicios"
+                  className="hover:text-[#ea9216] transition-colors"
+                >
+                  Prototipos rápidos
+                </a>
+              </li>
+              <li>
+                •{" "}
+                <a
+                  href="/portafolio"
+                  className="hover:text-[#ea9216] transition-colors"
+                >
+                  Figuras y decoración
+                </a>
+              </li>
+              <li>
+                •{" "}
+                <a
+                  href="/servicios"
+                  className="hover:text-[#ea9216] transition-colors"
+                >
+                  Piezas funcionales
+                </a>
+              </li>
+              <li>
+                •{" "}
+                <a
+                  href="/contacto"
+                  className="hover:text-[#ea9216] transition-colors"
+                >
+                  Envíos a todo Bolivia
+                </a>
+              </li>
             </ul>
           </div>
 

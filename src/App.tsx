@@ -3,6 +3,11 @@ import { ThemeProvider } from "./hooks/useTheme";
 import { HomePage } from "./pages/HomePage";
 import { Header } from "./components/layout/NewHeader";
 import { Loader, CustomCursor } from "./components/ui";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Suspense } from "react";
+import { ServicesSection } from "./components/sections/ServicesSection";
+import { PortfolioSection } from "./components/sections/PortfolioSection";
+import { ContactSection } from "./components/sections/ContactSection";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -75,13 +80,49 @@ function App() {
             {/* Mount cursor with the rest to avoid extra work during loader */}
             <CustomCursor />
             <div className="App">
-              <HomePage />
+              <BrowserRouter>
+                <Suspense fallback={null}>
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/servicios" element={<ServicesRoute />} />
+                    <Route path="/portafolio" element={<PortfolioRoute />} />
+                    <Route path="/contacto" element={<ContactRoute />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                  </Routes>
+                </Suspense>
+              </BrowserRouter>
             </div>
           </div>
         )}
         {showLoader && <Loader onLoadingComplete={handleLoadingComplete} />}
       </div>
     </ThemeProvider>
+  );
+}
+
+// Minimal route wrappers to provide distinct URLs for indexing.
+// They reuse the existing sections with some spacing and the same theme.
+function ServicesRoute() {
+  return (
+    <main className="pt-24">
+      <ServicesSection />
+    </main>
+  );
+}
+
+function PortfolioRoute() {
+  return (
+    <main className="pt-24">
+      <PortfolioSection />
+    </main>
+  );
+}
+
+function ContactRoute() {
+  return (
+    <main className="pt-24">
+      <ContactSection />
+    </main>
   );
 }
 
