@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "./hooks/useTheme";
 import { HomePage } from "./pages/HomePage";
+import { Header } from "./components/layout/NewHeader";
 import { Loader, CustomCursor } from "./components/ui";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -39,6 +40,8 @@ function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-white dark:bg-[#313841] transition-colors duration-300">
+        {/* Keep Header outside of the animated container so position: fixed isn't affected by transforms */}
+        <Header />
         {/* App content behind loader, crossfading in */}
         <div
           className={

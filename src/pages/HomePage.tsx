@@ -1,4 +1,3 @@
-import { Header } from "../components/layout/NewHeader";
 import { Footer } from "../components/layout/Footer";
 import { HeroSection } from "../components/sections/NewHeroSection";
 import { VoxelMeaningSection } from "../components/sections/VoxelMeaningSection";
@@ -12,7 +11,6 @@ import { ContactSection } from "../components/sections/ContactSection";
 export const HomePage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-[#313841] text-gray-900 dark:text-gray-100 transition-colors duration-300">
-      <Header />
       <main>
         <HeroSection />
         <VoxelMeaningSection />
