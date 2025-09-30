@@ -3,7 +3,7 @@ import { Sun, Moon } from "lucide-react";
 import { gsap } from "gsap";
 import { useTheme } from "../../hooks/useTheme";
 import { NAVIGATION_ITEMS } from "../../constants";
-import { Link } from "react-router-dom";
+// Removed page routing; we keep single-page anchor navigation
 import { scrollToSection } from "../../utils/helpers";
 import { magneticHover } from "../../utils/advancedAnimations";
 import logoSolo from "../../assets/VoxelForgeLogos/voxel-forge-logo-solo.svg";
@@ -161,25 +161,7 @@ export const Header = () => {
                 <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#ea9216] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </button>
             ))}
-            {/* New routable links for SEO */}
-            <Link
-              to="/servicios"
-              className="relative text-gray-700 dark:text-gray-300 hover:text-[#ea9216] dark:hover:text-[#ea9216] transition-all duration-300 font-medium py-2 px-3 rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50"
-            >
-              Servicios (página)
-            </Link>
-            <Link
-              to="/portafolio"
-              className="relative text-gray-700 dark:text-gray-300 hover:text-[#ea9216] dark:hover:text-[#ea9216] transition-all duration-300 font-medium py-2 px-3 rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50"
-            >
-              Portafolio (página)
-            </Link>
-            <Link
-              to="/contacto"
-              className="relative text-gray-700 dark:text-gray-300 hover:text-[#ea9216] dark:hover:text-[#ea9216] transition-all duration-300 font-medium py-2 px-3 rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50"
-            >
-              Contacto (página)
-            </Link>
+            {/* Removed extra page links to keep SPA behavior */}
           </nav>
 
           {/* Social Links & Theme Toggle & Mobile Menu */}

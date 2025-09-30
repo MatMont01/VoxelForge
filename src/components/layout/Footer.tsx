@@ -1,5 +1,5 @@
 import { Mail, MapPin, Phone } from "lucide-react";
-import { Link } from "react-router-dom";
+// SPA only: use in-page anchors and smooth scroll
 import { CONTACT_INFO, BRAND_COLORS } from "../../constants";
 import { formatWhatsAppUrl, formatEmail } from "../../utils/helpers";
 import instagramLogo from "../../assets/SocialMediaLogo/instagram.png";
@@ -87,57 +87,57 @@ export const Footer = () => {
             <ul className="space-y-2 text-gray-300 dark:text-gray-400">
               <li>
                 •{" "}
-                <Link
-                  to="/servicios"
+                <a
+                  href="#services"
                   className="hover:text-[#ea9216] transition-colors"
                 >
                   Impresión 3D a pedido
-                </Link>
+                </a>
               </li>
               <li>
                 •{" "}
-                <Link
-                  to="/servicios"
+                <a
+                  href="#services"
                   className="hover:text-[#ea9216] transition-colors"
                 >
                   Diseños personalizados
-                </Link>
+                </a>
               </li>
               <li>
                 •{" "}
-                <Link
-                  to="/servicios"
+                <a
+                  href="#services"
                   className="hover:text-[#ea9216] transition-colors"
                 >
                   Prototipos rápidos
-                </Link>
+                </a>
               </li>
               <li>
                 •{" "}
-                <Link
-                  to="/portafolio"
+                <a
+                  href="#portfolio"
                   className="hover:text-[#ea9216] transition-colors"
                 >
                   Figuras y decoración
-                </Link>
+                </a>
               </li>
               <li>
                 •{" "}
-                <Link
-                  to="/servicios"
+                <a
+                  href="#services"
                   className="hover:text-[#ea9216] transition-colors"
                 >
                   Piezas funcionales
-                </Link>
+                </a>
               </li>
               <li>
                 •{" "}
-                <Link
-                  to="/contacto"
+                <a
+                  href="#contact"
                   className="hover:text-[#ea9216] transition-colors"
                 >
                   Envíos a todo Bolivia
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
