@@ -3,13 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/voxel-forge-icon.svg" />
+    <link rel="apple-touch-icon" href="/voxel-forge-icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
-    <title>VOXEL FORGE</title>
+    <title>
+      Voxel Forge | Impresión 3D en Santa Cruz | Prototipos y Piezas
+      Personalizadas
+    </title>
     <meta
       name="description"
-      content="VoxelForge - Servicios profesionales de impresión 3D en Santa Cruz de la Sierra. Ve tus pedidos imprimiéndose en vivo en TikTok."
+      content="Voxel Forge ofrece servicios profesionales de impresión 3D en Santa Cruz de la Sierra: prototipos, piezas personalizadas, arte y más. Atención rápida, materiales de calidad y seguimiento en vivo."
     />
+    <link rel="canonical" href="https://voxelforge.org/" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Hreflang -->
+    <link rel="alternate" href="https://voxelforge.org/" hreflang="es" />
+    <link rel="alternate" href="https://voxelforge.org/" hreflang="x-default" />
+
+    <!-- Theme color for light/dark -->
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#313841"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://voxelforge.org/" />
+    <meta
+      property="og:title"
+      content="Voxel Forge | Impresión 3D en Santa Cruz"
+    />
+    <meta
+      property="og:description"
+      content="Prototipos y piezas personalizadas en 3D. Materiales de calidad, atención rápida y seguimiento en vivo."
+    />
+    <meta property="og:site_name" content="Voxel Forge" />
+    <meta property="og:locale" content="es_BO" />
+    <!-- Nota: idealmente usar una imagen en /public/og-image.jpg -->
+    <meta property="og:image" content="https://voxelforge.org/og-image.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Voxel Forge | Impresión 3D en Santa Cruz"
+    />
+    <meta
+      name="twitter:description"
+      content="Prototipos y piezas personalizadas en 3D. Materiales de calidad, atención rápida y seguimiento en vivo."
+    />
+    <meta name="twitter:image" content="https://voxelforge.org/og-image.svg" />
 
     <!-- Early theme setup to default to dark on first visit (no flash) -->
     <script>
@@ -34,6 +85,104 @@
         background: #313841;
       }
     </style>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Voxel Forge",
+            "url": "https://voxelforge.org/",
+            "logo": "https://voxelforge.org/voxel-forge-icon.svg",
+            "sameAs": [
+              "https://www.instagram.com/voxelforge_scz/",
+              "https://www.tiktok.com/@voxelforge_scz"
+            ],
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "telephone": "+59167784792",
+                "contactType": "customer service",
+                "areaServed": "BO",
+                "availableLanguage": ["es"]
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "name": "Voxel Forge",
+            "url": "https://voxelforge.org/",
+            "inLanguage": "es",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://voxelforge.org/?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@type": "LocalBusiness",
+            "@id": "https://voxelforge.org/#business",
+            "name": "Voxel Forge",
+            "url": "https://voxelforge.org/",
+            "image": "https://voxelforge.org/og-image.svg",
+            "logo": "https://voxelforge.org/voxel-forge-icon.svg",
+            "telephone": "+59167784792",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Santa Cruz de la Sierra",
+              "addressCountry": "BO"
+            },
+            "areaServed": ["Bolivia"],
+            "sameAs": [
+              "https://www.instagram.com/voxelforge_scz/",
+              "https://www.tiktok.com/@voxelforge_scz"
+            ]
+          },
+          {
+            "@type": "ItemList",
+            "name": "Servicios de Impresión 3D",
+            "itemListElement": [
+              { "@type": "Service", "name": "Impresión 3D de prototipos" },
+              { "@type": "Service", "name": "Piezas personalizadas" },
+              { "@type": "Service", "name": "Modelos y maquetas" },
+              { "@type": "Service", "name": "Arte y figuras 3D" },
+              { "@type": "Service", "name": "Repuestos y componentes" }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "¿Qué materiales ofrecen?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Trabajamos con PLA, PETG, ABS, ASA, PC, PA y otros materiales según la necesidad del proyecto."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Hacen envíos?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sí, realizamos envíos a toda Bolivia. Consulta tiempos y costos según tu ubicación."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Cuánto tarda un pedido?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Depende del tamaño y complejidad. Prototipos pequeños pueden estar listos en 24-72 horas."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
 
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">

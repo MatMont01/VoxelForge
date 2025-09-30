@@ -1,0 +1,6 @@
+# robots.txt for https://voxelforge.org/
+# Allow everything by default
+User-agent: *
+Allow: /
+
+Sitemap: https://voxelforge.org/sitemap.xml
