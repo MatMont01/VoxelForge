@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { gsap } from "gsap";
 
 export const CustomCursor = () => {
@@ -145,29 +146,32 @@ export const CustomCursor = () => {
     ) ||
       window.innerWidth < 768);
 
-  if (isMobile) return null;
+  if (isMobile || typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <>
       <div
         ref={cursorRef}
-        className="cursor-dot fixed top-0 left-0 w-3 h-3 bg-[#ea9216] rounded-full pointer-events-none z-[99999] shadow-lg"
+        className="cursor-dot fixed top-0 left-0 w-3 h-3 bg-[#ea9216] rounded-full pointer-events-none shadow-lg"
         style={{
           transform: "translate(-50%, -50%)",
           opacity: 0,
           scale: 0,
+          zIndex: 2147483647, // ensure above any overlay/banners
         }}
       />
       <div
         ref={followerRef}
-        className="cursor-follower fixed top-0 left-0 w-8 h-8 border-2 border-[#ea9216] rounded-full pointer-events-none z-[99998] opacity-60"
+        className="cursor-follower fixed top-0 left-0 w-8 h-8 border-2 border-[#ea9216] rounded-full pointer-events-none opacity-60"
         style={{
           transform: "translate(-50%, -50%)",
           opacity: 0,
           scale: 0,
+          zIndex: 2147483646,
         }}
       />
-    </>
+    </>,
+    document.body
   );
 };
 
