@@ -1,5 +1,42 @@
 @import "tailwindcss";
 
+/* Brand font: Cunia */
+@font-face {
+  font-family: "Cunia";
+  src: url("./assets/fonts/Cunia.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+/* Map bold to the same source so bold headings keep the same style */
+@font-face {
+  font-family: "Cunia";
+  src: url("./assets/fonts/Cunia.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --font-cunia: "Cunia", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+    "Segoe UI Emoji", sans-serif;
+}
+
+/* Apply Cunia to main headings by default */
+h1,
+h2,
+h3,
+.font-display,
+.brand-title {
+  font-family: var(--font-cunia);
+}
+
+/* Utility class to opt-in anywhere */
+.font-cunia {
+  font-family: var(--font-cunia);
+}
+
 /* Modo oscuro sutil - conserva colores vibrantes, mejora legibilidad */
 /* Solo cambios esenciales para contraste */
 html.dark {

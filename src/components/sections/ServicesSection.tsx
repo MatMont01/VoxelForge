@@ -179,7 +179,7 @@ export const ServicesSection = () => {
           </div>
           <h2
             ref={titleRef}
-            className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent"
+            className="brand-title text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent"
           >
             <span>Nuestros</span> <span>Servicios</span>
           </h2>

@@ -242,7 +242,7 @@ export const HeroSection = () => {
           {/* Main Title */}
           <h1
             ref={titleRef}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight perspective-1000"
+            className="brand-title text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight perspective-1000"
             style={{ transformStyle: "preserve-3d" }}
           >
             <span className="text-[#ea9216] inline-block">Voxel</span>{" "}

@@ -272,7 +272,7 @@ export const VoxelMeaningSection = () => {
             </span>
           </div>
 
-          <h2 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h2 className="brand-title text-5xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="meaning-title inline-block bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent">
               ¿Qué es
             </span>
