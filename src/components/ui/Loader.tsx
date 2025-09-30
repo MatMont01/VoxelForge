@@ -120,7 +120,7 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
   return (
     <div
       className={
-        "loader-container fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] transition-opacity duration-800 " +
+        "loader-container fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] transition-opacity duration-2000 " +
         (exiting ? "opacity-0" : "opacity-100")
       }
       style={{ willChange: "opacity" }}
