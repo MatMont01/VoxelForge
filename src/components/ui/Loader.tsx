@@ -16,6 +16,15 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
   const barRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // Force start at top and lock scroll while loader is visible
+    const htmlEl = document.documentElement;
+    const bodyEl = document.body;
+    const prevBehavior = htmlEl.style.scrollBehavior;
+    htmlEl.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    htmlEl.style.overflow = "hidden";
+    bodyEl.style.overflow = "hidden";
+
     // Prevent double-run within same page session
     if (typeof window !== "undefined") {
       (window as any).__vf_loader_started = true;
@@ -101,13 +110,17 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
       tl.kill();
       toNinety.kill();
       window.removeEventListener("load", onLoad);
+      // Restore scroll settings
+      htmlEl.style.scrollBehavior = prevBehavior || "smooth";
+      htmlEl.style.overflow = "";
+      bodyEl.style.overflow = "";
     };
   }, [onLoadingComplete]);
 
   return (
     <div
       className={
-        "loader-container fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] transition-opacity duration-600 " +
+        "loader-container fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] transition-opacity duration-800 " +
         (exiting ? "opacity-0" : "opacity-100")
       }
       style={{ willChange: "opacity" }}

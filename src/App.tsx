@@ -33,8 +33,9 @@ function App() {
   const handleLoadingComplete = () => {
     // Reveal app content with a slightly longer overlap for a smoother feel
     setAppVisible(true);
-    // Allow the loader to fade out while the app scales in; slightly longer than 500ms for fluidity
-    setTimeout(() => setShowLoader(false), 700);
+    // Keep scroll at top just in case and allow a slightly longer crossfade
+    window.scrollTo(0, 0);
+    setTimeout(() => setShowLoader(false), 900);
   };
 
   return (
@@ -47,8 +48,8 @@ function App() {
           className={
             (appVisible
               ? "opacity-100 scale-100 blur-0"
-              : "opacity-0 scale-[0.98] blur-[2px]") +
-            " transition-all duration-700"
+              : "opacity-0 scale-[0.97] blur-[3px]") +
+            " transition-all duration-900"
           }
           style={{ willChange: "opacity, transform, filter" }}
         >
