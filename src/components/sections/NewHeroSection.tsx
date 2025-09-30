@@ -236,6 +236,10 @@ export const HeroSection = () => {
               src={logoSolo}
               alt="Voxel Forge Logo"
               className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 drop-shadow-2xl opacity-0 translate-y-6"
+              width={128}
+              height={128}
+              decoding="async"
+              fetchPriority="high"
             />
           </div>
 
