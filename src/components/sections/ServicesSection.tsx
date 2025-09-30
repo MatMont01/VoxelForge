@@ -147,7 +147,7 @@ export const ServicesSection = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="py-20 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-[#0a2e1a] dark:via-[#1a3d2e] dark:to-[#0a2e1a] relative overflow-hidden"
+      className="cv-auto py-20 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-[#0a2e1a] dark:via-[#1a3d2e] dark:to-[#0a2e1a] relative overflow-hidden"
     >
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">

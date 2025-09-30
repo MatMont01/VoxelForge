@@ -143,7 +143,7 @@ export const LivePrintingSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-[#f8fafc] dark:via-[#f1f5f9] dark:to-[#f8fafc] relative overflow-hidden"
+      className="cv-auto py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-[#f8fafc] dark:via-[#f1f5f9] dark:to-[#f8fafc] relative overflow-hidden"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">

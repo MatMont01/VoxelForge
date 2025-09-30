@@ -11,6 +11,7 @@ import {
   printerHeadAnimation,
 } from "../../utils/advancedAnimations";
 import logoCircular from "../../assets/VoxelForgeLogos/voxel-forge-logo-circular.png";
+import { isLowEndDevice } from "../../utils/perf";
 
 export const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -25,6 +26,7 @@ export const HeroSection = () => {
   const heroVideoRef = useRef<HTMLDivElement>(null);
   const scrollArrowRef = useRef<HTMLDivElement>(null);
   const [isScrollArrowVisible, setIsScrollArrowVisible] = useState(true);
+  const lowEnd = isLowEndDevice();
 
   // Separate effect just for scroll arrow visibility
   useEffect(() => {
@@ -82,16 +84,16 @@ export const HeroSection = () => {
     tl.to(logoRef.current, {
       opacity: 1,
       y: 0,
-      scale: 1.2,
-      duration: 2,
-      ease: "elastic.out(1, 0.5)",
+      scale: lowEnd ? 1.05 : 1.2,
+      duration: lowEnd ? 0.8 : 2,
+      ease: lowEnd ? "power2.out" : "elastic.out(1, 0.5)",
     })
       .to(
         titleRef.current,
         {
           opacity: 1,
           y: 0,
-          duration: 1.5,
+          duration: lowEnd ? 0.7 : 1.5,
           ease: "power3.out",
         },
         "-=1"
@@ -101,7 +103,7 @@ export const HeroSection = () => {
         {
           opacity: 1,
           y: 0,
-          duration: 1.5,
+          duration: lowEnd ? 0.7 : 1.5,
           ease: "power3.out",
         },
         "-=0.5"
@@ -111,26 +113,26 @@ export const HeroSection = () => {
         {
           opacity: 1,
           y: 0,
-          duration: 1.2,
-          ease: "back.out(1.7)",
+          duration: lowEnd ? 0.6 : 1.2,
+          ease: lowEnd ? "power2.out" : "back.out(1.7)",
         },
         "-=0.8"
       );
 
     // Background animations
-    if (bgShapeRef.current) {
+    if (bgShapeRef.current && !lowEnd) {
       morphingBackground(bgShapeRef.current);
     }
 
     // Logo breathing animation
-    if (logoRef.current) {
+    if (logoRef.current && !lowEnd) {
       setTimeout(() => {
         breathingAnimation(logoRef.current!);
       }, 3000);
     }
 
     // Printer head animation
-    if (printerIconRef.current) {
+    if (printerIconRef.current && !lowEnd) {
       setTimeout(() => {
         printerHeadAnimation(printerIconRef.current!);
       }, 2000);
@@ -138,7 +140,7 @@ export const HeroSection = () => {
 
     // Create particles
     if (particleContainerRef.current) {
-      createParticles(particleContainerRef.current, 30);
+      createParticles(particleContainerRef.current, lowEnd ? 10 : 30);
     }
 
     // Feature cards animation
@@ -147,27 +149,29 @@ export const HeroSection = () => {
       gsap.fromTo(
         cards,
         {
-          y: 150,
+          y: lowEnd ? 60 : 150,
           opacity: 0,
-          rotationX: 45,
-          scale: 0.8,
+          rotationX: lowEnd ? 0 : 45,
+          scale: lowEnd ? 0.95 : 0.8,
         },
         {
           y: 0,
           opacity: 1,
           rotationX: 0,
           scale: 1,
-          duration: 1.8,
-          stagger: 0.2,
+          duration: lowEnd ? 0.7 : 1.8,
+          stagger: lowEnd ? 0.1 : 0.2,
           ease: "power3.out",
           delay: 1.5,
         }
       );
 
       // Add magnetic hover to cards
-      cards.forEach((card) => {
-        magneticHover(card as HTMLElement, 0.2);
-      });
+      if (window.matchMedia?.("(hover: hover)").matches && !lowEnd) {
+        cards.forEach((card) => {
+          magneticHover(card as HTMLElement, 0.2);
+        });
+      }
     }
 
     // Background subtle animation (removed ScrollTrigger that was causing content to disappear)
@@ -218,9 +222,9 @@ export const HeroSection = () => {
 
       {/* Additional Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10">
-        <div className="absolute top-1/3 left-1/4 w-2 h-2 bg-[#ea9216] rounded-full animate-pulse"></div>
-        <div className="absolute top-2/3 left-3/4 w-3 h-3 bg-[#ea9216] rounded-full animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-[#ea9216] rounded-full animate-pulse delay-500"></div>
+        <div className="absolute top-1/3 left-1/4 w-2 h-2 bg-[#ea9216] rounded-full md:animate-pulse"></div>
+        <div className="absolute top-2/3 left-3/4 w-3 h-3 bg-[#ea9216] rounded-full md:animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-[#ea9216] rounded-full md:animate-pulse delay-500"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
