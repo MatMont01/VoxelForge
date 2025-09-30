@@ -4,11 +4,36 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/voxel-forge-icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
     <title>VOXEL FORGE</title>
     <meta
       name="description"
       content="VoxelForge - Servicios profesionales de impresión 3D en Santa Cruz de la Sierra. Ve tus pedidos imprimiéndose en vivo en TikTok."
     />
+
+    <!-- Early theme setup to default to dark on first visit (no flash) -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("darkMode");
+          var isDark = saved ? JSON.parse(saved) : true; // default: dark
+          if (isDark) {
+            var html = document.documentElement;
+            html.classList.add("dark");
+            html.setAttribute("data-theme", "dark");
+          }
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+
+    <!-- Minimal dark fallback background before app styles load -->
+    <style>
+      html.dark body {
+        background: #313841;
+      }
+    </style>
 
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
