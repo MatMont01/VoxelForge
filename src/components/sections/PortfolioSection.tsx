@@ -197,6 +197,10 @@ export const PortfolioSection = () => {
                 src={instagramLogo}
                 alt="Instagram"
                 className="w-5 h-5 mr-3"
+                width={20}
+                height={20}
+                loading="lazy"
+                decoding="async"
               />
               <span className="text-gray-700 dark:text-gray-300 mr-3">
                 Síguenos para ver más proyectos:
@@ -334,6 +338,10 @@ export const PortfolioSection = () => {
                       src={instagramLogo}
                       alt="Instagram"
                       className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform"
+                      width={20}
+                      height={20}
+                      loading="lazy"
+                      decoding="async"
                     />
                     <span className="text-gray-700 dark:text-gray-300 font-medium">
                       Instagram
@@ -349,6 +357,10 @@ export const PortfolioSection = () => {
                       src={tiktokLogo}
                       alt="TikTok"
                       className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform"
+                      width={20}
+                      height={20}
+                      loading="lazy"
+                      decoding="async"
                     />
                     <span className="text-gray-700 dark:text-gray-300 font-medium">
                       TikTok

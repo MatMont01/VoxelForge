@@ -107,6 +107,9 @@ export const Carousel = ({
                     src={item.imageUrl}
                     alt={item.title}
                     loading="lazy"
+                    decoding="async"
+                    width={1280}
+                    height={720}
                     className="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105"
                     onClick={() => openModal(item.imageUrl)}
                   />
@@ -185,6 +188,7 @@ export const Carousel = ({
               src={selectedImage}
               alt="Vista completa"
               loading="lazy"
+              decoding="async"
               className="max-w-full max-h-[90vh] object-contain rounded-lg"
             />
           </div>

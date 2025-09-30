@@ -159,6 +159,9 @@ export const Footer = () => {
                     src={instagramLogo}
                     alt="Instagram"
                     loading="lazy"
+                    decoding="async"
+                    width={16}
+                    height={16}
                     className="w-4 h-4"
                   />
                 </div>
@@ -178,6 +181,9 @@ export const Footer = () => {
                     src={tiktokLogo}
                     alt="TikTok"
                     loading="lazy"
+                    decoding="async"
+                    width={16}
+                    height={16}
                     className="w-4 h-4"
                   />
                 </div>

@@ -2,9 +2,25 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <!-- Favicon principal (SVG circular) -->
-    <link rel="icon" type="image/svg+xml" href="/voxel-forge-icon.svg" />
-    <link rel="apple-touch-icon" href="/voxel-forge-icon.svg" />
+    <!-- Preconnects for faster third-party loads -->
+    <link
+      rel="preconnect"
+      href="https://www.googletagmanager.com"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Favicon principal (SVG circular) y PNGs generados en build -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      sizes="any"
+      href="/voxel-forge-icon.svg"
+    />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="shortcut icon" href="/voxel-forge-icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
     <title>
@@ -48,10 +64,15 @@
     />
     <meta property="og:site_name" content="Voxel Forge" />
     <meta property="og:locale" content="es_BO" />
-    <!-- Imagen principal para tarjetas sociales: usa la JPG rectangular si está en /public -->
+    <meta property="og:locale:alternate" content="es_LA" />
+    <!-- Imagen principal para tarjetas sociales: estándar 1200x630 -->
     <meta
       property="og:image"
-      content="https://voxelforge.org/voxel-forge-logo-rectangular.jpg"
+      content="https://voxelforge.org/og-1200x630.jpg"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://voxelforge.org/og-1200x630.jpg"
     />
     <meta
       property="og:image:alt"
@@ -76,7 +97,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://voxelforge.org/voxel-forge-logo-rectangular.jpg"
+      content="https://voxelforge.org/og-1200x630.jpg"
     />
     <meta
       name="twitter:image:alt"
@@ -270,6 +291,7 @@
             "@type": "LocalBusiness",
             "@id": "https://voxelforge.org/#business",
             "name": "Voxel Forge",
+            "alternateName": "Voxel Forge Santa Cruz",
             "url": "https://voxelforge.org/",
             "image": "https://voxelforge.org/voxel-forge-logo-rectangular.jpg",
             "logo": "https://voxelforge.org/voxel-forge-icon.svg",
@@ -311,7 +333,48 @@
             "sameAs": [
               "https://www.instagram.com/voxelforge_scz/",
               "https://www.tiktok.com/@voxelforge_scz"
-            ]
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Servicios",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Impresión 3D de prototipos"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Piezas personalizadas"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Modelos y maquetas"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Arte y figuras 3D"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Repuestos y componentes"
+                  }
+                }
+              ]
+            }
           },
           {
             "@type": "ItemList",
@@ -391,6 +454,43 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- SEO fallback for non-JS crawlers -->
+    <noscript>
+      <section
+        style="
+          max-width: 960px;
+          margin: 2rem auto;
+          padding: 1rem;
+          color: #111;
+          background: #fff;
+          border-radius: 12px;
+        "
+      >
+        <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem">
+          Voxel Forge — Impresión 3D en Santa Cruz (envíos a toda Bolivia)
+        </h1>
+        <p style="margin: 0.5rem 0">
+          Prototipos, piezas personalizadas, figuras y repuestos. Materiales:
+          PLA, PETG, ABS, ASA, PC, PA. Atención rápida y asesoría experta.
+        </p>
+        <ul style="margin: 0.5rem 0 0.5rem 1.25rem">
+          <li>Impresión 3D a pedido y prototipado rápido</li>
+          <li>Diseño/modelado 3D y postprocesado</li>
+          <li>
+            Envíos a Santa Cruz, La Paz, Cochabamba, Chuquisaca, Oruro, Potosí,
+            Tarija, Beni y Pando
+          </li>
+        </ul>
+        <p style="margin: 0.5rem 0">
+          Contacto:
+          <a href="mailto:voxelforge1502@gmail.com">voxelforge1502@gmail.com</a>
+          · WhatsApp: <a href="https://wa.me/59167784792">+591 677 84792</a>
+        </p>
+        <p style="margin: 0.5rem 0">
+          Horarios: Lun–Jue 18:00–22:00 · Vie–Dom 08:00–17:00
+        </p>
+      </section>
+    </noscript>
     <!-- Consent banner -->
     <div
       id="consent-banner"

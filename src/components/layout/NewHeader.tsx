@@ -132,6 +132,9 @@ export const Header = () => {
                 src={logoSolo}
                 alt="Voxel Forge Logo"
                 className="w-12 h-12 rounded-full shadow-lg group-hover:shadow-xl transition-all duration-300"
+                width={48}
+                height={48}
+                decoding="async"
               />
               <div className="absolute inset-0 bg-[#ea9216]/20 rounded-full scale-0 group-hover:scale-110 transition-transform duration-300" />
             </div>
@@ -179,6 +182,10 @@ export const Header = () => {
                   src={instagramLogo}
                   alt="Instagram"
                   className="w-4 h-4 group-hover:scale-110 transition-transform"
+                  width={16}
+                  height={16}
+                  loading="lazy"
+                  decoding="async"
                 />
               </a>
               <a
@@ -192,6 +199,10 @@ export const Header = () => {
                   src={tiktokLogo}
                   alt="TikTok"
                   className="w-4 h-4 group-hover:scale-110 transition-transform"
+                  width={16}
+                  height={16}
+                  loading="lazy"
+                  decoding="async"
                 />
               </a>
             </div>
