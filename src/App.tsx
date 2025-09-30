@@ -13,16 +13,11 @@ function App() {
   // Crossfade approach: render app behind loader, reveal, then unmount loader
   const [showLoader, setShowLoader] = useState(true);
   const [appVisible, setAppVisible] = useState(false);
+  const [mountContent, setMountContent] = useState(false);
 
   useEffect(() => {
     // Configure GSAP for better performance with native scroll
     gsap.ticker.lagSmoothing(0);
-
-    // Initialize GSAP ScrollTrigger with native scroll
-    ScrollTrigger.refresh();
-
-    // Ensure smooth native scrolling
-    document.documentElement.style.scrollBehavior = "smooth";
 
     return () => {
       // Clean up
@@ -30,34 +25,60 @@ function App() {
     };
   }, []);
 
+  // Run ScrollTrigger refresh only after we mount the heavy content
+  useEffect(() => {
+    if (!mountContent) return;
+    document.documentElement.style.scrollBehavior = "smooth";
+    ScrollTrigger.refresh();
+  }, [mountContent]);
+
   const handleLoadingComplete = () => {
-    // Reveal app content with a slightly longer overlap for a smoother feel
-    setAppVisible(true);
-    // Keep scroll at top just in case and allow a slightly longer crossfade
+    // Start content reveal with a small delay so the fade is clearly perceived
     window.scrollTo(0, 0);
-    setTimeout(() => setShowLoader(false), 900);
+    const startDelay = 200; // tighter sync with the ring pulse
+    const contentFadeMs = 1200; // match transition duration below
+    // Mount content immediately but keep it hidden until the reveal starts
+    if (!mountContent) setMountContent(true);
+    setTimeout(() => {
+      // trigger transition on next frame so initial state (opacity 0) applies
+      requestAnimationFrame(() => setAppVisible(true));
+    }, startDelay);
+    // Keep the loader a bit longer to overlap the beginning of the content fade-in
+    setTimeout(
+      () => setShowLoader(false),
+      startDelay + Math.min(900, contentFadeMs)
+    );
   };
 
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-white dark:bg-[#313841] transition-colors duration-300">
-        {/* Keep Header outside of the animated container so position: fixed isn't affected by transforms */}
-        <Header />
+        {/* Header mounts only when content is ready to avoid heavy work during loader */}
+        {mountContent && <Header />}
         {/* App content behind loader, crossfading in */}
-        <div
-          className={
-            (appVisible
-              ? "opacity-100 scale-100 blur-0"
-              : "opacity-0 scale-[0.97] blur-[3px]") +
-            " transition-all duration-900"
-          }
-          style={{ willChange: "opacity, transform, filter" }}
-        >
-          <CustomCursor />
-          <div className="App">
-            <HomePage />
+        {mountContent && (
+          <div
+            className={
+              (appVisible
+                ? "opacity-100 scale-100 blur-0"
+                : "opacity-0 scale-[0.965] blur-[4px]") +
+              " transition-all duration-[1200ms] ease-out"
+            }
+            style={{
+              willChange: "opacity, transform, filter",
+              transition:
+                "opacity 1200ms ease-out, transform 1200ms ease-out, filter 1200ms ease-out",
+              visibility: appVisible ? "visible" : "hidden",
+            }}
+            aria-hidden={!appVisible}
+          >
+            {/* Mount cursor with the rest to avoid extra work during loader */}
+            <CustomCursor />
+            <div className="App">
+              <HomePage />
+            </div>
           </div>
-        </div>
+        )}
         {showLoader && <Loader onLoadingComplete={handleLoadingComplete} />}
       </div>
     </ThemeProvider>
