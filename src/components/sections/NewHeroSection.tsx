@@ -300,7 +300,7 @@ export const HeroSection = () => {
           {/* Features Grid with 3D Effects */}
           <div
             ref={featuresRef}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-24 md:mb-32"
           >
             {features.map((feature) => {
               const Icon = feature.icon;

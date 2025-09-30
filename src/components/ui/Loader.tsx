@@ -8,10 +8,25 @@ interface LoaderProps {
 
 export const Loader = ({ onLoadingComplete }: LoaderProps) => {
   const [progress, setProgress] = useState(0);
+  const alreadyStarted =
+    typeof window !== "undefined" &&
+    (window as any).__vf_loader_started === true;
 
   useEffect(() => {
+    if (alreadyStarted) {
+      // If a double-mount happens (e.g., StrictMode/dev), skip running again
+      onLoadingComplete();
+      return;
+    }
+
+    // Mark as started so we don't run twice within the same page session
+    if (typeof window !== "undefined") {
+      (window as any).__vf_loader_started = true;
+    }
+
     const tl = gsap.timeline({
       onComplete: () => {
+        // Light fade-out of the overlay is handled via CSS transition on container
         setTimeout(onLoadingComplete, 100);
       },
     });
@@ -58,6 +73,11 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
           ease: "power2.out",
         },
         "-=1.5"
+      )
+      .to(
+        ".loader-container",
+        { opacity: 0, duration: 0.4, ease: "power2.out" },
+        ">-0.2"
       );
 
     // Progress counter
@@ -70,7 +90,11 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
         setProgress(Math.round(progressCounter.value));
       },
     });
-  }, [onLoadingComplete]);
+
+    return () => {
+      tl.kill();
+    };
+  }, [alreadyStarted, onLoadingComplete]);
 
   return (
     <div className="loader-container fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] transition-opacity duration-300">
