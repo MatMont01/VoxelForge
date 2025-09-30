@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#313841"/>
+      <stop offset="100%" stop-color="#3a4750"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <g font-family="'Cunia', sans-serif" text-anchor="middle">
+    <text x="600" y="280" font-size="96" fill="#ffffff">Voxel <tspan fill="#ea9216">Forge</tspan></text>
+    <text x="600" y="360" font-size="36" fill="#e5e7eb">Impresión 3D en Santa Cruz</text>
+  </g>
+</svg>
