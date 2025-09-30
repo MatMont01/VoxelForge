@@ -1,103 +1,113 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import logoSolo from "../../assets/VoxelForgeLogos/voxel-forge-logo-solo.svg";
 
-interface LoaderProps {
+export type LoaderProps = {
   onLoadingComplete: () => void;
-}
+};
 
 export const Loader = ({ onLoadingComplete }: LoaderProps) => {
   const [progress, setProgress] = useState(0);
-  const alreadyStarted =
-    typeof window !== "undefined" &&
-    (window as any).__vf_loader_started === true;
+  const [exiting, setExiting] = useState(false);
+
+  const timeDoneRef = useRef(false);
+  const loadDoneRef = useRef(false);
+  const finishedRef = useRef(false);
 
   useEffect(() => {
-    if (alreadyStarted) {
-      // If a double-mount happens (e.g., StrictMode/dev), skip running again
-      onLoadingComplete();
-      return;
-    }
-
-    // Mark as started so we don't run twice within the same page session
+    // Prevent double-run within same page session
     if (typeof window !== "undefined") {
       (window as any).__vf_loader_started = true;
     }
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        // Light fade-out of the overlay is handled via CSS transition on container
-        setTimeout(onLoadingComplete, 100);
-      },
-    });
-
-    // Logo animation
-    tl.fromTo(
-      ".loader-logo",
-      {
-        scale: 0,
-        rotation: -180,
-        opacity: 0,
-      },
-      {
-        scale: 1,
-        rotation: 0,
-        opacity: 1,
-        duration: 1.5,
-        ease: "elastic.out(1, 0.5)",
-      }
-    )
-      .to(".loader-logo", {
-        scale: 1.1,
-        duration: 0.5,
-        yoyo: true,
-        repeat: 3,
-        ease: "power2.inOut",
-      })
-      .to(
-        ".progress-bar",
+    // Intro animations
+    const tl = gsap
+      .timeline()
+      .fromTo(
+        ".loader-logo",
+        { scale: 0, rotation: -180, opacity: 0 },
         {
-          width: "100%",
-          duration: 1.6,
-          ease: "power2.out",
-        },
-        "-=1.8"
-      )
-      .to(
-        ".loader-text",
-        {
+          scale: 1,
+          rotation: 0,
           opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power2.out",
-        },
-        "-=1.5"
+          duration: 1.2,
+          ease: "elastic.out(1, 0.5)",
+        }
       )
-      .to(
-        ".loader-container",
-        { opacity: 0, duration: 0.4, ease: "power2.out" },
-        ">-0.2"
+      .fromTo(
+        ".loader-text",
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" },
+        "-=0.8"
       );
 
-    // Progress counter
+    // Progress logic: time to 90%, then wait for real window load to finish to 100%
     const progressCounter = { value: 0 };
-    gsap.to(progressCounter, {
-      value: 100,
-      duration: 3,
+    const updateBar = () => {
+      setProgress(Math.round(progressCounter.value));
+      gsap.set(".progress-bar", { width: `${progressCounter.value}%` });
+    };
+
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const minDuration = prefersReduced ? 0.8 : 2.0; // seconds
+    const toNinety = gsap.to(progressCounter, {
+      value: 90,
+      duration: minDuration,
       ease: "power2.out",
-      onUpdate: () => {
-        setProgress(Math.round(progressCounter.value));
+      onUpdate: updateBar,
+      onComplete: () => {
+        timeDoneRef.current = true;
+        maybeFinish();
       },
     });
+
+    const onLoad = () => {
+      loadDoneRef.current = true;
+      maybeFinish();
+    };
+    window.addEventListener("load", onLoad, { once: true });
+    if (document.readyState === "complete") {
+      // In case load already fired
+      loadDoneRef.current = true;
+      maybeFinish();
+    }
+
+    function maybeFinish() {
+      if (finishedRef.current) return;
+      if (timeDoneRef.current && loadDoneRef.current) {
+        finishedRef.current = true;
+        gsap.to(progressCounter, {
+          value: 100,
+          duration: prefersReduced ? 0.25 : 0.45,
+          ease: "power2.out",
+          onUpdate: updateBar,
+          onComplete: () => {
+            setExiting(true);
+            // Give the fade-out a head start, then notify parent to reveal app
+            setTimeout(() => onLoadingComplete(), 50);
+          },
+        });
+      }
+    }
 
     return () => {
       tl.kill();
+      toNinety.kill();
+      window.removeEventListener("load", onLoad);
     };
-  }, [alreadyStarted, onLoadingComplete]);
+  }, [onLoadingComplete]);
 
   return (
-    <div className="loader-container fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] transition-opacity duration-300">
+    <div
+      className={
+        "loader-container fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] transition-opacity duration-300 " +
+        (exiting ? "opacity-0" : "opacity-100")
+      }
+    >
       {/* Background Animation */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#ea9216]/20 rounded-full blur-3xl animate-pulse-glow" />
@@ -119,10 +129,10 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
 
         {/* Company Name */}
         <div className="mb-8">
-          <h1 className="loader-text text-4xl md:text-5xl font-bold text-gray-900 dark:text-white opacity-0 transform translate-y-4">
+          <h1 className="loader-text text-4xl md:text-5xl font-bold text-gray-900 dark:text-white opacity-0 translate-y-4">
             <span className="text-[#ea9216]">Voxel</span> Forge
           </h1>
-          <p className="loader-text text-lg text-gray-600 dark:text-gray-300 mt-2 opacity-0 transform translate-y-4">
+          <p className="loader-text text-lg text-gray-600 dark:text-gray-300 mt-2 opacity-0 translate-y-4">
             3D Printing Studio
           </p>
         </div>
@@ -138,10 +148,12 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
         </div>
 
         {/* Loading Text */}
-        <p className="loader-text text-gray-500 dark:text-gray-400 opacity-0 transform translate-y-4">
+        <p className="loader-text text-gray-500 dark:text-gray-400 opacity-0 translate-y-4">
           Preparando una experiencia increíble...
         </p>
       </div>
     </div>
   );
 };
+
+export default Loader;
