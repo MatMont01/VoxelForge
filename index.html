@@ -62,19 +62,127 @@
     />
     <meta name="twitter:image" content="https://voxelforge.org/og-image.svg" />
 
-    <!-- Google Analytics 4 -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-L88Z4WZLDP"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
+    <!-- Consent-based GA4 loader (no carga Analytics sin consentimiento) -->
+    <style>
+      #consent-banner {
+        position: fixed;
+        z-index: 60;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        max-width: 680px;
+        margin: auto;
+        background: #ffffff;
+        color: #111827;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        padding: 16px;
+        display: none;
       }
-      gtag("js", new Date());
-      // GA4 config (IP anonymization es predeterminado en GA4)
-      gtag("config", "G-L88Z4WZLDP");
+      html.dark #consent-banner {
+        background: #3a4750;
+        color: #f3f4f6;
+      }
+      #consent-banner .cb-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+      #consent-banner .cb-btn {
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        color: #111827;
+        cursor: pointer;
+      }
+      #consent-banner .cb-btn-primary {
+        background: #ea9216;
+        color: #fff;
+        border-color: #ea9216;
+      }
+      html.dark #consent-banner .cb-btn {
+        background: #313841;
+        color: #f3f4f6;
+        border-color: #4b5563;
+      }
+      html.dark #consent-banner .cb-btn-primary {
+        background: #ea9216;
+        border-color: #ea9216;
+      }
+      #consent-banner p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      #consent-banner a {
+        color: #ea9216;
+        text-decoration: underline;
+      }
+    </style>
+    <script>
+      (function () {
+        const CONSENT_KEY = "vf_ga_consent";
+        function loadGA4() {
+          if (window.__gaLoaded) return;
+          window.__gaLoaded = true;
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-L88Z4WZLDP";
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          window.gtag = gtag;
+          gtag("js", new Date());
+          gtag("config", "G-L88Z4WZLDP");
+        }
+        function initConsent() {
+          try {
+            const dnt =
+              navigator.doNotTrack == "1" ||
+              window.doNotTrack == "1" ||
+              navigator.msDoNotTrack == "1" ||
+              window.globalPrivacyControl === true;
+            const stored = localStorage.getItem(CONSENT_KEY);
+            const banner = document.getElementById("consent-banner");
+            if (stored === "granted") {
+              if (banner) banner.style.display = "none";
+              loadGA4();
+              return;
+            }
+            if (stored === "denied" || dnt) {
+              if (banner) banner.style.display = "none";
+              return;
+            }
+            if (banner) banner.style.display = "block";
+          } catch (e) {}
+        }
+        window.addEventListener("DOMContentLoaded", function () {
+          var accept = document.getElementById("consent-accept");
+          var decline = document.getElementById("consent-decline");
+          if (accept)
+            accept.addEventListener("click", function () {
+              try {
+                localStorage.setItem(CONSENT_KEY, "granted");
+              } catch (e) {}
+              var b = document.getElementById("consent-banner");
+              if (b) b.style.display = "none";
+              loadGA4();
+            });
+          if (decline)
+            decline.addEventListener("click", function () {
+              try {
+                localStorage.setItem(CONSENT_KEY, "denied");
+              } catch (e) {}
+              var b = document.getElementById("consent-banner");
+              if (b) b.style.display = "none";
+            });
+          initConsent();
+        });
+      })();
     </script>
 
     <!-- Early theme setup to default to dark on first visit (no flash) -->
@@ -234,5 +342,25 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Consent banner -->
+    <div
+      id="consent-banner"
+      role="dialog"
+      aria-live="polite"
+      aria-label="Consentimiento de analytics"
+    >
+      <p>
+        Usamos cookies solo para medir el uso del sitio (Google Analytics 4).
+        ¿Nos das tu consentimiento para recopilar estadísticas anónimas?
+      </p>
+      <div class="cb-actions">
+        <button id="consent-decline" class="cb-btn" type="button">
+          Rechazar
+        </button>
+        <button id="consent-accept" class="cb-btn cb-btn-primary" type="button">
+          Aceptar
+        </button>
+      </div>
+    </div>
   </body>
 </html>
