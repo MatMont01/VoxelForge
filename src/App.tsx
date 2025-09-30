@@ -9,7 +9,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  // Crossfade approach: render app behind loader, reveal, then unmount loader
+  const [showLoader, setShowLoader] = useState(true);
+  const [appVisible, setAppVisible] = useState(false);
 
   useEffect(() => {
     // Configure GSAP for better performance with native scroll
@@ -28,23 +30,28 @@ function App() {
   }, []);
 
   const handleLoadingComplete = () => {
-    console.log("Loading completed, switching to main app");
-    setIsLoading(false);
+    // Reveal app content
+    setAppVisible(true);
+    // Unmount loader after crossfade
+    setTimeout(() => setShowLoader(false), 500);
   };
 
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-white dark:bg-[#313841] transition-colors duration-300">
-        {isLoading ? (
-          <Loader onLoadingComplete={handleLoadingComplete} />
-        ) : (
-          <>
-            <CustomCursor />
-            <div className="App">
-              <HomePage />
-            </div>
-          </>
-        )}
+        {/* App content behind loader, crossfading in */}
+        <div
+          className={
+            (appVisible ? "opacity-100" : "opacity-0") +
+            " transition-opacity duration-500"
+          }
+        >
+          <CustomCursor />
+          <div className="App">
+            <HomePage />
+          </div>
+        </div>
+        {showLoader && <Loader onLoadingComplete={handleLoadingComplete} />}
       </div>
     </ThemeProvider>
   );

@@ -12,7 +12,7 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
   useEffect(() => {
     const tl = gsap.timeline({
       onComplete: () => {
-        setTimeout(onLoadingComplete, 500);
+        setTimeout(onLoadingComplete, 100);
       },
     });
 
@@ -43,10 +43,10 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
         ".progress-bar",
         {
           width: "100%",
-          duration: 2,
+          duration: 1.6,
           ease: "power2.out",
         },
-        "-=2"
+        "-=1.8"
       )
       .to(
         ".loader-text",
@@ -58,13 +58,7 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
           ease: "power2.out",
         },
         "-=1.5"
-      )
-      .to(".loader-container", {
-        scale: 1.2,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.in",
-      });
+      );
 
     // Progress counter
     const progressCounter = { value: 0 };
@@ -79,7 +73,7 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
   }, [onLoadingComplete]);
 
   return (
-    <div className="loader-container fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841]">
+    <div className="loader-container fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] transition-opacity duration-300">
       {/* Background Animation */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#ea9216]/20 rounded-full blur-3xl animate-pulse-glow" />
