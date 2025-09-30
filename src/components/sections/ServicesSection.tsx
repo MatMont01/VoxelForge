@@ -14,6 +14,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DESIGN_WEBSITES } from "../../constants";
 import { Button } from "../ui/Button";
 import { scrollToSection } from "../../utils/helpers";
+import { isLowEndDevice, gsapDefaultsForPerf } from "../../utils/perf";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,23 +22,28 @@ export const ServicesSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const lowEnd = isLowEndDevice();
 
   useEffect(() => {
+    const base = gsapDefaultsForPerf();
+
     // Animación del título con efecto de escritura
     if (titleRef.current) {
       gsap.fromTo(
         titleRef.current.children,
-        { y: 100, opacity: 0 },
+        { y: lowEnd ? 40 : 100, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out",
+          duration: lowEnd ? base.duration * 0.8 : 1,
+          stagger: lowEnd ? 0.06 : 0.1,
+          ease: base.ease,
           scrollTrigger: {
             trigger: titleRef.current,
-            start: "top 80%",
+            start: "top 85%",
             toggleActions: "play none none reverse",
+            // throttle refresh to avoid jank on mobile
+            once: false,
           },
         }
       );
@@ -49,28 +55,35 @@ export const ServicesSection = () => {
       gsap.fromTo(
         cards,
         {
-          y: 80,
+          y: lowEnd ? 40 : 80,
           opacity: 0,
-          rotationX: 45,
-          scale: 0.8,
+          rotationX: lowEnd ? 15 : 45,
+          scale: lowEnd ? 0.92 : 0.8,
+          willChange: "transform, opacity",
         },
         {
           y: 0,
           opacity: 1,
           rotationX: 0,
           scale: 1,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "back.out(1.7)",
+          duration: lowEnd ? base.duration : 0.8,
+          stagger: lowEnd ? 0.1 : 0.2,
+          ease: "back.out(1.4)",
           scrollTrigger: {
             trigger: cardsRef.current,
             start: "top 85%",
             toggleActions: "play none none reverse",
           },
+          onComplete: () => {
+            // Drop will-change after anim completes to save memory
+            (cards as any).forEach?.(
+              (el: HTMLElement) => (el.style.willChange = "auto")
+            );
+          },
         }
       );
     }
-  }, []);
+  }, [lowEnd]);
 
   const services = [
     {
