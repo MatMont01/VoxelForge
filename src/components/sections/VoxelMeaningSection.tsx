@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 import { Box, Hammer, Sparkles, Zap, Layers, Infinity } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { isLowEndDevice } from "../../utils/perf";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,8 +13,12 @@ export const VoxelMeaningSection = () => {
   const forgeRef = useRef<HTMLDivElement>(null);
   const unityRef = useRef<HTMLDivElement>(null);
   const cubesRef = useRef<HTMLDivElement>(null);
+  const particlesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const lowEnd = isLowEndDevice();
+    const mm = gsap.matchMedia();
+
     // Enhanced title animation
     if (titleRef.current) {
       const tl = gsap.timeline({
@@ -27,19 +32,19 @@ export const VoxelMeaningSection = () => {
       tl.fromTo(
         ".meaning-title",
         {
-          y: 100,
+          y: lowEnd ? 40 : 100,
           opacity: 0,
-          scale: 0.8,
-          rotationX: 45,
+          scale: lowEnd ? 0.95 : 0.8,
+          rotationX: lowEnd ? 0 : 45,
         },
         {
           y: 0,
           opacity: 1,
           scale: 1,
           rotationX: 0,
-          duration: 1.5,
-          ease: "elastic.out(1, 0.5)",
-          stagger: 0.2,
+          duration: lowEnd ? 0.8 : 1.5,
+          ease: lowEnd ? "power2.out" : "elastic.out(1, 0.5)",
+          stagger: lowEnd ? 0.1 : 0.2,
         }
       );
     }
@@ -49,16 +54,16 @@ export const VoxelMeaningSection = () => {
       gsap.fromTo(
         voxelRef.current,
         {
-          x: -200,
+          x: lowEnd ? -80 : -200,
           opacity: 0,
-          rotationY: -45,
+          rotationY: lowEnd ? 0 : -45,
         },
         {
           x: 0,
           opacity: 1,
           rotationY: 0,
-          duration: 1.8,
-          ease: "power4.out",
+          duration: lowEnd ? 0.9 : 1.8,
+          ease: lowEnd ? "power2.out" : "power4.out",
           scrollTrigger: {
             trigger: voxelRef.current,
             start: "top 80%",
@@ -73,16 +78,16 @@ export const VoxelMeaningSection = () => {
       gsap.fromTo(
         forgeRef.current,
         {
-          x: 200,
+          x: lowEnd ? 80 : 200,
           opacity: 0,
-          rotationY: 45,
+          rotationY: lowEnd ? 0 : 45,
         },
         {
           x: 0,
           opacity: 1,
           rotationY: 0,
-          duration: 1.8,
-          ease: "power4.out",
+          duration: lowEnd ? 0.9 : 1.8,
+          ease: lowEnd ? "power2.out" : "power4.out",
           scrollTrigger: {
             trigger: forgeRef.current,
             start: "top 80%",
@@ -98,19 +103,19 @@ export const VoxelMeaningSection = () => {
       gsap.fromTo(
         unityCards,
         {
-          y: 100,
+          y: lowEnd ? 40 : 100,
           opacity: 0,
-          scale: 0.5,
-          rotationZ: 15,
+          scale: lowEnd ? 0.95 : 0.5,
+          rotationZ: lowEnd ? 0 : 15,
         },
         {
           y: 0,
           opacity: 1,
           scale: 1,
           rotationZ: 0,
-          duration: 1.5,
-          stagger: 0.2,
-          ease: "back.out(1.7)",
+          duration: lowEnd ? 0.7 : 1.5,
+          stagger: lowEnd ? 0.1 : 0.2,
+          ease: lowEnd ? "power2.out" : "back.out(1.7)",
           scrollTrigger: {
             trigger: unityRef.current,
             start: "top 80%",
@@ -125,45 +130,91 @@ export const VoxelMeaningSection = () => {
       const cubes = cubesRef.current.querySelectorAll(".floating-cube");
       gsap.set(cubes, { transformStyle: "preserve-3d" });
 
+      const cubeTweens: gsap.core.Tween[] = [];
       cubes.forEach((cube, i) => {
-        gsap.to(cube, {
-          rotationX: 360,
-          rotationY: 360,
-          duration: 8 + i * 2,
-          ease: "none",
-          repeat: -1,
-        });
+        if (!lowEnd) {
+          cubeTweens.push(
+            gsap.to(cube, {
+              rotationX: 360,
+              rotationY: 360,
+              duration: 8 + i * 2,
+              ease: "none",
+              repeat: -1,
+              paused: true,
+            })
+          );
+        }
 
-        gsap.to(cube, {
-          y: -30,
-          duration: 3 + i * 0.5,
-          ease: "power2.inOut",
-          yoyo: true,
-          repeat: -1,
-          delay: i * 0.3,
-        });
+        cubeTweens.push(
+          gsap.to(cube, {
+            y: lowEnd ? -8 : -30,
+            duration: lowEnd ? 2 : 3 + i * 0.5,
+            ease: "power2.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: i * 0.3,
+            paused: true,
+          })
+        );
+      });
+
+      // Pause/resume cube animations only when section is visible
+      ScrollTrigger.create({
+        trigger: sectionRef.current!,
+        start: "top 90%",
+        end: "bottom top",
+        onEnter: () => cubeTweens.forEach((t) => t.play()),
+        onLeave: () => cubeTweens.forEach((t) => t.pause()),
+        onEnterBack: () => cubeTweens.forEach((t) => t.play()),
+        onLeaveBack: () => cubeTweens.forEach((t) => t.pause()),
       });
     }
 
-    // Particle animation
-    gsap.to(".meaning-particle", {
-      y: -50,
-      x: "random(-20, 20)",
-      opacity: 0,
-      duration: 3,
-      ease: "power2.out",
-      repeat: -1,
-      stagger: {
-        amount: 2,
+    // Particle animation - scoped to this section and paused off-screen
+    if (particlesRef.current) {
+      const particles =
+        particlesRef.current.querySelectorAll(".meaning-particle");
+
+      const particleTween = gsap.to(particles, {
+        y: lowEnd ? -20 : -50,
+        x: lowEnd ? 0 : "random(-20, 20)",
+        opacity: 0,
+        duration: lowEnd ? 2 : 3,
+        ease: "power2.out",
         repeat: -1,
-      },
-    });
+        stagger: {
+          amount: lowEnd ? 1.2 : 2,
+          repeat: -1,
+        },
+        paused: true,
+      });
+
+      ScrollTrigger.create({
+        trigger: sectionRef.current!,
+        start: "top 90%",
+        end: "bottom top",
+        onEnter: () => particleTween.play(),
+        onLeave: () => particleTween.pause(),
+        onEnterBack: () => particleTween.play(),
+        onLeaveBack: () => particleTween.pause(),
+      });
+    }
+
+    return () => {
+      mm.revert();
+      ScrollTrigger.getAll().forEach((st) => {
+        const el = st.vars.trigger as HTMLElement | undefined;
+        if (el && sectionRef.current && sectionRef.current.contains(el)) {
+          st.kill();
+        }
+      });
+    };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="py-20 bg-gradient-to-br from-gray-100 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden"
+      className="cv-auto py-20 bg-gradient-to-br from-gray-100 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden"
     >
       {/* Animated Background */}
       <div className="absolute inset-0">
@@ -197,7 +248,7 @@ export const VoxelMeaningSection = () => {
       </div>
 
       {/* Particles */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div ref={particlesRef} className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}

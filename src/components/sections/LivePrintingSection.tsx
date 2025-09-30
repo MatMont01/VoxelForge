@@ -199,7 +199,12 @@ export const LivePrintingSection = () => {
                   {/* TikTok UI Elements */}
                   <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
                     <div className="flex items-center space-x-2">
-                      <img src={tiktokLogo} alt="TikTok" className="w-6 h-6" />
+                      <img
+                        src={tiktokLogo}
+                        alt="TikTok"
+                        loading="lazy"
+                        className="w-6 h-6"
+                      />
                       <span className="text-white text-sm font-bold">
                         @voxelforge_scz
                       </span>
@@ -340,7 +345,12 @@ export const LivePrintingSection = () => {
                 rel="noopener noreferrer"
                 className="group inline-flex items-center px-8 py-4 bg-black text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
               >
-                <img src={tiktokLogo} alt="TikTok" className="w-6 h-6 mr-3" />
+                <img
+                  src={tiktokLogo}
+                  alt="TikTok"
+                  loading="lazy"
+                  className="w-6 h-6 mr-3"
+                />
                 Seguir en TikTok
                 <Play className="w-5 h-5 ml-3 group-hover:scale-110 transition-transform" />
               </a>

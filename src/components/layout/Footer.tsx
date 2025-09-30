@@ -109,6 +109,7 @@ export const Footer = () => {
                   <img
                     src={instagramLogo}
                     alt="Instagram"
+                    loading="lazy"
                     className="w-4 h-4"
                   />
                 </div>
@@ -124,7 +125,12 @@ export const Footer = () => {
                 className="flex items-center space-x-3 text-gray-300 dark:text-gray-400 hover:text-gray-200 transition-colors group"
               >
                 <div className="w-8 h-8 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <img src={tiktokLogo} alt="TikTok" className="w-4 h-4" />
+                  <img
+                    src={tiktokLogo}
+                    alt="TikTok"
+                    loading="lazy"
+                    className="w-4 h-4"
+                  />
                 </div>
                 <div>
                   <div className="font-medium">TikTok</div>

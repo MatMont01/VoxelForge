@@ -399,6 +399,13 @@ html.dark [class*="text-gray-200"] {
   color: #1f2937 !important;
 }
 
+/* Performance utility: only paint heavy sections when needed */
+.cv-auto {
+  content-visibility: auto;
+  /* Reasonable placeholder size to avoid layout shift until painted */
+  contain-intrinsic-size: 1000px;
+}
+
 html.dark [class*="text-gray-300"] {
   color: #374151 !important;
 }
