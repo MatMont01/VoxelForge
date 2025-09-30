@@ -137,7 +137,7 @@ export const ServicesSection = () => {
       className="py-20 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-[#0a2e1a] dark:via-[#1a3d2e] dark:to-[#0a2e1a] relative overflow-hidden"
     >
       {/* Enhanced Background Effects */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
@@ -221,9 +221,9 @@ export const ServicesSection = () => {
                 </span>
               </div>
 
-              {/* Gradient Overlay */}
+              {/* Gradient Overlay (decorative, ignore pointer events) */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500`}
+                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500 pointer-events-none`}
               />
 
               {/* Icon */}
@@ -257,11 +257,7 @@ export const ServicesSection = () => {
                   variant="outline"
                   size="sm"
                   className="w-full group-hover:bg-[#ea9216] group-hover:text-white group-hover:border-[#ea9216] transition-all duration-300"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log("Botón Solicitar Cotización clickeado!");
-                    alert("Botón funcionando - redirigiendo a contacto");
+                  onClick={() => {
                     scrollToSection("#contact");
                   }}
                 >
@@ -270,8 +266,8 @@ export const ServicesSection = () => {
                 </Button>
               </div>
 
-              {/* Shine Effect */}
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-3xl" />
+              {/* Shine Effect (decorative, ignore pointer events) */}
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-3xl pointer-events-none" />
             </div>
           ))}
         </div>
@@ -280,7 +276,7 @@ export const ServicesSection = () => {
         <div className="mt-20 relative">
           <div className="relative bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-12 border border-gray-200/50 dark:border-gray-700/30 shadow-2xl overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0 opacity-5 pointer-events-none">
               <div
                 className="absolute inset-0"
                 style={{
@@ -412,13 +408,7 @@ export const ServicesSection = () => {
               <Button
                 size="lg"
                 className="text-lg px-8 py-4"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  console.log(
-                    "Botón Solicitar Cotización Personalizada clickeado!"
-                  );
-                  alert("Botón grande funcionando - redirigiendo a contacto");
+                onClick={() => {
                   scrollToSection("#contact");
                 }}
               >
@@ -432,7 +422,7 @@ export const ServicesSection = () => {
         {/* Design Websites Section - Modernizada */}
         <div className="mt-20 relative bg-gradient-to-br from-gray-50/80 via-white/40 to-gray-100/80 dark:from-[#3a4750]/80 dark:via-[#313841]/40 dark:to-[#3a4750]/80 backdrop-blur-xl rounded-3xl p-10 border border-white/20 dark:border-gray-700/30 shadow-2xl overflow-hidden">
           {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 opacity-5 pointer-events-none">
             <div
               className="absolute inset-0"
               style={{
