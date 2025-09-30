@@ -23,6 +23,48 @@
     "Segoe UI Emoji", sans-serif;
 }
 
+/* Body font: Caladea (regular, italic, bold, bold italic) */
+@font-face {
+  font-family: "Caladea";
+  src: url("./assets/fonts/caladea/Caladea-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Caladea";
+  src: url("./assets/fonts/caladea/Caladea-Italic.ttf") format("truetype");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Caladea";
+  src: url("./assets/fonts/caladea/Caladea-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Caladea";
+  src: url("./assets/fonts/caladea/Caladea-BoldItalic.ttf") format("truetype");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --font-caladea: "Caladea", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+    "Segoe UI Emoji", sans-serif;
+}
+
+/* Default body font to Caladea (headings overridden below to Cunia) */
+html,
+body {
+  font-family: var(--font-caladea);
+}
+
 /* Apply Cunia to main headings by default */
 h1,
 h2,
@@ -35,6 +77,11 @@ h3,
 /* Utility class to opt-in anywhere */
 .font-cunia {
   font-family: var(--font-cunia);
+}
+
+/* Utility for Caladea when needed */
+.font-caladea {
+  font-family: var(--font-caladea);
 }
 
 /* Modo oscuro sutil - conserva colores vibrantes, mejora legibilidad */
