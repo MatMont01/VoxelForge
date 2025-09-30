@@ -30,10 +30,10 @@ function App() {
   }, []);
 
   const handleLoadingComplete = () => {
-    // Reveal app content
+    // Reveal app content with a slightly longer overlap for a smoother feel
     setAppVisible(true);
-    // Unmount loader after crossfade
-    setTimeout(() => setShowLoader(false), 500);
+    // Allow the loader to fade out while the app scales in; slightly longer than 500ms for fluidity
+    setTimeout(() => setShowLoader(false), 700);
   };
 
   return (
@@ -42,9 +42,12 @@ function App() {
         {/* App content behind loader, crossfading in */}
         <div
           className={
-            (appVisible ? "opacity-100" : "opacity-0") +
-            " transition-opacity duration-500"
+            (appVisible
+              ? "opacity-100 scale-100 blur-0"
+              : "opacity-0 scale-[0.98] blur-[2px]") +
+            " transition-all duration-700"
           }
+          style={{ willChange: "opacity, transform, filter" }}
         >
           <CustomCursor />
           <div className="App">

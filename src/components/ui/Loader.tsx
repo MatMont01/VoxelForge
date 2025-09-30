@@ -13,6 +13,7 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
   const timeDoneRef = useRef(false);
   const loadDoneRef = useRef(false);
   const finishedRef = useRef(false);
+  const barRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     // Prevent double-run within same page session
@@ -45,7 +46,9 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
     const progressCounter = { value: 0 };
     const updateBar = () => {
       setProgress(Math.round(progressCounter.value));
-      gsap.set(".progress-bar", { width: `${progressCounter.value}%` });
+      if (barRef.current) {
+        gsap.set(barRef.current, { width: `${progressCounter.value}%` });
+      }
     };
 
     const prefersReduced =
@@ -104,9 +107,10 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
   return (
     <div
       className={
-        "loader-container fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] transition-opacity duration-300 " +
+        "loader-container fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841] transition-opacity duration-600 " +
         (exiting ? "opacity-0" : "opacity-100")
       }
+      style={{ willChange: "opacity" }}
     >
       {/* Background Animation */}
       <div className="absolute inset-0 overflow-hidden">
@@ -140,7 +144,10 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
         {/* Progress Bar */}
         <div className="mb-6">
           <div className="w-64 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mx-auto overflow-hidden">
-            <div className="progress-bar h-full bg-gradient-to-r from-[#ea9216] to-[#d68614] rounded-full w-0 transition-all duration-300"></div>
+            <div
+              ref={barRef}
+              className="progress-bar h-full bg-gradient-to-r from-[#ea9216] to-[#d68614] rounded-full w-0 transition-all duration-300"
+            ></div>
           </div>
           <div className="mt-4 text-2xl font-bold text-[#ea9216]">
             {progress}%
