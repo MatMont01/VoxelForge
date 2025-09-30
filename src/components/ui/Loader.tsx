@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { gsap } from "gsap";
-import logoCircular from "../../assets/VoxelForgeLogos/voxel-forge-logo-circular.png";
+import logoSolo from "../../assets/VoxelForgeLogos/voxel-forge-logo-solo.svg";
 
 interface LoaderProps {
   onLoadingComplete: () => void;
@@ -93,7 +93,7 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
         {/* Logo */}
         <div className="mb-8">
           <img
-            src={logoCircular}
+            src={logoSolo}
             alt="Voxel Forge"
             className="loader-logo w-32 h-32 mx-auto drop-shadow-2xl"
           />
@@ -121,7 +121,7 @@ export const Loader = ({ onLoadingComplete }: LoaderProps) => {
 
         {/* Loading Text */}
         <p className="loader-text text-gray-500 dark:text-gray-400 opacity-0 transform translate-y-4">
-          Preparando experiencia increíble...
+          Preparando una experiencia increíble...
         </p>
       </div>
     </div>

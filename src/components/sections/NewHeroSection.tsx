@@ -235,14 +235,14 @@ export const HeroSection = () => {
               ref={logoRef}
               src={logoSolo}
               alt="Voxel Forge Logo"
-              className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 drop-shadow-2xl"
+              className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 drop-shadow-2xl opacity-0 translate-y-6"
             />
           </div>
 
           {/* Main Title */}
           <h1
             ref={titleRef}
-            className="brand-title text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight perspective-1000"
+            className="brand-title text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight perspective-1000 opacity-0 translate-y-6"
             style={{ transformStyle: "preserve-3d" }}
           >
             <span className="text-[#ea9216] inline-block">Voxel</span>{" "}
@@ -252,7 +252,7 @@ export const HeroSection = () => {
           {/* Subtitle */}
           <p
             ref={subtitleRef}
-            className="text-xl md:text-3xl text-gray-600 dark:text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
+            className="text-xl md:text-3xl text-gray-600 dark:text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed opacity-0 translate-y-6"
           >
             Transformamos tus{" "}
             <span className="text-[#ea9216] font-semibold">
@@ -267,7 +267,7 @@ export const HeroSection = () => {
           {/* CTA Buttons */}
           <div
             ref={buttonsRef}
-            className="flex flex-col sm:flex-row gap-6 justify-center mb-20"
+            className="flex flex-col sm:flex-row gap-6 justify-center mb-20 opacity-0 translate-y-6"
           >
             <Button
               size="lg"
