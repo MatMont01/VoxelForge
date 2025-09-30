@@ -6,22 +6,4 @@
     <priority>1.0</priority>
     <lastmod>2025-09-30</lastmod>
   </url>
-  <url>
-    <loc>https://voxelforge.org/servicios</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2025-09-30</lastmod>
-  </url>
-  <url>
-    <loc>https://voxelforge.org/portafolio</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2025-09-30</lastmod>
-  </url>
-  <url>
-    <loc>https://voxelforge.org/contacto</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <lastmod>2025-09-30</lastmod>
-  </url>
 </urlset>
