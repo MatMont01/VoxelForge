@@ -32,9 +32,19 @@ export const CustomCursor = () => {
       follower.style.transform = `translate(${fx}px, ${fy}px) translate(-50%, -50%) scale(${followerScale})`;
     };
 
+    let hasShown = false;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      // Ensure cursor becomes visible on first movement
+      if (!hasShown) {
+        cursor.style.opacity = "1";
+        follower.style.opacity = "0.6";
+        cursorScale = 1;
+        followerScale = 1;
+        hasShown = true;
+      }
       // Move the small cursor immediately while keeping center + scale
       applyTransforms();
     };
