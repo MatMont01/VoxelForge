@@ -100,7 +100,7 @@ export const EquipmentSection = () => {
             variants={slideLeft}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
+            viewport={{ amount: 0.1 }}
             className="relative bg-gray-600/90 dark:bg-[#313841]/80 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-gray-400/30 dark:border-gray-700/30"
             style={{
               background: `linear-gradient(135deg, 
