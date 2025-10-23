@@ -112,10 +112,10 @@ export const EquipmentSection = () => {
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
               {/* Printer Showcase */}
-              <div className="relative p-8 sm:p-12 flex items-center justify-center bg-gradient-to-br from-[#eeeeee]/50 to-gray-100/50 dark:from-[#3a4750]/50 dark:to-[#313841]/50 order-2 lg:order-1 mt-6 lg:mt-0">
+              <div className="relative p-8 sm:p-12 flex items-center justify-center bg-gradient-to-br from-[#eeeeee]/50 to-gray-100/50 dark:from-[#3a4750]/50 dark:to-[#313841]/50 order-2 lg:order-1 mt-6 lg:mt-0 overflow-hidden">
                 {/* 3D Printer Model */}
                 <div className="relative group">
-                  <div className="w-full max-w-xs sm:max-w-sm aspect-square flex items-center justify-center overflow-visible">
+                  <div className="w-full max-w-xs sm:max-w-sm aspect-square flex items-center justify-center overflow-hidden">
                     <img
                       src={p1sPrinterImage}
                       alt="Bambu Lab P1S 3D Printer"
@@ -124,7 +124,7 @@ export const EquipmentSection = () => {
                   </div>
 
                   {/* Status Badge */}
-                  <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-xl animate-pulse">
+                  <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-20 h-20 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-xl animate-pulse">
                     <div className="text-center">
                       <div className="w-3 h-3 bg-white rounded-full mx-auto mb-1"></div>
                       <span className="text-white font-bold text-xs">
@@ -135,19 +135,19 @@ export const EquipmentSection = () => {
 
                   {/* Floating Elements */}
                   <div
-                    className="absolute -top-4 -left-4 w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center shadow-lg animate-bounce"
+                    className="absolute -top-2 -left-2 sm:-top-4 sm:-left-4 w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center shadow-lg animate-bounce"
                     style={{ animationDelay: "0s" }}
                   >
                     <Cpu className="w-4 h-4 text-white" />
                   </div>
                   <div
-                    className="absolute -bottom-2 -left-6 w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center shadow-lg animate-bounce"
+                    className="absolute -bottom-1 -left-4 sm:-bottom-2 sm:-left-6 w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center shadow-lg animate-bounce"
                     style={{ animationDelay: "0.5s" }}
                   >
                     <Gauge className="w-5 h-5 text-white" />
                   </div>
                   <div
-                    className="absolute top-10 -right-2 w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center shadow-lg animate-bounce"
+                    className="absolute top-10 -right-1 sm:-right-2 w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center shadow-lg animate-bounce"
                     style={{ animationDelay: "1s" }}
                   >
                     <Star className="w-3 h-3 text-white fill-current" />

@@ -151,6 +151,8 @@ body {
   /* Ensure body inherits theme colors */
   background-color: inherit;
   color: inherit;
+  /* Avoid horizontal scroll caused by decorative absolute elements */
+  overflow-x: hidden;
 }
 
 /* Smooth transitions for dark mode - but not affecting scroll */
