@@ -401,17 +401,7 @@ textarea:focus {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Custom cursor - hide native cursor only when our cursor is enabled and any fine pointer exists */
-@media (any-pointer: fine) {
-  html[data-cursor="enabled"] * {
-    cursor: none !important;
-  }
-  html[data-cursor="enabled"] a,
-  html[data-cursor="enabled"] button,
-  html[data-cursor="enabled"] [data-cursor="pointer"] {
-    cursor: none !important;
-  }
-}
+/* Custom cursor removed: no native cursor hiding rules */
 
 /* Animaciones para LivePrintingSection */
 @keyframes float {
