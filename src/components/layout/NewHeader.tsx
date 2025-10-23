@@ -94,25 +94,8 @@ export const Header = () => {
             {/* Removed extra page links to keep SPA behavior */}
           </nav>
 
-          {/* Right side CTAs & Mobile Menu */}
+          {/* Mobile Menu Button */}
           <div className="flex items-center space-x-3">
-            {/* Guidance CTAs - Desktop only */}
-            <div className="hidden md:flex items-center space-x-2">
-              <button
-                onClick={() => scrollToSection("#designs")}
-                className="px-4 py-2 rounded-full bg-white/70 dark:bg-gray-800/60 backdrop-blur-md border border-gray-200/40 dark:border-gray-700/40 text-sm font-medium text-gray-800 dark:text-gray-200 hover:bg-white/90 dark:hover:bg-gray-800/80 transition-all duration-300"
-              >
-                Descargar diseños
-              </button>
-              <button
-                onClick={() => scrollToSection("#contact")}
-                className="px-5 py-2 rounded-full bg-gradient-to-r from-[#ea9216] to-[#d68614] text-white text-sm font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-              >
-                Cotizar
-              </button>
-            </div>
-
-            {/* Mobile menu button */}
             <button
               className="md:hidden p-3 text-gray-700 dark:text-gray-300 hover:text-[#ea9216] transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -163,20 +146,6 @@ export const Header = () => {
                 </span>
               </button>
             ))}
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <button
-                onClick={() => handleNavClick("#designs")}
-                className="px-4 py-3 rounded-xl bg-white/80 dark:bg-gray-800/70 border border-gray-200/40 dark:border-gray-700/40 text-sm font-semibold text-gray-800 dark:text-gray-200"
-              >
-                Descargar diseños
-              </button>
-              <button
-                onClick={() => handleNavClick("#contact")}
-                className="px-4 py-3 rounded-xl bg-gradient-to-r from-[#ea9216] to-[#d68614] text-white text-sm font-semibold shadow-lg"
-              >
-                Cotizar
-              </button>
-            </div>
           </div>
         </div>
       </div>

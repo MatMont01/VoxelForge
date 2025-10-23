@@ -83,8 +83,9 @@ export const COMPANY_HISTORY = {
 export const NAVIGATION_ITEMS = [
   { name: "Inicio", href: "#home" },
   { name: "Servicios", href: "#services" },
+  { name: "Descargar Diseños", href: "#designs" },
   { name: "Equipos", href: "#equipment" },
   { name: "Portafolio", href: "#portfolio" },
   { name: "Sobre Nosotros", href: "#about" },
-  { name: "Contacto", href: "#contact" },
+  { name: "Cotizar", href: "#contact" },
 ];
