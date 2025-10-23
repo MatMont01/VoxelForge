@@ -86,10 +86,9 @@ export const ServicesSection = () => {
   return (
     <section
       ref={sectionRef}
-      id="services"
       className="cv-auto py-20 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-[#0a2e1a] dark:via-[#1a3d2e] dark:to-[#0a2e1a] relative overflow-hidden"
     >
-      {/* Enhanced Background Effects */}
+      {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div
           className="absolute inset-0"
@@ -99,16 +98,13 @@ export const ServicesSection = () => {
         />
       </div>
 
-      {/* Floating Service Icons */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-32 left-20 w-12 h-12 bg-gradient-to-br from-green-400/20 to-emerald-500/20 rounded-full animate-pulse"></div>
-        <div className="absolute top-48 right-32 w-8 h-8 bg-gradient-to-br from-teal-400/15 to-green-500/15 rounded-full animate-bounce"></div>
-        <div className="absolute bottom-36 left-32 w-16 h-16 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full"></div>
-        <div className="absolute bottom-24 right-20 w-10 h-10 bg-gradient-to-br from-green-500/15 to-emerald-400/15 rounded-full animate-pulse"></div>
-      </div>
+      {/* Floating Accents */}
+      <div className="absolute bottom-36 left-32 w-16 h-16 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full" />
+      <div className="absolute bottom-24 right-20 w-10 h-10 bg-gradient-to-br from-green-500/15 to-emerald-400/15 rounded-full animate-pulse" />
 
       {/* Green Ambient Light */}
-      <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-gradient-radial from-green-300/15 via-emerald-300/8 to-transparent rounded-full blur-3xl"></div>
+      <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-gradient-radial from-green-300/15 via-emerald-300/8 to-transparent rounded-full blur-3xl" />
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/20 border border-[#ea9216]/20 mb-6">
@@ -137,9 +133,16 @@ export const ServicesSection = () => {
         </div>
 
         {/* Services Grid con efectos modernos */}
-        <div
+        <motion.div
           ref={cardsRef}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
+          }}
         >
           {services.map((service) => (
             <motion.div
@@ -152,10 +155,27 @@ export const ServicesSection = () => {
                 )`,
                 backdropFilter: "blur(20px)",
               }}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              variants={{
+                hidden: { opacity: 0, y: 24 },
+                show: { opacity: 1, y: 0 },
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 140,
+                damping: 18,
+                mass: 0.6,
+              }}
+              whileHover={{
+                y: -6,
+                scale: 1.02,
+                transition: {
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 22,
+                  mass: 0.4,
+                },
+              }}
+              whileTap={{ scale: 0.99 }}
               // onMouseEnter={(e) => {
               //   gsap.to(e.currentTarget, {
               //     scale: 1.02,
@@ -231,7 +251,7 @@ export const ServicesSection = () => {
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-3xl pointer-events-none" />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Cotization Process Section */}
         <div className="mt-20 relative">

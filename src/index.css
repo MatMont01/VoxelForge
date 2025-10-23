@@ -102,6 +102,18 @@ html.dark {
   contain-intrinsic-size: 1000px;
 }
 
+/* Show custom cursor only when component enables it, and device has any fine pointer */
+@media (any-pointer: fine) {
+  html[data-cursor="enabled"] * {
+    cursor: none !important;
+  }
+  html[data-cursor="enabled"] a,
+  html[data-cursor="enabled"] button,
+  html[data-cursor="enabled"] [data-cursor="pointer"] {
+    cursor: none !important;
+  }
+}
+
 /* Custom styles */
 html {
   scroll-behavior: smooth;
