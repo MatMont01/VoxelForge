@@ -112,7 +112,7 @@ export const EquipmentSection = () => {
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
               {/* Printer Showcase */}
-              <div className="relative p-12 flex items-center justify-center bg-gradient-to-br from-[#eeeeee]/50 to-gray-100/50 dark:from-[#3a4750]/50 dark:to-[#313841]/50">
+              <div className="relative p-8 sm:p-12 flex items-center justify-center bg-gradient-to-br from-[#eeeeee]/50 to-gray-100/50 dark:from-[#3a4750]/50 dark:to-[#313841]/50 order-2 lg:order-1">
                 {/* 3D Printer Model */}
                 <div className="relative group">
                   <div className="w-96 h-96 flex items-center justify-center overflow-visible">
@@ -156,7 +156,7 @@ export const EquipmentSection = () => {
               </div>
 
               {/* Printer Details */}
-              <div className="p-12 relative">
+              <div className="p-6 sm:p-12 relative order-1 lg:order-2 z-10">
                 {/* Header */}
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-4">
@@ -225,10 +225,10 @@ export const EquipmentSection = () => {
                           >
                             <IconComponent className="w-6 h-6 text-white" />
                           </div>
-                          <div className="font-bold text-white text-lg mb-1">
+                          <div className="font-bold text-gray-900 dark:text-white text-lg mb-1">
                             {Array.isArray(value) ? value.join(", ") : value}
                           </div>
-                          <div className="text-sm text-gray-200 font-medium">
+                          <div className="text-sm text-gray-700 dark:text-gray-200 font-medium">
                             {labels[key as keyof typeof labels]}
                           </div>
                         </div>
@@ -252,7 +252,7 @@ export const EquipmentSection = () => {
                         className="flex items-center p-3 bg-white/60 dark:bg-[#313841]/60 backdrop-blur-sm rounded-xl border border-white/30 hover:bg-white/80 dark:hover:bg-[#313841]/80 transition-all duration-300 hover:scale-105"
                       >
                         <div className="w-3 h-3 bg-gradient-to-r from-[#ea9216] to-[#d68614] rounded-full mr-3 shadow-sm"></div>
-                        <span className="text-sm font-medium text-gray-200">
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
                           {feature}
                         </span>
                       </div>

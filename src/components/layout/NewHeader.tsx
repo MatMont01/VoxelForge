@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 import { NAVIGATION_ITEMS } from "../../constants";
 import { scrollToSection } from "../../utils/helpers";
 import logoSolo from "../../assets/VoxelForgeLogos/voxel-forge-logo-solo.svg";
-import instagramLogo from "../../assets/SocialMediaLogo/instagram.png";
-import tiktokLogo from "../../assets/SocialMediaLogo/tiktok.png";
+// Removed social icons from header to keep it focused on guidance/CTAs
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -95,44 +94,22 @@ export const Header = () => {
             {/* Removed extra page links to keep SPA behavior */}
           </nav>
 
-          {/* Social Links & Mobile Menu */}
+          {/* Right side CTAs & Mobile Menu */}
           <div className="flex items-center space-x-3">
-            {/* Social Links - Desktop only */}
-            <div className="hidden lg:flex items-center space-x-2">
-              <a
-                href="https://www.instagram.com/voxelforge_scz/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-gradient-to-r from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 hover:from-pink-200 hover:to-purple-200 dark:hover:from-pink-800/40 dark:hover:to-purple-800/40 transition-all duration-300 group"
-                aria-label="Instagram"
+            {/* Guidance CTAs - Desktop only */}
+            <div className="hidden md:flex items-center space-x-2">
+              <button
+                onClick={() => scrollToSection("#designs")}
+                className="px-4 py-2 rounded-full bg-white/70 dark:bg-gray-800/60 backdrop-blur-md border border-gray-200/40 dark:border-gray-700/40 text-sm font-medium text-gray-800 dark:text-gray-200 hover:bg-white/90 dark:hover:bg-gray-800/80 transition-all duration-300"
               >
-                <img
-                  src={instagramLogo}
-                  alt="Instagram"
-                  className="w-4 h-4 group-hover:scale-110 transition-transform"
-                  width={16}
-                  height={16}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </a>
-              <a
-                href="https://www.tiktok.com/@voxelforge_scz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 group"
-                aria-label="TikTok"
+                Descargar diseños
+              </button>
+              <button
+                onClick={() => scrollToSection("#contact")}
+                className="px-5 py-2 rounded-full bg-gradient-to-r from-[#ea9216] to-[#d68614] text-white text-sm font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
               >
-                <img
-                  src={tiktokLogo}
-                  alt="TikTok"
-                  className="w-4 h-4 group-hover:scale-110 transition-transform"
-                  width={16}
-                  height={16}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </a>
+                Cotizar
+              </button>
             </div>
 
             {/* Mobile menu button */}
@@ -186,6 +163,20 @@ export const Header = () => {
                 </span>
               </button>
             ))}
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <button
+                onClick={() => handleNavClick("#designs")}
+                className="px-4 py-3 rounded-xl bg-white/80 dark:bg-gray-800/70 border border-gray-200/40 dark:border-gray-700/40 text-sm font-semibold text-gray-800 dark:text-gray-200"
+              >
+                Descargar diseños
+              </button>
+              <button
+                onClick={() => handleNavClick("#contact")}
+                className="px-4 py-3 rounded-xl bg-gradient-to-r from-[#ea9216] to-[#d68614] text-white text-sm font-semibold shadow-lg"
+              >
+                Cotizar
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -400,8 +400,11 @@ export const ServicesSection = () => {
           </div>
         </div>
 
-        {/* Design Websites Section - Modernizada */}
-        <div className="mt-20 relative bg-gradient-to-br from-gray-50/80 via-white/40 to-gray-100/80 dark:from-[#3a4750]/80 dark:via-[#313841]/40 dark:to-[#3a4750]/80 backdrop-blur-xl rounded-3xl p-10 border border-white/20 dark:border-gray-700/30 shadow-2xl overflow-hidden">
+        {/* Design Websites Section - Mejorada */}
+        <div
+          id="designs"
+          className="mt-20 relative bg-gradient-to-br from-gray-50/80 via-white/40 to-gray-100/80 dark:from-[#3a4750]/80 dark:via-[#313841]/40 dark:to-[#3a4750]/80 backdrop-blur-xl rounded-3xl p-10 border border-white/20 dark:border-gray-700/30 shadow-2xl overflow-hidden"
+        >
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5 pointer-events-none">
             <div
@@ -427,14 +430,23 @@ export const ServicesSection = () => {
                 </span>
               </h3>
               <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                Descubre miles de diseños increíbles en estas plataformas
-                especializadas
+                Descubre miles de diseños listos para imprimir en plataformas
+                confiables. Elige la que más te guste y descarga tus modelos.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={{
+                hidden: {},
+                show: { transition: { staggerChildren: 0.12 } },
+              }}
+            >
               {DESIGN_WEBSITES.map((website, index) => (
-                <a
+                <motion.a
                   key={website.name}
                   href={website.url}
                   target="_blank"
@@ -443,6 +455,11 @@ export const ServicesSection = () => {
                   style={{
                     animationDelay: `${index * 100}ms`,
                   }}
+                  variants={{
+                    hidden: { opacity: 0, y: 16 },
+                    show: { opacity: 1, y: 0 },
+                  }}
+                  whileHover={{ scale: 1.02 }}
                 >
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-br from-[#ea9216]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
@@ -460,13 +477,35 @@ export const ServicesSection = () => {
                     <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                       {website.description}
                     </p>
+
+                    <div className="mt-5 flex items-center justify-between">
+                      <span
+                        className={`px-2.5 py-1 rounded-full text-xs font-semibold ${
+                          website.category === "free"
+                            ? "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300"
+                            : website.category === "mixed"
+                            ? "bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300"
+                            : "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+                        }`}
+                      >
+                        {website.category === "free"
+                          ? "Gratis"
+                          : website.category === "mixed"
+                          ? "Gratis y Premium"
+                          : "Premium"}
+                      </span>
+                      <span className="inline-flex items-center text-[#ea9216] font-semibold">
+                        Ver diseños
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </span>
+                    </div>
                   </div>
 
                   {/* Shine Effect */}
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 rounded-2xl" />
-                </a>
+                </motion.a>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

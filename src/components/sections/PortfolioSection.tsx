@@ -179,7 +179,13 @@ export const PortfolioSection = () => {
         </motion.div>
 
         {/* Enhanced Categories */}
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-200/30 dark:border-purple-700/30 mb-6">
             <Sparkles className="w-4 h-4 text-purple-500 mr-2" />
             <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
@@ -191,7 +197,7 @@ export const PortfolioSection = () => {
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map((category, index) => (
-              <span
+              <motion.span
                 key={category}
                 className={`px-6 py-3 bg-gradient-to-r backdrop-blur-sm rounded-2xl text-sm font-semibold border transition-all duration-300 hover:scale-105 hover:shadow-lg ${
                   index % 4 === 0
@@ -202,12 +208,20 @@ export const PortfolioSection = () => {
                     ? "from-[#ea9216]/10 to-[#ea9216]/20 text-[#ea9216] border-[#ea9216]/30"
                     : "from-green-500/10 to-green-600/10 text-green-600 dark:text-green-400 border-green-200/30 dark:border-green-700/30"
                 }`}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.4,
+                  ease: "easeOut",
+                  delay: index * 0.05,
+                }}
               >
                 {category}
-              </span>
+              </motion.span>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Enhanced Call to Action with Social Links */}
         <div className="max-w-5xl mx-auto">
