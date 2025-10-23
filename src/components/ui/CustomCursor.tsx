@@ -8,7 +8,7 @@ export const CustomCursor = () => {
   useEffect(() => {
     // Enable only on fine pointer devices (mouse/trackpad)
     const isFinePointer =
-      window.matchMedia?.("(pointer: fine)").matches ?? true;
+      window.matchMedia?.("(any-pointer: fine)").matches ?? false;
     if (!isFinePointer) return;
 
     const cursor = cursorRef.current;
