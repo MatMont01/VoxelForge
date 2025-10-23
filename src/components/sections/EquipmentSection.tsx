@@ -112,14 +112,14 @@ export const EquipmentSection = () => {
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
               {/* Printer Showcase */}
-              <div className="relative p-8 sm:p-12 flex items-center justify-center bg-gradient-to-br from-[#eeeeee]/50 to-gray-100/50 dark:from-[#3a4750]/50 dark:to-[#313841]/50 order-2 lg:order-1">
+              <div className="relative p-8 sm:p-12 flex items-center justify-center bg-gradient-to-br from-[#eeeeee]/50 to-gray-100/50 dark:from-[#3a4750]/50 dark:to-[#313841]/50 order-2 lg:order-1 mt-6 lg:mt-0">
                 {/* 3D Printer Model */}
                 <div className="relative group">
-                  <div className="w-96 h-96 flex items-center justify-center overflow-visible">
+                  <div className="w-full max-w-xs sm:max-w-sm aspect-square flex items-center justify-center overflow-visible">
                     <img
                       src={p1sPrinterImage}
                       alt="Bambu Lab P1S 3D Printer"
-                      className="w-[120%] h-[120%] object-contain drop-shadow-2xl filter brightness-110 transform transition-all duration-500 group-hover:scale-110 relative z-10"
+                      className="w-full h-full object-contain drop-shadow-2xl filter brightness-110 transform transition-all duration-500 group-hover:scale-105 relative z-10"
                     />
                   </div>
 

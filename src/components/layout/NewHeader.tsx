@@ -61,10 +61,10 @@ export const Header = () => {
               <div className="absolute inset-0 bg-[#ea9216]/20 rounded-full scale-0 group-hover:scale-110 transition-transform duration-300" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-[#ea9216] transition-colors duration-300">
+              <span className="text-xl font-bold font-cunia text-gray-900 dark:text-white group-hover:text-[#ea9216] transition-colors duration-300">
                 Voxel Forge
               </span>
-              <span className="text-xs text-gray-500 dark:text-gray-400 -mt-1">
+              <span className="text-xs font-cunia text-gray-500 dark:text-gray-400 -mt-1">
                 3D Printing Studio
               </span>
             </div>
