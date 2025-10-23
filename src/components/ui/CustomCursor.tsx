@@ -22,11 +22,21 @@ export const CustomCursor = () => {
     let mouseX = 0;
     let mouseY = 0;
 
+    // Track current scales to compose transforms safely
+    let cursorScale = 1;
+    let followerScale = 1;
+
+    const applyTransforms = () => {
+      // Center with -50% offset and apply scale explicitly to avoid mixing
+      cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%) scale(${cursorScale})`;
+      follower.style.transform = `translate(${fx}px, ${fy}px) translate(-50%, -50%) scale(${followerScale})`;
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      // Move the small cursor immediately
-      cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+      // Move the small cursor immediately while keeping center + scale
+      applyTransforms();
     };
 
     // Smoothly follow the cursor using requestAnimationFrame
@@ -37,7 +47,7 @@ export const CustomCursor = () => {
     const follow = () => {
       fx = lerp(fx, mouseX, 0.18);
       fy = lerp(fy, mouseY, 0.18);
-      follower.style.transform = `translate(${fx}px, ${fy}px)`;
+      applyTransforms();
       rafId = requestAnimationFrame(follow);
     };
     rafId = requestAnimationFrame(follow);
@@ -45,25 +55,29 @@ export const CustomCursor = () => {
     const handleMouseEnter = () => {
       cursor.style.opacity = "1";
       follower.style.opacity = "0.6";
-      cursor.style.scale = "1";
-      follower.style.scale = "1";
+      cursorScale = 1;
+      followerScale = 1;
+      applyTransforms();
     };
 
     const handleMouseLeave = () => {
       cursor.style.opacity = "0";
       follower.style.opacity = "0";
-      cursor.style.scale = "0";
-      follower.style.scale = "0";
+      cursorScale = 0;
+      followerScale = 0;
+      applyTransforms();
     };
 
     const handleMouseDown = () => {
-      cursor.style.scale = "0.8";
-      follower.style.scale = "0.8";
+      cursorScale = 0.8;
+      followerScale = 0.8;
+      applyTransforms();
     };
 
     const handleMouseUp = () => {
-      cursor.style.scale = "1";
-      follower.style.scale = "1";
+      cursorScale = 1;
+      followerScale = 1;
+      applyTransforms();
     };
 
     // Handle hover effects for interactive elements
@@ -74,17 +88,19 @@ export const CustomCursor = () => {
 
       hoverableElements.forEach((element) => {
         element.addEventListener("mouseenter", () => {
-          cursor.style.scale = "1.5";
+          cursorScale = 1.5;
+          followerScale = 1.5;
           cursor.style.backgroundColor = "#ea9216";
-          follower.style.scale = "1.5";
           (follower.style as any).borderColor = "#ea9216";
+          applyTransforms();
         });
 
         element.addEventListener("mouseleave", () => {
-          cursor.style.scale = "1";
+          cursorScale = 1;
+          followerScale = 1;
           cursor.style.backgroundColor = "#ea9216";
-          follower.style.scale = "1";
           (follower.style as any).borderColor = "#ea9216";
+          applyTransforms();
         });
       });
     };
