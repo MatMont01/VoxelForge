@@ -6,18 +6,19 @@ export const CustomCursor = () => {
   const followerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Check if it's a mobile device
-    const isMobile =
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      ) || window.innerWidth < 768;
-
-    if (isMobile) return;
+    // Enable only on fine pointer devices (mouse/trackpad)
+    const isFinePointer =
+      window.matchMedia?.("(pointer: fine)").matches ?? true;
+    if (!isFinePointer) return;
 
     const cursor = cursorRef.current;
     const follower = followerRef.current;
 
     if (!cursor || !follower) return;
+
+    // Signal CSS to hide native cursor only when enabled
+    const html = document.documentElement;
+    html.setAttribute("data-cursor", "enabled");
 
     let mouseX = 0;
     let mouseY = 0;
@@ -34,7 +35,7 @@ export const CustomCursor = () => {
 
     let hasShown = false;
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e: PointerEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       // Ensure cursor becomes visible on first movement
@@ -62,21 +63,7 @@ export const CustomCursor = () => {
     };
     rafId = requestAnimationFrame(follow);
 
-    const handleMouseEnter = () => {
-      cursor.style.opacity = "1";
-      follower.style.opacity = "0.6";
-      cursorScale = 1;
-      followerScale = 1;
-      applyTransforms();
-    };
-
-    const handleMouseLeave = () => {
-      cursor.style.opacity = "0";
-      follower.style.opacity = "0";
-      cursorScale = 0;
-      followerScale = 0;
-      applyTransforms();
-    };
+    // We rely on pointermove to show, so explicit enter/leave are unnecessary now
 
     const handleMouseDown = () => {
       cursorScale = 0.8;
@@ -115,11 +102,9 @@ export const CustomCursor = () => {
       });
     };
 
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseenter", handleMouseEnter);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mousedown", handleMouseDown);
-    document.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("pointermove", handleMouseMove, { passive: true });
+    window.addEventListener("mousedown", handleMouseDown, { passive: true });
+    window.addEventListener("mouseup", handleMouseUp, { passive: true });
 
     // Initial setup for hoverable elements
     handleHoverableElements();
@@ -129,25 +114,17 @@ export const CustomCursor = () => {
     observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseenter", handleMouseEnter);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      document.removeEventListener("mousedown", handleMouseDown);
-      document.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("pointermove", handleMouseMove);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
       cancelAnimationFrame(rafId);
       observer.disconnect();
+      html.removeAttribute("data-cursor");
     };
   }, []);
 
-  // Check if it's a mobile device for conditional rendering
-  const isMobile =
-    typeof window !== "undefined" &&
-    (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    ) ||
-      window.innerWidth < 768);
-
-  if (isMobile || typeof document === "undefined") return null;
+  // Render only when document exists and pointer is fine
+  if (typeof document === "undefined") return null;
 
   return createPortal(
     <>
