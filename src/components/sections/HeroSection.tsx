@@ -1,33 +1,19 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { ArrowDown, Printer, Zap, Shield } from "lucide-react";
-import { gsap } from "gsap";
 import { Button } from "../ui/Button";
 import { scrollToSection } from "../../utils/helpers";
-import { fadeInUp } from "../../utils/animations";
+import { motion } from "framer-motion";
 
 export const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const buttonsRef = useRef<HTMLDivElement>(null);
-  const featuresRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const tl = gsap.timeline();
-
-    if (titleRef.current) {
-      tl.add(fadeInUp(titleRef.current, 0));
-    }
-    if (subtitleRef.current) {
-      tl.add(fadeInUp(subtitleRef.current, 0.2), 0.3);
-    }
-    if (buttonsRef.current) {
-      tl.add(fadeInUp(buttonsRef.current, 0), 0.6);
-    }
-    if (featuresRef.current) {
-      tl.add(fadeInUp(featuresRef.current, 0), 0.9);
-    }
-  }, []);
+  const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    show: (delay: number = 0) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut", delay },
+    }),
+  };
 
   const features = [
     {
@@ -91,23 +77,32 @@ export const HeroSection = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
-          <h1
-            ref={titleRef}
+          <motion.h1
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0}
             className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6"
           >
             <span className="text-[#ea9216]">Voxel</span> Forge
-          </h1>
+          </motion.h1>
 
-          <p
-            ref={subtitleRef}
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0.2}
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto"
           >
             Transformamos tus ideas en realidad tangible con impresión 3D de
             alta calidad
-          </p>
+          </motion.p>
 
-          <div
-            ref={buttonsRef}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0.4}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
             <Button
@@ -125,11 +120,14 @@ export const HeroSection = () => {
             >
               Ver Portafolio
             </Button>
-          </div>
+          </motion.div>
 
           {/* Features Grid */}
-          <div
-            ref={featuresRef}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0.6}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
           >
             {features.map((feature) => {
@@ -149,7 +147,7 @@ export const HeroSection = () => {
                 </div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
 
         {/* Scroll Indicator */}

@@ -1,10 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Calendar, MapPin, Award, Target, Heart } from "lucide-react";
 import { COMPANY_HISTORY } from "../../constants";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion } from "framer-motion";
 
 export const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -13,255 +10,26 @@ export const AboutSection = () => {
   const valuesRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const missionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Enhanced title animation with 3D effect
-    if (titleRef.current) {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      tl.fromTo(
-        ".title-word",
-        {
-          y: 150,
-          opacity: 0,
-          rotationX: 90,
-          transformOrigin: "50% 50% -50px",
-        },
-        {
-          y: 0,
-          opacity: 1,
-          rotationX: 0,
-          duration: 1.5,
-          stagger: 0.2,
-          ease: "elastic.out(1, 0.5)",
-        }
-      ).from(
-        ".title-sparkle",
-        {
-          scale: 0,
-          rotation: 180,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "back.out(2)",
-        },
-        "-=1"
-      );
-    }
-
-    // Enhanced story animation with magnetic effect
-    if (storyRef.current) {
-      gsap.set(storyRef.current, { perspective: 1000 });
-
-      gsap.fromTo(
-        storyRef.current,
-        {
-          x: -200,
-          opacity: 0,
-          rotationY: -45,
-          transformOrigin: "right center",
-        },
-        {
-          x: 0,
-          opacity: 1,
-          rotationY: 0,
-          duration: 1.8,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: storyRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Timeline animation with sequential reveals
-    if (timelineRef.current) {
-      const timelineItems =
-        timelineRef.current.querySelectorAll(".timeline-item");
-      gsap.fromTo(
-        timelineItems,
-        {
-          x: -100,
-          opacity: 0,
-          scale: 0.8,
-          rotationZ: -5,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          scale: 1,
-          rotationZ: 0,
-          duration: 1.2,
-          stagger: 0.3,
-          ease: "back.out(1.5)",
-          scrollTrigger: {
-            trigger: timelineRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Mission/Vision with morphing effect
-    if (missionRef.current) {
-      const missionCards = missionRef.current.querySelectorAll(".mission-card");
-      gsap.fromTo(
-        missionCards,
-        {
-          y: 100,
-          opacity: 0,
-          scale: 0.5,
-          rotationX: 45,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          rotationX: 0,
-          duration: 1.5,
-          stagger: 0.2,
-          ease: "elastic.out(1, 0.3)",
-          scrollTrigger: {
-            trigger: missionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Enhanced values animation with spectacular effects
-    if (valuesRef.current) {
-      const valueCards = valuesRef.current.querySelectorAll(".value-card");
-
-      // Initial state with dramatic perspective
-      gsap.set(valueCards, {
-        perspective: 1000,
-        transformStyle: "preserve-3d",
-      });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: valuesRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      tl.fromTo(
-        valueCards,
-        {
-          y: 200,
-          opacity: 0,
-          rotationY: 90,
-          rotationX: 45,
-          scale: 0.3,
-          transformOrigin: "center center -100px",
-        },
-        {
-          y: 0,
-          opacity: 1,
-          rotationY: 0,
-          rotationX: 0,
-          scale: 1,
-          duration: 2,
-          stagger: 0.25,
-          ease: "elastic.out(1, 0.4)",
-        }
-      )
-        .from(
-          ".value-icon",
-          {
-            scale: 0,
-            rotation: 360,
-            duration: 1,
-            stagger: 0.2,
-            ease: "back.out(3)",
-          },
-          "-=1.5"
-        )
-        .from(
-          ".value-glow",
-          {
-            scale: 0,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power2.out",
-          },
-          "-=1"
-        );
-
-      // Hover animations for value cards
-      valueCards.forEach((card) => {
-        card.addEventListener("mouseenter", () => {
-          gsap.to(card, {
-            y: -20,
-            rotationY: 5,
-            rotationX: 5,
-            scale: 1.05,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-
-          gsap.to(card.querySelector(".value-icon"), {
-            scale: 1.2,
-            rotation: 10,
-            duration: 0.3,
-            ease: "back.out(2)",
-          });
-        });
-
-        card.addEventListener("mouseleave", () => {
-          gsap.to(card, {
-            y: 0,
-            rotationY: 0,
-            rotationX: 0,
-            scale: 1,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-
-          gsap.to(card.querySelector(".value-icon"), {
-            scale: 1,
-            rotation: 0,
-            duration: 0.3,
-            ease: "back.out(2)",
-          });
-        });
-      });
-    }
-
-    // Floating animation for decorative elements
-    gsap.to(".floating-element", {
-      y: -20,
-      duration: 2,
-      ease: "power2.inOut",
-      yoyo: true,
-      repeat: -1,
-      stagger: 0.5,
-    });
-
-    // Continuous glow animation
-    gsap.to(".glow-pulse", {
-      scale: 1.2,
-      opacity: 0.7,
-      duration: 2,
-      ease: "power2.inOut",
-      yoyo: true,
-      repeat: -1,
-      stagger: 0.3,
-    });
-  }, []);
+  const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    show: (delay: number = 0) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: "easeOut", delay },
+    }),
+  };
+  const slideLeft = {
+    hidden: { opacity: 0, x: -40 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+  const containerStagger = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.2, delayChildren: 0.1 } },
+  };
 
   const values = [
     {
@@ -329,8 +97,12 @@ export const AboutSection = () => {
             </span>
           </div>
 
-          <h2
+          <motion.h2
             ref={titleRef}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.5 }}
             className="text-4xl md:text-6xl font-bold mb-6 relative"
           >
             <span className="title-word inline-block bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent relative">
@@ -341,7 +113,7 @@ export const AboutSection = () => {
               Nosotros
               <span className="title-sparkle absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-yellow-400 to-[#ea9216] rounded-full opacity-90"></span>
             </span>
-          </h2>
+          </motion.h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Una historia de{" "}
             <span className="text-[#ea9216] font-semibold">pasión</span>,{" "}
@@ -354,7 +126,13 @@ export const AboutSection = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             {/* Company Story */}
-            <div ref={storyRef}>
+            <motion.div
+              ref={storyRef}
+              variants={slideLeft}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.5 }}
+            >
               <div className="flex items-center mb-6">
                 <Calendar className="w-8 h-8 text-[#ea9216] mr-3" />
                 <span className="text-2xl font-bold text-[#ea9216]">
@@ -380,14 +158,24 @@ export const AboutSection = () => {
                   decenas de clientes a materializar sus ideas más creativas.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Visual Timeline */}
-            <div ref={timelineRef} className="relative">
+            <motion.div
+              ref={timelineRef}
+              className="relative"
+              variants={containerStagger}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.4 }}
+            >
               <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#ea9216] via-yellow-400 to-[#ea9216] glow-pulse"></div>
 
               <div className="space-y-8">
-                <div className="timeline-item flex items-start">
+                <motion.div
+                  className="timeline-item flex items-start"
+                  variants={fadeUp}
+                >
                   <div className="w-16 h-16 bg-gray-400 rounded-full flex items-center justify-center mr-6 shadow-lg floating-element">
                     <span className="text-white font-bold">2022</span>
                   </div>
@@ -400,9 +188,12 @@ export const AboutSection = () => {
                       aprendizaje.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="timeline-item flex items-start">
+                <motion.div
+                  className="timeline-item flex items-start"
+                  variants={fadeUp}
+                >
                   <div className="w-16 h-16 bg-[#ea9216] rounded-full flex items-center justify-center mr-6 shadow-lg floating-element">
                     <span className="text-white font-bold">2023</span>
                   </div>
@@ -415,9 +206,12 @@ export const AboutSection = () => {
                       procesos.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="timeline-item flex items-start">
+                <motion.div
+                  className="timeline-item flex items-start"
+                  variants={fadeUp}
+                >
                   <div className="w-16 h-16 bg-[#ea9216] rounded-full flex items-center justify-center mr-6 shadow-lg floating-element">
                     <span className="text-white font-bold">2024</span>
                   </div>
@@ -430,9 +224,12 @@ export const AboutSection = () => {
                       página web.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="timeline-item flex items-start">
+                <motion.div
+                  className="timeline-item flex items-start"
+                  variants={fadeUp}
+                >
                   <div className="w-16 h-16 bg-gradient-to-r from-[#ea9216] to-[#d68614] rounded-full flex items-center justify-center mr-6 shadow-lg border-2 border-yellow-400 relative floating-element">
                     <span className="text-white font-bold">2025</span>
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full animate-ping glow-pulse"></div>
@@ -448,37 +245,54 @@ export const AboutSection = () => {
                       Participación como expositores oficiales en cada evento.
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Mission & Vision */}
-          <div
+          <motion.div
             ref={missionRef}
+            variants={containerStagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
             className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16"
           >
-            <div className="mission-card bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/80 dark:to-gray-700/80 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-gray-200/50 dark:border-gray-600/50 hover:shadow-2xl transition-all duration-500">
+            <motion.div
+              variants={fadeUp}
+              className="mission-card bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/80 dark:to-gray-700/80 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-gray-200/50 dark:border-gray-600/50 hover:shadow-2xl transition-all duration-500"
+            >
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                 <span className="text-2xl mr-3">🎯</span> Nuestra Misión
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                 {COMPANY_HISTORY.mission}
               </p>
-            </div>
+            </motion.div>
 
-            <div className="mission-card bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/80 dark:to-gray-700/80 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-gray-200/50 dark:border-gray-600/50 hover:shadow-2xl transition-all duration-500">
+            <motion.div
+              variants={fadeUp}
+              className="mission-card bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/80 dark:to-gray-700/80 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-gray-200/50 dark:border-gray-600/50 hover:shadow-2xl transition-all duration-500"
+            >
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                 <span className="text-2xl mr-3">🚀</span> Nuestra Visión
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                 {COMPANY_HISTORY.vision}
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Enhanced Values */}
-          <div ref={valuesRef} className="mt-20">
+          <motion.div
+            ref={valuesRef}
+            className="mt-20"
+            variants={containerStagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="text-center mb-16">
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/20 border border-[#ea9216]/20 mb-6">
                 <Heart className="w-4 h-4 text-[#ea9216] mr-2 animate-pulse" />
@@ -517,7 +331,8 @@ export const AboutSection = () => {
                 ];
 
                 return (
-                  <div
+                  <motion.div
+                    variants={fadeUp}
                     key={value.title}
                     className={`value-card relative bg-gradient-to-br from-white/95 via-gray-50/90 to-white/95 dark:from-gray-800/90 dark:via-gray-700/85 dark:to-gray-800/90 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-gray-600/40 shadow-2xl hover:shadow-3xl transition-all duration-700 text-center group overflow-hidden`}
                   >
@@ -559,11 +374,11 @@ export const AboutSection = () => {
 
                     {/* Shimmer effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-3xl"></div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

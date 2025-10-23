@@ -1,10 +1,7 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { Box, Hammer, Sparkles, Zap, Layers, Infinity } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 import { isLowEndDevice } from "../../utils/perf";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export const VoxelMeaningSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -14,202 +11,7 @@ export const VoxelMeaningSection = () => {
   const unityRef = useRef<HTMLDivElement>(null);
   const cubesRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const lowEnd = isLowEndDevice();
-    const mm = gsap.matchMedia();
-
-    // Enhanced title animation
-    if (titleRef.current) {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      tl.fromTo(
-        ".meaning-title",
-        {
-          y: lowEnd ? 40 : 100,
-          opacity: 0,
-          scale: lowEnd ? 0.95 : 0.8,
-          rotationX: lowEnd ? 0 : 45,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          rotationX: 0,
-          duration: lowEnd ? 0.8 : 1.5,
-          ease: lowEnd ? "power2.out" : "elastic.out(1, 0.5)",
-          stagger: lowEnd ? 0.1 : 0.2,
-        }
-      );
-    }
-
-    // Voxel explanation animation
-    if (voxelRef.current) {
-      gsap.fromTo(
-        voxelRef.current,
-        {
-          x: lowEnd ? -80 : -200,
-          opacity: 0,
-          rotationY: lowEnd ? 0 : -45,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          rotationY: 0,
-          duration: lowEnd ? 0.9 : 1.8,
-          ease: lowEnd ? "power2.out" : "power4.out",
-          scrollTrigger: {
-            trigger: voxelRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Forge explanation animation
-    if (forgeRef.current) {
-      gsap.fromTo(
-        forgeRef.current,
-        {
-          x: lowEnd ? 80 : 200,
-          opacity: 0,
-          rotationY: lowEnd ? 0 : 45,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          rotationY: 0,
-          duration: lowEnd ? 0.9 : 1.8,
-          ease: lowEnd ? "power2.out" : "power4.out",
-          scrollTrigger: {
-            trigger: forgeRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Unity section animation
-    if (unityRef.current) {
-      const unityCards = unityRef.current.querySelectorAll(".unity-card");
-      gsap.fromTo(
-        unityCards,
-        {
-          y: lowEnd ? 40 : 100,
-          opacity: 0,
-          scale: lowEnd ? 0.95 : 0.5,
-          rotationZ: lowEnd ? 0 : 15,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          rotationZ: 0,
-          duration: lowEnd ? 0.7 : 1.5,
-          stagger: lowEnd ? 0.1 : 0.2,
-          ease: lowEnd ? "power2.out" : "back.out(1.7)",
-          scrollTrigger: {
-            trigger: unityRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // 3D Cubes animation
-    if (cubesRef.current) {
-      const cubes = cubesRef.current.querySelectorAll(".floating-cube");
-      gsap.set(cubes, { transformStyle: "preserve-3d" });
-
-      const cubeTweens: gsap.core.Tween[] = [];
-      cubes.forEach((cube, i) => {
-        if (!lowEnd) {
-          cubeTweens.push(
-            gsap.to(cube, {
-              rotationX: 360,
-              rotationY: 360,
-              duration: 8 + i * 2,
-              ease: "none",
-              repeat: -1,
-              paused: true,
-            })
-          );
-        }
-
-        cubeTweens.push(
-          gsap.to(cube, {
-            y: lowEnd ? -8 : -30,
-            duration: lowEnd ? 2 : 3 + i * 0.5,
-            ease: "power2.inOut",
-            yoyo: true,
-            repeat: -1,
-            delay: i * 0.3,
-            paused: true,
-          })
-        );
-      });
-
-      // Pause/resume cube animations only when section is visible
-      ScrollTrigger.create({
-        trigger: sectionRef.current!,
-        start: "top 90%",
-        end: "bottom top",
-        onEnter: () => cubeTweens.forEach((t) => t.play()),
-        onLeave: () => cubeTweens.forEach((t) => t.pause()),
-        onEnterBack: () => cubeTweens.forEach((t) => t.play()),
-        onLeaveBack: () => cubeTweens.forEach((t) => t.pause()),
-      });
-    }
-
-    // Particle animation - scoped to this section and paused off-screen
-    if (particlesRef.current) {
-      const particles =
-        particlesRef.current.querySelectorAll(".meaning-particle");
-
-      const particleTween = gsap.to(particles, {
-        y: lowEnd ? -20 : -50,
-        x: lowEnd ? 0 : "random(-20, 20)",
-        opacity: 0,
-        duration: lowEnd ? 2 : 3,
-        ease: "power2.out",
-        repeat: -1,
-        stagger: {
-          amount: lowEnd ? 1.2 : 2,
-          repeat: -1,
-        },
-        paused: true,
-      });
-
-      ScrollTrigger.create({
-        trigger: sectionRef.current!,
-        start: "top 90%",
-        end: "bottom top",
-        onEnter: () => particleTween.play(),
-        onLeave: () => particleTween.pause(),
-        onEnterBack: () => particleTween.play(),
-        onLeaveBack: () => particleTween.pause(),
-      });
-    }
-
-    return () => {
-      mm.revert();
-      ScrollTrigger.getAll().forEach((st) => {
-        const el = st.vars.trigger as HTMLElement | undefined;
-        if (el && sectionRef.current && sectionRef.current.contains(el)) {
-          st.kill();
-        }
-      });
-    };
-  }, []);
+  const lowEnd = isLowEndDevice();
 
   return (
     <section
@@ -230,20 +32,32 @@ export const VoxelMeaningSection = () => {
       {/* Floating 3D Cubes */}
       <div ref={cubesRef} className="absolute inset-0 pointer-events-none">
         <div
-          className="floating-cube absolute top-20 left-10 w-8 h-8 bg-gradient-to-br from-[#ea9216]/30 to-orange-600/30 transform rotate-45"
-          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+          className="floating-cube absolute top-20 left-10 w-8 h-8 bg-gradient-to-br from-[#ea9216]/30 to-orange-600/30 rotate-45"
+          style={{
+            clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+            animation: `${lowEnd ? "pulse" : "bounce"} 6s ease-in-out infinite`,
+          }}
         ></div>
         <div
-          className="floating-cube absolute top-40 right-20 w-6 h-6 bg-gradient-to-br from-blue-500/30 to-purple-600/30 transform rotate-45"
-          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+          className="floating-cube absolute top-40 right-20 w-6 h-6 bg-gradient-to-br from-blue-500/30 to-purple-600/30 rotate-45"
+          style={{
+            clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+            animation: `${lowEnd ? "pulse" : "bounce"} 7s ease-in-out infinite`,
+          }}
         ></div>
         <div
-          className="floating-cube absolute bottom-32 left-20 w-10 h-10 bg-gradient-to-br from-green-500/30 to-teal-600/30 transform rotate-45"
-          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+          className="floating-cube absolute bottom-32 left-20 w-10 h-10 bg-gradient-to-br from-green-500/30 to-teal-600/30 rotate-45"
+          style={{
+            clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+            animation: `${lowEnd ? "pulse" : "bounce"} 8s ease-in-out infinite`,
+          }}
         ></div>
         <div
-          className="floating-cube absolute bottom-20 right-10 w-7 h-7 bg-gradient-to-br from-pink-500/30 to-red-600/30 transform rotate-45"
-          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+          className="floating-cube absolute bottom-20 right-10 w-7 h-7 bg-gradient-to-br from-pink-500/30 to-red-600/30 rotate-45"
+          style={{
+            clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+            animation: `${lowEnd ? "pulse" : "bounce"} 5.5s ease-in-out infinite`,
+          }}
         ></div>
       </div>
 
@@ -273,13 +87,25 @@ export const VoxelMeaningSection = () => {
           </div>
 
           <h2 className="brand-title text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="meaning-title inline-block bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent">
+            <motion.span
+              className="meaning-title inline-block bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               ¿Qué es
-            </span>
+            </motion.span>
             <br className="mb-4" />
-            <span className="meaning-title inline-block bg-gradient-to-r from-[#ea9216] via-yellow-400 to-[#ea9216] bg-clip-text text-transparent mt-4">
+            <motion.span
+              className="meaning-title inline-block bg-gradient-to-r from-[#ea9216] via-yellow-400 to-[#ea9216] bg-clip-text text-transparent mt-4"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            >
               VOXEL FORGE?
-            </span>
+            </motion.span>
           </h2>
 
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
@@ -295,9 +121,16 @@ export const VoxelMeaningSection = () => {
         {/* Main Content */}
         <div className="max-w-7xl mx-auto">
           {/* Voxel + Forge Explanation */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
             {/* VOXEL */}
-            <div ref={voxelRef} className="relative">
+            <motion.div
+              ref={voxelRef}
+              className="relative"
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               <div className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-gray-700/50 shadow-2xl hover:shadow-[#ea9216]/20 transition-all duration-500">
                 <div className="flex items-center mb-8">
                   <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mr-6 shadow-2xl">
@@ -354,10 +187,17 @@ export const VoxelMeaningSection = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* FORGE */}
-            <div ref={forgeRef} className="relative">
+            <motion.div
+              ref={forgeRef}
+              className="relative"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               <div className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-gray-700/50 shadow-2xl hover:shadow-[#ea9216]/20 transition-all duration-500">
                 <div className="flex items-center mb-8">
                   <div className="w-16 h-16 bg-gradient-to-br from-[#ea9216] to-red-600 rounded-2xl flex items-center justify-center mr-6 shadow-2xl">
@@ -407,7 +247,7 @@ export const VoxelMeaningSection = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Unity Section */}
@@ -433,7 +273,13 @@ export const VoxelMeaningSection = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="unity-card bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/60 dark:to-gray-900/60 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-gray-700/30 text-center hover:border-[#ea9216]/50 transition-all duration-500">
+              <motion.div
+                className="unity-card bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/60 dark:to-gray-900/60 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-gray-700/30 text-center hover:border-[#ea9216]/50 transition-all duration-500"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-6">
                   <Box className="w-8 h-8 text-white" />
                 </div>
@@ -444,9 +290,15 @@ export const VoxelMeaningSection = () => {
                   Cada proyecto comienza como una colección de voxels en el
                   espacio digital
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="unity-card bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/60 dark:to-gray-900/60 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-gray-700/30 text-center hover:border-[#ea9216]/50 transition-all duration-500">
+              <motion.div
+                className="unity-card bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/60 dark:to-gray-900/60 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-gray-700/30 text-center hover:border-[#ea9216]/50 transition-all duration-500"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+              >
                 <div className="w-16 h-16 bg-gradient-to-br from-[#ea9216] to-orange-600 rounded-xl flex items-center justify-center mx-auto mb-6">
                   <Zap className="w-8 h-8 text-white" />
                 </div>
@@ -457,9 +309,15 @@ export const VoxelMeaningSection = () => {
                   Nuestras impresoras 3D actúan como forjas modernas, creando
                   layer por layer
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="unity-card bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/60 dark:to-gray-900/60 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-gray-700/30 text-center hover:border-[#ea9216]/50 transition-all duration-500">
+              <motion.div
+                className="unity-card bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/60 dark:to-gray-900/60 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-gray-700/30 text-center hover:border-[#ea9216]/50 transition-all duration-500"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+              >
                 <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center mx-auto mb-6">
                   <Sparkles className="w-8 h-8 text-white" />
                 </div>
@@ -470,7 +328,7 @@ export const VoxelMeaningSection = () => {
                   El resultado final: tus ideas convertidas en objetos reales
                   que puedes tocar
                 </p>
-              </div>
+              </motion.div>
             </div>
           </div>
 

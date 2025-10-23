@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
   <head>
     <meta charset="UTF-8" />
     <!-- Preconnects for faster third-party loads -->
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="shortcut icon" href="/voxel-forge-icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark light" />
+    <meta name="color-scheme" content="dark" />
     <title>
       Voxel Forge | Impresión 3D en Santa Cruz | Envíos a toda Bolivia
     </title>
@@ -39,17 +39,8 @@
     <link rel="alternate" href="https://voxelforge.org/" hreflang="es-BO" />
     <link rel="alternate" href="https://voxelforge.org/" hreflang="x-default" />
 
-    <!-- Theme color for light/dark -->
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#ffffff"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#313841"
-    />
+    <!-- Theme color (dark-only) -->
+    <meta name="theme-color" content="#313841" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -227,26 +218,9 @@
       })();
     </script>
 
-    <!-- Early theme setup to default to dark on first visit (no flash) -->
-    <script>
-      (function () {
-        try {
-          var saved = localStorage.getItem("darkMode");
-          var isDark = saved ? JSON.parse(saved) : true; // default: dark
-          if (isDark) {
-            var html = document.documentElement;
-            html.classList.add("dark");
-            html.setAttribute("data-theme", "dark");
-          }
-        } catch (e) {
-          document.documentElement.classList.add("dark");
-        }
-      })();
-    </script>
-
-    <!-- Minimal dark fallback background before app styles load -->
+    <!-- Dark background fallback before app styles load -->
     <style>
-      html.dark body {
+      body {
         background: #313841;
       }
     </style>

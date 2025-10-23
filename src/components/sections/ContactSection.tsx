@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
 import { CONTACT_INFO } from "../../constants";
 import {
@@ -6,8 +6,8 @@ import {
   formatEmail,
   validateEmail,
 } from "../../utils/helpers";
-import { fadeInUp, staggerCards } from "../../utils/animations";
 import { Button } from "../ui/Button";
+import { motion } from "framer-motion";
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -21,22 +21,20 @@ export const ContactSection = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (titleRef.current) {
-      fadeInUp(titleRef.current);
-    }
-    if (cardsRef.current) {
-      const cards = cardsRef.current.querySelectorAll(".contact-card");
-      staggerCards(Array.from(cards) as HTMLElement[], 0.15);
-    }
-    if (formRef.current) {
-      fadeInUp(formRef.current, 0.3);
-    }
-  }, []);
+  const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    show: (delay: number = 0) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut", delay },
+    }),
+  };
+  const containerStagger = {
+    hidden: {},
+    show: {
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+    },
+  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -196,15 +194,29 @@ Este mensaje fue enviado desde el formulario de contacto de voxelforge.com
             </span>
           </div>
 
-          <h2 ref={titleRef} className="text-4xl md:text-6xl font-bold mb-6">
+          <motion.h2
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.4 }}
+            custom={0}
+            className="text-4xl md:text-6xl font-bold mb-6"
+          >
             <span className="bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent">
               Contáct
             </span>
             <span className="bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent">
               anos
             </span>
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.4 }}
+            custom={0.2}
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+          >
             ¿Tienes un{" "}
             <span className="text-[#ea9216] font-semibold">
               proyecto en mente
@@ -213,19 +225,24 @@ Este mensaje fue enviado desde el formulario de contacto de voxelforge.com
             <span className="text-[#ea9216] font-semibold">
               hacerlo realidad
             </span>
-          </p>
+          </motion.p>
         </div>
 
         <div className="max-w-6xl mx-auto">
           {/* Contact Methods */}
-          <div
-            ref={cardsRef}
+          <motion.div
+            variants={containerStagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
           >
-            {contactMethods.map((method) => {
+            {contactMethods.map((method, idx) => {
               const Icon = method.icon;
               return (
-                <div
+                <motion.div
+                  variants={fadeUp}
+                  custom={idx * 0.05}
                   key={method.title}
                   className="contact-card bg-gray-50 dark:bg-[#3a4750] rounded-xl p-8 text-center hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105"
                   onClick={method.action}
@@ -242,15 +259,19 @@ Este mensaje fue enviado desde el formulario de contacto de voxelforge.com
                   <p className="text-gray-600 dark:text-gray-300 text-sm">
                     {method.description}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* Contact Form */}
           <div className="max-w-2xl mx-auto">
-            <form
-              ref={formRef}
+            <motion.form
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              custom={0.2}
               onSubmit={handleSubmit}
               className="bg-gray-50 dark:bg-[#3a4750] rounded-2xl p-8 shadow-lg"
             >
@@ -388,7 +409,7 @@ Este mensaje fue enviado desde el formulario de contacto de voxelforge.com
                 * Campos obligatorios. También puedes contactarnos directamente
                 por WhatsApp.
               </p>
-            </form>
+            </motion.form>
           </div>
 
           {/* Service Areas */}

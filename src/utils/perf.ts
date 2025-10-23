@@ -7,8 +7,4 @@ export const isLowEndDevice = () => {
     matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
   return cores <= 4 || memory <= 2 || prefersReducedMotion;
 };
-
-export const gsapDefaultsForPerf = () => ({
-  duration: 0.7,
-  ease: "power2.out",
-});
+// Deprecated: GSAP removed. Keep only device heuristics.

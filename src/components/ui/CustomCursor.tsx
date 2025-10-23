@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { gsap } from "gsap";
 
 export const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -26,58 +25,45 @@ export const CustomCursor = () => {
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-
-      gsap.to(cursor, {
-        x: mouseX,
-        y: mouseY,
-        duration: 0.1,
-        ease: "power2.out",
-      });
-
-      gsap.to(follower, {
-        x: mouseX,
-        y: mouseY,
-        duration: 0.3,
-        ease: "power2.out",
-      });
+      // Move the small cursor immediately
+      cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
     };
 
+    // Smoothly follow the cursor using requestAnimationFrame
+    let rafId = 0;
+    const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b;
+    let fx = 0,
+      fy = 0;
+    const follow = () => {
+      fx = lerp(fx, mouseX, 0.18);
+      fy = lerp(fy, mouseY, 0.18);
+      follower.style.transform = `translate(${fx}px, ${fy}px)`;
+      rafId = requestAnimationFrame(follow);
+    };
+    rafId = requestAnimationFrame(follow);
+
     const handleMouseEnter = () => {
-      gsap.to([cursor, follower], {
-        scale: 1,
-        opacity: 1,
-        duration: 0.3,
-      });
+      cursor.style.opacity = "1";
+      follower.style.opacity = "0.6";
+      cursor.style.scale = "1";
+      follower.style.scale = "1";
     };
 
     const handleMouseLeave = () => {
-      gsap.to([cursor, follower], {
-        scale: 0,
-        opacity: 0,
-        duration: 0.3,
-      });
+      cursor.style.opacity = "0";
+      follower.style.opacity = "0";
+      cursor.style.scale = "0";
+      follower.style.scale = "0";
     };
 
     const handleMouseDown = () => {
-      gsap.to(cursor, {
-        scale: 0.8,
-        duration: 0.1,
-      });
-      gsap.to(follower, {
-        scale: 0.8,
-        duration: 0.3,
-      });
+      cursor.style.scale = "0.8";
+      follower.style.scale = "0.8";
     };
 
     const handleMouseUp = () => {
-      gsap.to(cursor, {
-        scale: 1,
-        duration: 0.1,
-      });
-      gsap.to(follower, {
-        scale: 1,
-        duration: 0.3,
-      });
+      cursor.style.scale = "1";
+      follower.style.scale = "1";
     };
 
     // Handle hover effects for interactive elements
@@ -88,29 +74,17 @@ export const CustomCursor = () => {
 
       hoverableElements.forEach((element) => {
         element.addEventListener("mouseenter", () => {
-          gsap.to(cursor, {
-            scale: 1.5,
-            backgroundColor: "#ea9216",
-            duration: 0.3,
-          });
-          gsap.to(follower, {
-            scale: 1.5,
-            borderColor: "#ea9216",
-            duration: 0.3,
-          });
+          cursor.style.scale = "1.5";
+          cursor.style.backgroundColor = "#ea9216";
+          follower.style.scale = "1.5";
+          (follower.style as any).borderColor = "#ea9216";
         });
 
         element.addEventListener("mouseleave", () => {
-          gsap.to(cursor, {
-            scale: 1,
-            backgroundColor: "#ea9216",
-            duration: 0.3,
-          });
-          gsap.to(follower, {
-            scale: 1,
-            borderColor: "#ea9216",
-            duration: 0.3,
-          });
+          cursor.style.scale = "1";
+          cursor.style.backgroundColor = "#ea9216";
+          follower.style.scale = "1";
+          (follower.style as any).borderColor = "#ea9216";
         });
       });
     };
@@ -134,6 +108,7 @@ export const CustomCursor = () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mousedown", handleMouseDown);
       document.removeEventListener("mouseup", handleMouseUp);
+      cancelAnimationFrame(rafId);
       observer.disconnect();
     };
   }, []);

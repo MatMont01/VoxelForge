@@ -1,65 +1,29 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Printer, Cpu, Gauge, Layers, Star, Sparkles } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PRINTERS } from "../../constants";
 import p1sPrinterImage from "../../assets/3DPrinters/p1sPrinter.png";
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion } from "framer-motion";
 
 export const EquipmentSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const printerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Animación del título con efecto de revelado
-    if (titleRef.current) {
-      gsap.fromTo(
-        titleRef.current.children,
-        { y: 100, opacity: 0, rotationX: 45 },
-        {
-          y: 0,
-          opacity: 1,
-          rotationX: 0,
-          duration: 1.2,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Animación de la impresora con efectos 3D
-    if (printerRef.current) {
-      gsap.fromTo(
-        printerRef.current,
-        {
-          x: -100,
-          opacity: 0,
-          rotationY: -15,
-          scale: 0.9,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          rotationY: 0,
-          scale: 1,
-          duration: 1.5,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: printerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-  }, []);
+  const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    show: (delay: number = 0) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut", delay },
+    }),
+  };
+  const slideLeft = {
+    hidden: { opacity: 0, x: -40 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
 
   const printer = PRINTERS[0]; // Bambu Lab P1S
 
@@ -105,14 +69,21 @@ export const EquipmentSection = () => {
               Tecnología Premium
             </span>
           </div>
-          <h2 ref={titleRef} className="text-4xl md:text-6xl font-bold mb-6">
+          <motion.h2
+            ref={titleRef}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.5 }}
+            className="text-4xl md:text-6xl font-bold mb-6"
+          >
             <span className="bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent">
               Nuestro
             </span>{" "}
             <span className="bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent">
               Equipo
             </span>
-          </h2>
+          </motion.h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Utilizamos la{" "}
             <span className="text-[#ea9216] font-semibold">Bambu Lab P1S</span>,{" "}
@@ -124,8 +95,12 @@ export const EquipmentSection = () => {
         </div>
 
         <div className="max-w-7xl mx-auto">
-          <div
+          <motion.div
             ref={printerRef}
+            variants={slideLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.4 }}
             className="relative bg-gray-600/90 dark:bg-[#313841]/80 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-gray-400/30 dark:border-gray-700/30"
             style={{
               background: `linear-gradient(135deg, 
@@ -307,7 +282,7 @@ export const EquipmentSection = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Evolution Timeline */}
           <div className="mt-20">

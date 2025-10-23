@@ -1,13 +1,10 @@
 import { useEffect, useRef } from "react";
 import { Carousel } from "../ui/Carousel";
 import { SAMPLE_PROJECTS } from "../../constants/projects";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 import { Play, Star, Sparkles, ArrowRight, ExternalLink } from "lucide-react";
 import instagramLogo from "../../assets/SocialMediaLogo/instagram.png";
 import tiktokLogo from "../../assets/SocialMediaLogo/tiktok.png";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export const PortfolioSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -16,67 +13,7 @@ export const PortfolioSection = () => {
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Title animation
-    if (titleRef.current) {
-      gsap.fromTo(
-        titleRef.current.children,
-        { y: 100, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Stats counter animation
-    if (statsRef.current) {
-      const stats = statsRef.current.querySelectorAll(".stat-number");
-      stats.forEach((stat) => {
-        const finalValue = parseInt(stat.textContent || "0");
-        gsap.fromTo(
-          stat,
-          { textContent: 0 },
-          {
-            textContent: finalValue,
-            duration: 2,
-            ease: "power2.out",
-            snap: { textContent: 1 },
-            scrollTrigger: {
-              trigger: stat,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-    }
-
-    // Carousel animation
-    if (carouselRef.current) {
-      gsap.fromTo(
-        carouselRef.current,
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: carouselRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
+    // No JS animations needed here; framer-motion handles simple viewport fades
   }, []);
 
   const categories = [
@@ -116,7 +53,13 @@ export const PortfolioSection = () => {
       <div className="absolute top-1/3 left-1/3 w-[600px] h-[600px] bg-gradient-radial from-purple-400/10 via-pink-400/5 to-transparent rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-20">
+        <motion.div
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           {/* Badge */}
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/20 border border-[#ea9216]/20 mb-6">
             <Star className="w-4 h-4 text-[#ea9216] mr-2 animate-pulse" />
@@ -133,7 +76,7 @@ export const PortfolioSection = () => {
               Portafolio
             </span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
             Cada proyecto cuenta una historia de{" "}
             <span className="text-[#ea9216] font-semibold">precisión</span>,{" "}
             <span className="text-[#ea9216] font-semibold">creatividad</span> y{" "}
@@ -215,10 +158,17 @@ export const PortfolioSection = () => {
               </a>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Enhanced Carousel */}
-        <div ref={carouselRef} className="mb-16">
+        <motion.div
+          ref={carouselRef}
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <div className="relative bg-gray-100/80 dark:bg-[#313841]/60 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/30 dark:border-gray-700/30 shadow-2xl">
             <Carousel
               items={SAMPLE_PROJECTS}
@@ -226,7 +176,7 @@ export const PortfolioSection = () => {
               autoPlayInterval={5000}
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Enhanced Categories */}
         <div className="text-center mb-16">

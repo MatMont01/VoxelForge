@@ -1,184 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { ArrowDown, Printer, Zap, Shield, Play } from "lucide-react";
-import { gsap } from "gsap";
+import { motion } from "framer-motion";
 import { Button } from "../ui/Button";
 import { scrollToSection } from "../../utils/helpers";
-import {
-  morphingBackground,
-  createParticles,
-  magneticHover,
-  breathingAnimation,
-  printerHeadAnimation,
-} from "../../utils/advancedAnimations";
 import logoSolo from "../../assets/VoxelForgeLogos/voxel-forge-logo-solo.svg";
 import { isLowEndDevice } from "../../utils/perf";
 
 export const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const buttonsRef = useRef<HTMLDivElement>(null);
-  const featuresRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLImageElement>(null);
-  const bgShapeRef = useRef<HTMLDivElement>(null);
-  const particleContainerRef = useRef<HTMLDivElement>(null);
-  const printerIconRef = useRef<HTMLDivElement>(null);
-  const heroVideoRef = useRef<HTMLDivElement>(null);
   const scrollArrowRef = useRef<HTMLDivElement>(null);
-  const [isScrollArrowVisible, setIsScrollArrowVisible] = useState(true);
   const lowEnd = isLowEndDevice();
-
-  // Separate effect just for scroll arrow visibility
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      if (scrollY > 150) {
-        if (scrollArrowRef.current && isScrollArrowVisible) {
-          gsap.to(scrollArrowRef.current, {
-            opacity: 0,
-            scale: 0.8,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-          setIsScrollArrowVisible(false);
-        }
-      } else {
-        if (scrollArrowRef.current && !isScrollArrowVisible) {
-          gsap.to(scrollArrowRef.current, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-          setIsScrollArrowVisible(true);
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isScrollArrowVisible]);
-
-  // Separate effect for main animations (runs only once)
-  useEffect(() => {
-    const tl = gsap.timeline();
-
-    // Set initial states
-    gsap.set(
-      [
-        titleRef.current,
-        subtitleRef.current,
-        buttonsRef.current,
-        logoRef.current,
-      ],
-      {
-        opacity: 0,
-        y: 100,
-      }
-    );
-
-    // Main animation sequence
-    tl.to(logoRef.current, {
-      opacity: 1,
-      y: 0,
-      scale: lowEnd ? 1.05 : 1.2,
-      duration: lowEnd ? 0.8 : 2,
-      ease: lowEnd ? "power2.out" : "elastic.out(1, 0.5)",
-    })
-      .to(
-        titleRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: lowEnd ? 0.7 : 1.5,
-          ease: "power3.out",
-        },
-        "-=1"
-      )
-      .to(
-        subtitleRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: lowEnd ? 0.7 : 1.5,
-          ease: "power3.out",
-        },
-        "-=0.5"
-      )
-      .to(
-        buttonsRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: lowEnd ? 0.6 : 1.2,
-          ease: lowEnd ? "power2.out" : "back.out(1.7)",
-        },
-        "-=0.8"
-      );
-
-    // Background animations
-    if (bgShapeRef.current && !lowEnd) {
-      morphingBackground(bgShapeRef.current);
-    }
-
-    // Logo breathing animation
-    if (logoRef.current && !lowEnd) {
-      setTimeout(() => {
-        breathingAnimation(logoRef.current!);
-      }, 3000);
-    }
-
-    // Printer head animation
-    if (printerIconRef.current && !lowEnd) {
-      setTimeout(() => {
-        printerHeadAnimation(printerIconRef.current!);
-      }, 2000);
-    }
-
-    // Create particles
-    if (particleContainerRef.current) {
-      createParticles(particleContainerRef.current, lowEnd ? 10 : 30);
-    }
-
-    // Feature cards animation
-    if (featuresRef.current) {
-      const cards = featuresRef.current.querySelectorAll(".feature-card");
-      gsap.fromTo(
-        cards,
-        {
-          y: lowEnd ? 60 : 150,
-          opacity: 0,
-          rotationX: lowEnd ? 0 : 45,
-          scale: lowEnd ? 0.95 : 0.8,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          rotationX: 0,
-          scale: 1,
-          duration: lowEnd ? 0.7 : 1.8,
-          stagger: lowEnd ? 0.1 : 0.2,
-          ease: "power3.out",
-          delay: 1.5,
-        }
-      );
-
-      // Add magnetic hover to cards
-      if (window.matchMedia?.("(hover: hover)").matches && !lowEnd) {
-        cards.forEach((card) => {
-          magneticHover(card as HTMLElement, 0.2);
-        });
-      }
-    }
-
-    // Background subtle animation (removed ScrollTrigger that was causing content to disappear)
-    if (bgShapeRef.current) {
-      gsap.set(bgShapeRef.current, { y: 0 });
-    }
-  }, []);
+  // Arrow visibility/animation removed to keep perf high on low-end devices
 
   const features = [
     {
@@ -207,18 +39,8 @@ export const HeroSection = () => {
       id="home"
       className="min-h-screen pt-28 md:pt-32 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841]"
     >
-      {/* Particle System */}
-      <div
-        ref={particleContainerRef}
-        className="absolute inset-0 pointer-events-none"
-      />
-
-      {/* Morphing Background Shape */}
-      <div
-        ref={bgShapeRef}
-        className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-gradient-to-br from-[#ea9216]/20 to-[#ea9216]/5 blur-3xl"
-        style={{ borderRadius: "50% 20% 80% 30%" }}
-      />
+      {/* Decorative Background Shape (static for perf) */}
+      <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-gradient-to-br from-[#ea9216]/20 to-[#ea9216]/5 blur-3xl rounded-[50%_20%_80%_30%]" />
 
       {/* Additional Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10">
@@ -230,33 +52,40 @@ export const HeroSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
           {/* Logo */}
-          <div className="mb-8">
+          <motion.div
+            className="mb-8"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0, scale: lowEnd ? 1 : 1.05 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+          >
             <img
-              ref={logoRef}
               src={logoSolo}
               alt="Voxel Forge Logo"
-              className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 drop-shadow-2xl opacity-0 translate-y-6"
+              className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 drop-shadow-2xl"
               width={128}
               height={128}
               decoding="async"
               fetchPriority="high"
             />
-          </div>
+          </motion.div>
 
           {/* Main Title */}
-          <h1
-            ref={titleRef}
-            className="brand-title text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight perspective-1000 opacity-0 translate-y-6"
-            style={{ transformStyle: "preserve-3d" }}
+          <motion.h1
+            className="brand-title text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.25 }}
           >
             <span className="text-[#ea9216] inline-block">Voxel</span>{" "}
             <span className="inline-block">Forge</span>
-          </h1>
+          </motion.h1>
 
           {/* Subtitle */}
-          <p
-            ref={subtitleRef}
-            className="text-xl md:text-3xl text-gray-600 dark:text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed opacity-0 translate-y-6"
+          <motion.p
+            className="text-xl md:text-3xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.35 }}
           >
             Transformamos tus{" "}
             <span className="text-[#ea9216] font-semibold">
@@ -266,12 +95,14 @@ export const HeroSection = () => {
             <span className="text-[#ea9216] font-semibold">
               ultra alta calidad
             </span>
-          </p>
+          </motion.p>
 
           {/* CTA Buttons */}
-          <div
-            ref={buttonsRef}
-            className="flex flex-col sm:flex-row gap-6 justify-center mb-20 opacity-0 translate-y-6"
+          <motion.div
+            className="flex flex-col sm:flex-row gap-6 justify-center mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
           >
             <Button
               size="lg"
@@ -289,48 +120,36 @@ export const HeroSection = () => {
             >
               Ver Portafolio
             </Button>
-          </div>
+          </motion.div>
 
           {/* 3D Printer Icon Animation */}
           <div className="mb-16 flex justify-center">
-            <div
-              ref={printerIconRef}
+            <motion.div
               className="w-20 h-20 bg-gradient-to-br from-[#ea9216] to-[#d68614] rounded-2xl flex items-center justify-center shadow-2xl"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
             >
               <Printer className="w-10 h-10 text-white" />
-            </div>
+            </motion.div>
           </div>
 
           {/* Features Grid with 3D Effects */}
-          <div
-            ref={featuresRef}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-24 md:mb-32"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-24 md:mb-32">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (
-                <div
+                <motion.div
                   key={feature.title}
                   className="feature-card relative bg-white/90 dark:bg-[#3a4750]/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl transition-all duration-300 border border-white/20 dark:border-gray-700/30 cursor-pointer hover:shadow-3xl hover:-translate-y-2"
                   style={{
                     isolation: "isolate",
                   }}
-                  onMouseEnter={(e) => {
-                    const card = e.currentTarget;
-                    gsap.to(card, {
-                      scale: 1.03,
-                      duration: 0.2,
-                      ease: "power2.out",
-                    });
-                  }}
-                  onMouseLeave={(e) => {
-                    const card = e.currentTarget;
-                    gsap.to(card, {
-                      scale: 1,
-                      duration: 0.2,
-                      ease: "power2.out",
-                    });
-                  }}
+                  initial={{ opacity: 0, y: lowEnd ? 20 : 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                 >
                   {/* Icon */}
                   <div
@@ -346,7 +165,7 @@ export const HeroSection = () => {
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-center">
                     {feature.description}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -355,7 +174,7 @@ export const HeroSection = () => {
         {/* Scroll Indicator */}
         <div
           ref={scrollArrowRef}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
         >
           <button
             onClick={() => scrollToSection("#services")}
@@ -370,13 +189,7 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Video Background Overlay (Optional) */}
-      <div
-        ref={heroVideoRef}
-        className="absolute inset-0 opacity-5 pointer-events-none"
-      >
-        {/* You can add a video background here if needed */}
-      </div>
+      {/* Optional background video removed for performance */}
     </section>
   );
 };

@@ -1,11 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { Sun, Moon } from "lucide-react";
-import { gsap } from "gsap";
-import { useTheme } from "../../hooks/useTheme";
+import { motion } from "framer-motion";
 import { NAVIGATION_ITEMS } from "../../constants";
-// Removed page routing; we keep single-page anchor navigation
 import { scrollToSection } from "../../utils/helpers";
-import { magneticHover } from "../../utils/advancedAnimations";
 import logoSolo from "../../assets/VoxelForgeLogos/voxel-forge-logo-solo.svg";
 import instagramLogo from "../../assets/SocialMediaLogo/instagram.png";
 import tiktokLogo from "../../assets/SocialMediaLogo/tiktok.png";
@@ -13,10 +9,7 @@ import tiktokLogo from "../../assets/SocialMediaLogo/tiktok.png";
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { darkMode, toggleDarkMode } = useTheme();
   const headerRef = useRef<HTMLElement>(null);
-  const logoRef = useRef<HTMLImageElement>(null);
-  const navItemsRef = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,90 +20,18 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    // Initial animation
-    if (headerRef.current) {
-      gsap.fromTo(
-        headerRef.current,
-        { y: -100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.5 }
-      );
-    }
-
-    // Logo hover animation
-    if (logoRef.current) {
-      magneticHover(logoRef.current, 0.15);
-    }
-
-    // Nav items hover animations
-    navItemsRef.current.forEach((item, index) => {
-      if (item) {
-        gsap.set(item, { y: -20, opacity: 0 });
-        gsap.to(item, {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          delay: 0.8 + index * 0.1,
-          ease: "power2.out",
-        });
-
-        // Hover effect
-        item.addEventListener("mouseenter", () => {
-          gsap.to(item, {
-            y: -2,
-            scale: 1.05,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
-
-        item.addEventListener("mouseleave", () => {
-          gsap.to(item, {
-            y: 0,
-            scale: 1,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
-      }
-    });
-  }, []);
+  // Framer Motion variants for simple entrance and item stagger
+  const navVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: { opacity: 1, y: 0 },
+  } as const;
 
   const handleNavClick = (href: string) => {
     scrollToSection(href);
     setIsMenuOpen(false);
-
-    // Add click animation
-    gsap.to(headerRef.current, {
-      scale: 0.98,
-      duration: 0.1,
-      yoyo: true,
-      repeat: 1,
-      ease: "power2.inOut",
-    });
-  };
-
-  const handleThemeToggle = () => {
-    // Simple and reliable theme toggle
-    toggleDarkMode();
-
-    // Add subtle animation feedback
-    if (headerRef.current) {
-      gsap.fromTo(
-        headerRef.current,
-        { scale: 1 },
-        {
-          scale: 1.02,
-          duration: 0.1,
-          yoyo: true,
-          repeat: 1,
-          ease: "power2.inOut",
-        }
-      );
-    }
   };
   return (
-    <header
+    <motion.header
       ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
@@ -118,6 +39,9 @@ export const Header = () => {
           : "bg-transparent"
       }`}
       style={{ transformStyle: "preserve-3d" }}
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-18">
@@ -128,7 +52,6 @@ export const Header = () => {
           >
             <div className="relative">
               <img
-                ref={logoRef}
                 src={logoSolo}
                 alt="Voxel Forge Logo"
                 className="w-12 h-12 rounded-full shadow-lg group-hover:shadow-xl transition-all duration-300"
@@ -152,22 +75,27 @@ export const Header = () => {
           <nav className="hidden md:flex items-center space-x-8">
             {/* Existing in-page anchors */}
             {NAVIGATION_ITEMS.map((item, index) => (
-              <button
+              <motion.button
                 key={item.name}
-                ref={(el) => {
-                  navItemsRef.current[index] = el;
-                }}
                 onClick={() => handleNavClick(item.href)}
                 className="relative text-gray-700 dark:text-gray-300 hover:text-[#ea9216] dark:hover:text-[#ea9216] transition-all duration-300 font-medium py-2 px-3 rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 group"
+                variants={navVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{
+                  delay: 0.4 + index * 0.08,
+                  duration: 0.35,
+                  ease: "easeOut",
+                }}
               >
                 {item.name}
                 <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#ea9216] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </button>
+              </motion.button>
             ))}
             {/* Removed extra page links to keep SPA behavior */}
           </nav>
 
-          {/* Social Links & Theme Toggle & Mobile Menu */}
+          {/* Social Links & Mobile Menu */}
           <div className="flex items-center space-x-3">
             {/* Social Links - Desktop only */}
             <div className="hidden lg:flex items-center space-x-2">
@@ -206,24 +134,6 @@ export const Header = () => {
                 />
               </a>
             </div>
-
-            {/* Theme Toggle Button */}
-            <button
-              onClick={handleThemeToggle}
-              className="relative p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 group overflow-hidden"
-              aria-label={
-                darkMode ? "Activar modo claro" : "Activar modo oscuro"
-              }
-            >
-              <div className="relative z-10">
-                {darkMode ? (
-                  <Sun className="w-5 h-5 text-yellow-500 group-hover:text-yellow-400 transition-colors duration-300" />
-                ) : (
-                  <Moon className="w-5 h-5 text-blue-600 group-hover:text-blue-500 transition-colors duration-300" />
-                )}
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 dark:from-blue-600 dark:to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-            </button>
 
             {/* Mobile menu button */}
             <button
@@ -279,6 +189,6 @@ export const Header = () => {
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };

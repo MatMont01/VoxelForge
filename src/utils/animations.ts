@@ -1,125 +1,17 @@
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+// Legacy no-op shims: GSAP was removed in favor of Framer Motion and Tailwind.
+// These helpers now do nothing and exist only to avoid breaking stale imports.
 
-gsap.registerPlugin(ScrollTrigger);
-
-export const fadeInUp = (element: HTMLElement | string, delay = 0) => {
-  return gsap.fromTo(
-    element,
-    {
-      y: 50,
-      opacity: 0,
-    },
-    {
-      y: 0,
-      opacity: 1,
-      duration: 0.8,
-      delay,
-      ease: "power2.out",
-    }
-  );
-};
-
-export const fadeInLeft = (element: HTMLElement | string, delay = 0) => {
-  return gsap.fromTo(
-    element,
-    {
-      x: -50,
-      opacity: 0,
-    },
-    {
-      x: 0,
-      opacity: 1,
-      duration: 0.8,
-      delay,
-      ease: "power2.out",
-    }
-  );
-};
-
-export const fadeInRight = (element: HTMLElement | string, delay = 0) => {
-  return gsap.fromTo(
-    element,
-    {
-      x: 50,
-      opacity: 0,
-    },
-    {
-      x: 0,
-      opacity: 1,
-      duration: 0.8,
-      delay,
-      ease: "power2.out",
-    }
-  );
-};
-
-export const scaleIn = (element: HTMLElement | string, delay = 0) => {
-  return gsap.fromTo(
-    element,
-    {
-      scale: 0.8,
-      opacity: 0,
-    },
-    {
-      scale: 1,
-      opacity: 1,
-      duration: 0.6,
-      delay,
-      ease: "back.out(1.7)",
-    }
-  );
-};
-
-export const staggerCards = (elements: HTMLElement[] | string, delay = 0.1) => {
-  return gsap.fromTo(
-    elements,
-    {
-      y: 30,
-      opacity: 0,
-    },
-    {
-      y: 0,
-      opacity: 1,
-      duration: 0.6,
-      stagger: delay,
-      ease: "power2.out",
-    }
-  );
-};
-
+export const fadeInUp = (_element?: any, _delay: number = 0) => undefined;
+export const fadeInLeft = (_element?: any, _delay: number = 0) => undefined;
+export const fadeInRight = (_element?: any, _delay: number = 0) => undefined;
+export const scaleIn = (_element?: any, _delay: number = 0) => undefined;
+export const staggerCards = (_elements?: any, _delay: number = 0.1) =>
+  undefined;
 export const scrollTriggerAnimation = (
-  element: HTMLElement | string,
-  animation: () => void,
-  triggerElement?: HTMLElement | string
-) => {
-  ScrollTrigger.create({
-    trigger: triggerElement || element,
-    start: "top 80%",
-    onEnter: animation,
-    once: true,
-  });
-};
-
-export const parallaxEffect = (element: HTMLElement | string, speed = 0.5) => {
-  gsap.to(element, {
-    yPercent: -50 * speed,
-    ease: "none",
-    scrollTrigger: {
-      trigger: element,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: true,
-    },
-  });
-};
-
-export const hoverScale = (element: HTMLElement) => {
-  element.addEventListener("mouseenter", () => {
-    gsap.to(element, { scale: 1.05, duration: 0.3, ease: "power2.out" });
-  });
-
-  element.addEventListener("mouseleave", () => {
-    gsap.to(element, { scale: 1, duration: 0.3, ease: "power2.out" });
-  });
-};
+  _element?: any,
+  _animation?: () => void,
+  _triggerElement?: any
+) => undefined;
+export const parallaxEffect = (_element?: any, _speed: number = 0.5) =>
+  undefined;
+export const hoverScale = (_element?: HTMLElement) => undefined;

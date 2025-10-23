@@ -1,10 +1,6 @@
 import { useRef, useEffect } from "react";
 import { Play, Eye, Users, Clock, Sparkles, Video } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import tiktokLogo from "../../assets/SocialMediaLogo/tiktok.png";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export const LivePrintingSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -14,97 +10,7 @@ export const LivePrintingSection = () => {
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Title animation with 3D effect
-    if (titleRef.current) {
-      gsap.fromTo(
-        titleRef.current.children,
-        { y: 100, opacity: 0, rotationX: 45 },
-        {
-          y: 0,
-          opacity: 1,
-          rotationX: 0,
-          duration: 1.2,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Video mockup animation
-    if (videoRef.current) {
-      gsap.fromTo(
-        videoRef.current,
-        {
-          scale: 0.8,
-          opacity: 0,
-          rotationY: -15,
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          rotationY: 0,
-          duration: 1.5,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: videoRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Features stagger animation
-    if (featuresRef.current) {
-      const featureCards =
-        featuresRef.current.querySelectorAll(".feature-card");
-      gsap.fromTo(
-        featureCards,
-        { y: 60, opacity: 0, scale: 0.9 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: featuresRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Stats counter animation
-    if (statsRef.current) {
-      const statNumbers = statsRef.current.querySelectorAll(".stat-number");
-      statNumbers.forEach((stat) => {
-        const target = parseInt(stat.textContent || "0");
-        const obj = { value: 0 };
-        gsap.to(obj, {
-          value: target,
-          duration: 2,
-          ease: "power2.out",
-          onUpdate: function () {
-            (stat as HTMLElement).textContent = Math.round(
-              obj.value
-            ).toString();
-          },
-          scrollTrigger: {
-            trigger: stat,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      });
-    }
+    // Animations removed for performance; CSS handles subtle transitions
   }, []);
 
   const features = [

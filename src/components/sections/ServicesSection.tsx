@@ -9,14 +9,11 @@ import {
   Target,
   ArrowRight,
 } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 import { DESIGN_WEBSITES } from "../../constants";
 import { Button } from "../ui/Button";
 import { scrollToSection } from "../../utils/helpers";
-import { isLowEndDevice, gsapDefaultsForPerf } from "../../utils/perf";
-
-gsap.registerPlugin(ScrollTrigger);
+import { isLowEndDevice } from "../../utils/perf";
 
 export const ServicesSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -25,64 +22,7 @@ export const ServicesSection = () => {
   const lowEnd = isLowEndDevice();
 
   useEffect(() => {
-    const base = gsapDefaultsForPerf();
-
-    // Animación del título con efecto de escritura
-    if (titleRef.current) {
-      gsap.fromTo(
-        titleRef.current.children,
-        { y: lowEnd ? 40 : 100, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: lowEnd ? base.duration * 0.8 : 1,
-          stagger: lowEnd ? 0.06 : 0.1,
-          ease: base.ease,
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-            // throttle refresh to avoid jank on mobile
-            once: false,
-          },
-        }
-      );
-    }
-
-    // Animación de las tarjetas con efectos 3D
-    if (cardsRef.current) {
-      const cards = cardsRef.current.querySelectorAll(".service-card");
-      gsap.fromTo(
-        cards,
-        {
-          y: lowEnd ? 40 : 80,
-          opacity: 0,
-          rotationX: lowEnd ? 15 : 45,
-          scale: lowEnd ? 0.92 : 0.8,
-          willChange: "transform, opacity",
-        },
-        {
-          y: 0,
-          opacity: 1,
-          rotationX: 0,
-          scale: 1,
-          duration: lowEnd ? base.duration : 0.8,
-          stagger: lowEnd ? 0.1 : 0.2,
-          ease: "back.out(1.4)",
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-          onComplete: () => {
-            // Drop will-change after anim completes to save memory
-            (cards as any).forEach?.(
-              (el: HTMLElement) => (el.style.willChange = "auto")
-            );
-          },
-        }
-      );
-    }
+    // No JS animations; viewport transitions handled via framer-motion
   }, [lowEnd]);
 
   const services = [
@@ -177,13 +117,17 @@ export const ServicesSection = () => {
               Servicios Premium
             </span>
           </div>
-          <h2
+          <motion.h2
             ref={titleRef}
-            className="brand-title text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent"
+            className="brand-title text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-[#ea9216] to-white bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <span>Nuestros</span> <span>Servicios</span>
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          </motion.h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Transformamos tus ideas en realidad con{" "}
             <span className="text-[#ea9216] font-semibold">
               tecnología de vanguardia
@@ -198,7 +142,7 @@ export const ServicesSection = () => {
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
         >
           {services.map((service) => (
-            <div
+            <motion.div
               key={service.title}
               className="service-card group relative bg-gray-600/90 dark:bg-[#3a4750]/80 backdrop-blur-xl rounded-3xl p-8 shadow-2xl hover:shadow-4xl transition-all duration-500 border border-gray-400/30 dark:border-gray-700/30 hover:-translate-y-2 overflow-hidden"
               style={{
@@ -208,6 +152,10 @@ export const ServicesSection = () => {
                 )`,
                 backdropFilter: "blur(20px)",
               }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               // onMouseEnter={(e) => {
               //   gsap.to(e.currentTarget, {
               //     scale: 1.02,
@@ -281,7 +229,7 @@ export const ServicesSection = () => {
 
               {/* Shine Effect (decorative, ignore pointer events) */}
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-3xl pointer-events-none" />
-            </div>
+            </motion.div>
           ))}
         </div>
 
