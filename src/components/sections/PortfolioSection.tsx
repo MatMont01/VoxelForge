@@ -27,6 +27,7 @@ export const PortfolioSection = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(true);
+  const [openOverlays, setOpenOverlays] = useState<Set<string>>(new Set());
   // Prepare real portfolio items
   const portfolioItems = useMemo(
     () => [
@@ -107,11 +108,9 @@ export const PortfolioSection = () => {
   const categories = [
     ...new Set(SAMPLE_PROJECTS.map((project) => project.category)),
   ];
-  const totalProjects = SAMPLE_PROJECTS.length;
-  const totalPrintTime = SAMPLE_PROJECTS.reduce((acc, project) => {
-    const hours = parseInt(project.printTime.split(" ")[0]);
-    return acc + hours;
-  }, 0);
+  // Display numbers (business metrics)
+  const displayTotalProjects = 2000; // 2000+ proyectos
+  const displayTotalPrintTime = 12000; // 12000h+ de impresión
 
   return (
     <section
@@ -178,8 +177,8 @@ export const PortfolioSection = () => {
           >
             {[
               {
-                number: totalProjects,
-                label: "Proyectos Completados",
+                number: displayTotalProjects,
+                label: "Proyectos completados (incluye personales)",
                 icon: "🎯",
                 suffix: "+",
               },
@@ -190,7 +189,7 @@ export const PortfolioSection = () => {
                 suffix: "",
               },
               {
-                number: totalPrintTime,
+                number: displayTotalPrintTime,
                 label: "Horas de Impresión",
                 icon: "⏱️",
                 suffix: "h+",
@@ -272,7 +271,28 @@ export const PortfolioSection = () => {
                 {marqueeItems.map((item, idx) => (
                   <div
                     key={idx}
-                    className="relative w-[320px] sm:w-[360px] lg:w-[420px] h-[220px] sm:h-[240px] lg:h-[260px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/30 dark:border-gray-700/40 bg-gray-100/70 dark:bg-[#2b323b]/70 hover:shadow-xl transition-all duration-300"
+                    className="relative w-[320px] sm:w-[360px] lg:w-[420px] h-[220px] sm:h-[240px] lg:h-[260px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/30 dark:border-gray-700/40 bg-gray-100/70 dark:bg-[#2b323b]/70 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => {
+                      const id = `ltr-${idx}`;
+                      setOpenOverlays((prev) => {
+                        const next = new Set(prev);
+                        next.has(id) ? next.delete(id) : next.add(id);
+                        return next;
+                      });
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        const id = `ltr-${idx}`;
+                        setOpenOverlays((prev) => {
+                          const next = new Set(prev);
+                          next.has(id) ? next.delete(id) : next.add(id);
+                          return next;
+                        });
+                      }
+                    }}
                   >
                     <picture>
                       <source srcSet={item.webp} type="image/webp" />
@@ -284,8 +304,12 @@ export const PortfolioSection = () => {
                         decoding="async"
                       />
                     </picture>
-                    {/* Overlay content on hover (no animation pause) */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end will-change-opacity">
+                    {/* Overlay content: hover + tap toggle */}
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end will-change-opacity ${
+                        openOverlays.has(`ltr-${idx}`) ? "opacity-100" : ""
+                      }`}
+                    >
                       <div className="p-4">
                         <h4 className="text-white font-bold text-lg leading-tight">
                           {item.title}
@@ -305,7 +329,28 @@ export const PortfolioSection = () => {
                 {marqueeItems.map((item, idx) => (
                   <div
                     key={`rtl-${idx}`}
-                    className="relative w-[280px] sm:w-[320px] lg:w-[380px] h-[200px] sm:h-[220px] lg:h-[240px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/30 dark:border-gray-700/40 bg-gray-100/70 dark:bg-[#2b323b]/70 hover:shadow-xl transition-all duration-300"
+                    className="relative w-[280px] sm:w-[320px] lg:w-[380px] h-[200px] sm:h-[220px] lg:h-[240px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/30 dark:border-gray-700/40 bg-gray-100/70 dark:bg-[#2b323b]/70 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => {
+                      const id = `rtl-${idx}`;
+                      setOpenOverlays((prev) => {
+                        const next = new Set(prev);
+                        next.has(id) ? next.delete(id) : next.add(id);
+                        return next;
+                      });
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        const id = `rtl-${idx}`;
+                        setOpenOverlays((prev) => {
+                          const next = new Set(prev);
+                          next.has(id) ? next.delete(id) : next.add(id);
+                          return next;
+                        });
+                      }
+                    }}
                   >
                     <picture>
                       <source srcSet={item.webp} type="image/webp" />
@@ -317,7 +362,11 @@ export const PortfolioSection = () => {
                         decoding="async"
                       />
                     </picture>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end will-change-opacity">
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end will-change-opacity ${
+                        openOverlays.has(`rtl-${idx}`) ? "opacity-100" : ""
+                      }`}
+                    >
                       <div className="p-3">
                         <h4 className="text-white font-bold text-base leading-tight">
                           {item.title}
