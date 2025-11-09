@@ -107,7 +107,7 @@ src/
 ## 📞 Contacto
 
 - **Email**: voxelforge1502@gmail.com
-- **WhatsApp**: +591 67784792
+- **WhatsApp**: +591 74697838
 - **Ubicación**: Santa Cruz de la Sierra, Bolivia
 - **Servicios**: Impresión 3D, Diseños personalizados, Prototipos
 

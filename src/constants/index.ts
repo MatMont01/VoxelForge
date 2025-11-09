@@ -59,7 +59,7 @@ export const PRINTERS: Printer[] = [
 
 export const CONTACT_INFO: ContactInfo = {
   email: "voxelforge1502@gmail.com",
-  whatsapp: "+591 67784792",
+  whatsapp: "+591 74697838",
   location: "Santa Cruz de la Sierra, Bolivia",
   serviceAreas: [
     "Santa Cruz de la Sierra",

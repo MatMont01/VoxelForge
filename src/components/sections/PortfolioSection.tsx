@@ -261,7 +261,7 @@ export const PortfolioSection = () => {
                 <button
                   onClick={() =>
                     window.open(
-                      "https://wa.me/59167784792?text=Hola, tengo un proyecto que me gustaría imprimir",
+                      "https://wa.me/59174697838?text=Hola, tengo un proyecto que me gustaría imprimir",
                       "_blank"
                     )
                   }
