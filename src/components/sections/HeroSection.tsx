@@ -3,17 +3,11 @@ import { ArrowDown, Printer, Zap, Shield } from "lucide-react";
 import { Button } from "../ui/Button";
 import { scrollToSection } from "../../utils/helpers";
 import { motion } from "framer-motion";
+import { fadeInUp, staggerContainer } from "../../utils/motion";
 
 export const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
-  const fadeUp = {
-    hidden: { opacity: 0, y: 24 },
-    show: (delay: number = 0) => ({
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut", delay },
-    }),
-  };
+  // Using shared variants from utils/motion
 
   const features = [
     {
@@ -78,20 +72,18 @@ export const HeroSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
           <motion.h1
-            variants={fadeUp}
+            variants={fadeInUp(0)}
             initial="hidden"
             animate="show"
-            custom={0}
             className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6"
           >
             <span className="text-[#ea9216]">Voxel</span> Forge
           </motion.h1>
 
           <motion.p
-            variants={fadeUp}
+            variants={fadeInUp(0.15)}
             initial="hidden"
             animate="show"
-            custom={0.2}
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto"
           >
             Transformamos tus ideas en realidad tangible con impresión 3D de
@@ -99,10 +91,9 @@ export const HeroSection = () => {
           </motion.p>
 
           <motion.div
-            variants={fadeUp}
+            variants={fadeInUp(0.3)}
             initial="hidden"
             animate="show"
-            custom={0.4}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
             <Button
@@ -124,10 +115,9 @@ export const HeroSection = () => {
 
           {/* Features Grid */}
           <motion.div
-            variants={fadeUp}
+            variants={staggerContainer}
             initial="hidden"
             animate="show"
-            custom={0.6}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
           >
             {features.map((feature) => {

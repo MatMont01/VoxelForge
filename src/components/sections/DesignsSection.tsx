@@ -7,6 +7,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { fadeInUp, staggerContainer } from "../../utils/motion";
 import { DESIGN_WEBSITES } from "../../constants";
 
 const getCategoryIcon = (category: string) => {
@@ -43,34 +44,43 @@ export const DesignsSection = () => {
           </div>
 
           <div className="relative z-10">
-            <div className="text-center mb-12">
+            <motion.div
+              className="text-center mb-12"
+              variants={fadeInUp(0)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.4 }}
+            >
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/20 border border-purple-500/20 mb-4">
                 <Palette className="w-4 h-4 text-purple-500 mr-2" />
                 <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
                   Recursos Recomendados
                 </span>
               </div>
-              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              <motion.h3
+                variants={fadeInUp(0.1)}
+                className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+              >
                 ¿No sabes qué{" "}
                 <span className="bg-gradient-to-r from-[#ea9216] to-[#d68614] bg-clip-text text-transparent">
                   imprimir?
                 </span>
-              </h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              </motion.h3>
+              <motion.p
+                variants={fadeInUp(0.2)}
+                className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+              >
                 Descubre miles de diseños listos para imprimir en plataformas
                 confiables. Elige la que más te guste y descarga tus modelos.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
             <motion.div
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+              variants={staggerContainer}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={{
-                hidden: {},
-                show: { transition: { staggerChildren: 0.12 } },
-              }}
+              viewport={{ once: true, amount: 0.25 }}
             >
               {DESIGN_WEBSITES.map((website, index) => (
                 <motion.a
@@ -80,10 +90,7 @@ export const DesignsSection = () => {
                   rel="noopener noreferrer"
                   className="group relative bg-white/70 dark:bg-[#313841]/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/30 dark:border-gray-700/30 hover:-translate-y-2 overflow-hidden"
                   style={{ animationDelay: `${index * 100}ms` }}
-                  variants={{
-                    hidden: { opacity: 0, y: 16 },
-                    show: { opacity: 1, y: 0 },
-                  }}
+                  variants={fadeInUp(index * 0.05)}
                   whileHover={{ scale: 1.02 }}
                 >
                   {/* Gradient Overlay */}

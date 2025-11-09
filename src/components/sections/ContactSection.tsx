@@ -8,6 +8,7 @@ import {
 } from "../../utils/helpers";
 import { Button } from "../ui/Button";
 import { motion } from "framer-motion";
+import { fadeInUp, staggerContainer } from "../../utils/motion";
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -21,20 +22,7 @@ export const ContactSection = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const sectionRef = useRef<HTMLElement>(null);
-  const fadeUp = {
-    hidden: { opacity: 0, y: 24 },
-    show: (delay: number = 0) => ({
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut", delay },
-    }),
-  };
-  const containerStagger = {
-    hidden: {},
-    show: {
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-    },
-  };
+  // Replaced local variants with shared presets
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -185,7 +173,13 @@ Este mensaje fue enviado desde el formulario de contacto de voxelforge.com
       <div className="absolute top-1/4 right-1/3 w-80 h-80 bg-gradient-radial from-orange-300/10 via-yellow-300/5 to-transparent rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-20">
+        <motion.div
+          className="text-center mb-20"
+          variants={fadeInUp(0)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.5 }}
+        >
           {/* Badge */}
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/20 border border-[#ea9216]/20 mb-6">
             <Send className="w-4 h-4 text-[#ea9216] mr-2" />
@@ -195,11 +189,7 @@ Este mensaje fue enviado desde el formulario de contacto de voxelforge.com
           </div>
 
           <motion.h2
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
-            custom={0}
+            variants={fadeInUp(0.1)}
             className="text-4xl md:text-6xl font-bold mb-6"
           >
             <span className="bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent">
@@ -210,11 +200,7 @@ Este mensaje fue enviado desde el formulario de contacto de voxelforge.com
             </span>
           </motion.h2>
           <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
-            custom={0.2}
+            variants={fadeInUp(0.2)}
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
             ¿Tienes un{" "}
@@ -226,23 +212,22 @@ Este mensaje fue enviado desde el formulario de contacto de voxelforge.com
               hacerlo realidad
             </span>
           </motion.p>
-        </div>
+        </motion.div>
 
         <div className="max-w-6xl mx-auto">
           {/* Contact Methods */}
           <motion.div
-            variants={containerStagger}
+            variants={staggerContainer}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.25 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
           >
             {contactMethods.map((method, idx) => {
               const Icon = method.icon;
               return (
                 <motion.div
-                  variants={fadeUp}
-                  custom={idx * 0.05}
+                  variants={fadeInUp(idx * 0.05)}
                   key={method.title}
                   className="contact-card bg-gray-50 dark:bg-[#3a4750] rounded-xl p-8 text-center hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105"
                   onClick={method.action}
@@ -267,11 +252,10 @@ Este mensaje fue enviado desde el formulario de contacto de voxelforge.com
           {/* Contact Form */}
           <div className="max-w-2xl mx-auto">
             <motion.form
-              variants={fadeUp}
+              variants={fadeInUp(0.1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
-              custom={0.2}
               onSubmit={handleSubmit}
               className="bg-gray-50 dark:bg-[#3a4750] rounded-2xl p-8 shadow-lg"
             >

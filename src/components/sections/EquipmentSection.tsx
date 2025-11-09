@@ -3,27 +3,13 @@ import { Printer, Cpu, Gauge, Layers, Star, Sparkles } from "lucide-react";
 import { PRINTERS } from "../../constants";
 import p1sPrinterImage from "../../assets/3DPrinters/p1sPrinter.png";
 import { motion } from "framer-motion";
+import { fadeInUp, slideInLeft } from "../../utils/motion";
 
 export const EquipmentSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const printerRef = useRef<HTMLDivElement>(null);
-  const fadeUp = {
-    hidden: { opacity: 0, y: 24 },
-    show: (delay: number = 0) => ({
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut", delay },
-    }),
-  };
-  const slideLeft = {
-    hidden: { opacity: 0, x: -40 },
-    show: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
+  // Replaced local variants with shared presets
 
   const printer = PRINTERS[0]; // Bambu Lab P1S
 
@@ -71,7 +57,7 @@ export const EquipmentSection = () => {
           </div>
           <motion.h2
             ref={titleRef}
-            variants={fadeUp}
+            variants={fadeInUp(0)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.5 }}
@@ -97,10 +83,10 @@ export const EquipmentSection = () => {
         <div className="max-w-7xl mx-auto">
           <motion.div
             ref={printerRef}
-            variants={slideLeft}
+            variants={slideInLeft}
             initial="hidden"
             whileInView="show"
-            viewport={{ amount: 0.1 }}
+            viewport={{ once: true, amount: 0.2 }}
             className="relative bg-gray-600/90 dark:bg-[#313841]/80 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-gray-400/30 dark:border-gray-700/30"
             style={{
               background: `linear-gradient(135deg, 

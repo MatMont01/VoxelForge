@@ -1,6 +1,14 @@
 import { useRef, useEffect } from "react";
 import { Play, Eye, Users, Clock, Sparkles, Video } from "lucide-react";
 import tiktokLogo from "../../assets/SocialMediaLogo/tiktok.png";
+import { motion } from "framer-motion";
+import {
+  fadeInUp,
+  slideInLeft,
+  slideInRight,
+  staggerContainer,
+  scaleIn,
+} from "../../utils/motion";
 
 export const LivePrintingSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -71,17 +79,27 @@ export const LivePrintingSection = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Title Section */}
-        <div className="text-center mb-16">
-          <h2
+        <motion.div
+          className="text-center mb-16"
+          variants={fadeInUp(0)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.4 }}
+        >
+          <motion.h2
             ref={titleRef}
+            variants={fadeInUp(0.1)}
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-gray-900 mb-6 leading-tight"
           >
             <span className="block">¡Ve Tu Pedido</span>
             <span className="block bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-transparent">
               Imprimiéndose en Vivo!
             </span>
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-600 max-w-4xl mx-auto leading-relaxed">
+          </motion.h2>
+          <motion.p
+            variants={fadeInUp(0.2)}
+            className="text-xl md:text-2xl text-gray-600 dark:text-gray-600 max-w-4xl mx-auto leading-relaxed"
+          >
             Experimenta una{" "}
             <span className="font-bold text-[#ea9216]">
               transparencia total
@@ -91,13 +109,23 @@ export const LivePrintingSection = () => {
               {" "}
               streams en vivo de TikTok
             </span>
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+        <motion.div
+          className="grid lg:grid-cols-2 gap-16 items-center mb-20"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           {/* Video Mockup */}
-          <div ref={videoRef} className="relative">
+          <motion.div
+            ref={videoRef}
+            className="relative"
+            variants={slideInLeft}
+          >
             <div className="relative bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 shadow-2xl transform hover:scale-105 transition-transform duration-300">
               {/* Phone Frame */}
               <div className="bg-black rounded-2xl p-2 shadow-inner">
@@ -176,10 +204,14 @@ export const LivePrintingSection = () => {
               {/* Glow Effect */}
               <div className="absolute -inset-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-3xl opacity-20 blur-xl animate-pulse"></div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Features */}
-          <div ref={featuresRef} className="space-y-8">
+          <motion.div
+            ref={featuresRef}
+            className="space-y-8"
+            variants={slideInRight}
+          >
             <div className="mb-8">
               <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-900 mb-4">
                 Una Experiencia Única
@@ -191,8 +223,9 @@ export const LivePrintingSection = () => {
             </div>
 
             {features.map((feature, index) => (
-              <div
+              <motion.div
                 key={index}
+                variants={fadeInUp(index * 0.05)}
                 className="feature-card group flex items-start space-x-4 p-6 bg-white/50 dark:bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200/50 dark:border-gray-300/50"
               >
                 <div
@@ -208,19 +241,24 @@ export const LivePrintingSection = () => {
                     {feature.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Stats Section */}
-        <div
+        <motion.div
           ref={statsRef}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
         >
           {stats.map((stat, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={scaleIn}
               className="text-center p-8 bg-gradient-to-br from-white to-gray-50 dark:from-white dark:to-gray-100 rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-300/50"
             >
               <div className="text-4xl md:text-5xl font-bold text-[#ea9216] mb-2">
@@ -230,12 +268,18 @@ export const LivePrintingSection = () => {
               <p className="text-gray-600 dark:text-gray-600 font-medium">
                 {stat.label}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Call to Action */}
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          variants={fadeInUp(0)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <div className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-3xl p-8 md:p-12 shadow-2xl">
             <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
               ¡Síguenos en TikTok y No Te Pierdas Nada!
@@ -273,7 +317,7 @@ export const LivePrintingSection = () => {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

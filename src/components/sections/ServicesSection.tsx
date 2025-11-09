@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Sparkles, Zap, Target, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { fadeInUp, staggerContainer } from "../../utils/motion";
 // DESIGN_WEBSITES moved to standalone DesignsSection
 import { Button } from "../ui/Button";
 import { scrollToSection } from "../../utils/helpers";
@@ -87,7 +88,13 @@ export const ServicesSection = () => {
       <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-gradient-radial from-green-300/15 via-emerald-300/8 to-transparent rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
+        <motion.div
+          className="text-center mb-20"
+          variants={fadeInUp(0)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.5 }}
+        >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/20 border border-[#ea9216]/20 mb-6">
             <Sparkles className="w-4 h-4 text-[#ea9216] mr-2" />
             <span className="text-sm font-medium text-[#ea9216]">
@@ -96,34 +103,31 @@ export const ServicesSection = () => {
           </div>
           <motion.h2
             ref={titleRef}
+            variants={fadeInUp(0.1)}
             className="brand-title text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-[#ea9216] to-white bg-clip-text text-transparent"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <span>Nuestros</span> <span>Servicios</span>
           </motion.h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <motion.p
+            variants={fadeInUp(0.2)}
+            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+          >
             Transformamos tus ideas en realidad con{" "}
             <span className="text-[#ea9216] font-semibold">
               tecnología de vanguardia
             </span>{" "}
             y un servicio personalizado excepcional
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Services Grid con efectos modernos */}
         <motion.div
           ref={cardsRef}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
+          variants={staggerContainer}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={{
-            hidden: {},
-            show: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
-          }}
+          viewport={{ once: true, amount: 0.25 }}
         >
           {services.map((service) => (
             <motion.div
@@ -136,10 +140,7 @@ export const ServicesSection = () => {
                 )`,
                 backdropFilter: "blur(20px)",
               }}
-              variants={{
-                hidden: { opacity: 0, y: 24 },
-                show: { opacity: 1, y: 0 },
-              }}
+              variants={fadeInUp(0)}
               transition={{
                 type: "spring",
                 stiffness: 140,
