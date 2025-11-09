@@ -84,6 +84,7 @@ export const NAVIGATION_ITEMS = [
   { name: "Inicio", href: "#home" },
   { name: "Servicios", href: "#services" },
   { name: "Descargar Diseños", href: "#designs" },
+  { name: "Redes", href: "#social" },
   { name: "Equipos", href: "#equipment" },
   { name: "Portafolio", href: "#portfolio" },
   { name: "Sobre Nosotros", href: "#about" },
