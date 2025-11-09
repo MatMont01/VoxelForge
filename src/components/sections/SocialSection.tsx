@@ -1,8 +1,8 @@
-import { useRef } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import instagramLogo from "../../assets/SocialMediaLogo/instagram.png";
 import tiktokLogo from "../../assets/SocialMediaLogo/tiktok.png";
-import { Mail, Facebook, Twitch } from "lucide-react";
+import { Mail, Facebook, Twitch, Sparkles, Filter } from "lucide-react";
 
 interface SocialLink {
   id: string;
@@ -12,7 +12,12 @@ interface SocialLink {
   imageSrc?: string;
   icon?: React.ComponentType<{ className?: string }>;
   description: string;
-  accent: string; // tailwind color (hex or utility)
+  accent: string;
+  category: "social" | "contact" | "personal";
+  stats?: {
+    metric: string; // e.g. "Seguidores"
+    value: string; // e.g. "1.2K" (placeholder)
+  }[];
 }
 
 const SOCIAL_LINKS: SocialLink[] = [
@@ -24,6 +29,11 @@ const SOCIAL_LINKS: SocialLink[] = [
     imageSrc: instagramLogo,
     description: "Fotos de impresiones, prototipos y proyectos terminados.",
     accent: "from-pink-500 to-purple-500",
+    category: "social",
+    stats: [
+      { metric: "Posts", value: "100+" },
+      { metric: "Highlights", value: "Proyectos" },
+    ],
   },
   {
     id: "tiktok",
@@ -33,6 +43,11 @@ const SOCIAL_LINKS: SocialLink[] = [
     imageSrc: tiktokLogo,
     description: "Videos cortos mostrando el proceso y resultados.",
     accent: "from-gray-900 to-[#ea9216]",
+    category: "social",
+    stats: [
+      { metric: "Clips", value: "50+" },
+      { metric: "Formato", value: "Proceso" },
+    ],
   },
   {
     id: "facebook",
@@ -42,6 +57,11 @@ const SOCIAL_LINKS: SocialLink[] = [
     icon: Facebook,
     description: "Publicaciones, novedades y eventos especiales.",
     accent: "from-blue-600 to-indigo-600",
+    category: "social",
+    stats: [
+      { metric: "Comunidad", value: "Activa" },
+      { metric: "Eventos", value: "Anuncios" },
+    ],
   },
   {
     id: "email",
@@ -51,6 +71,11 @@ const SOCIAL_LINKS: SocialLink[] = [
     icon: Mail,
     description: "Contacto directo para cotizaciones detalladas.",
     accent: "from-[#ea9216] to-[#d68614]",
+    category: "contact",
+    stats: [
+      { metric: "Respuesta", value: "Rápida" },
+      { metric: "Detalle", value: "Cotizaciones" },
+    ],
   },
   {
     id: "twitch",
@@ -60,27 +85,75 @@ const SOCIAL_LINKS: SocialLink[] = [
     icon: Twitch,
     description: "Transmisiones personales de juegos (no comercial).",
     accent: "from-purple-600 to-fuchsia-600",
+    category: "personal",
+    stats: [
+      { metric: "Contenido", value: "Gaming" },
+      { metric: "Rol", value: "Personal" },
+    ],
   },
+];
+
+const FILTERS: { id: "all" | SocialLink["category"]; label: string }[] = [
+  { id: "all", label: "Todo" },
+  { id: "social", label: "Redes" },
+  { id: "contact", label: "Contacto" },
+  { id: "personal", label: "Personal" },
 ];
 
 export const SocialSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [activeFilter, setActiveFilter] = useState<
+    "all" | SocialLink["category"]
+  >("all");
+  const [motionAllowed, setMotionAllowed] = useState(true);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setMotionAllowed(!mq.matches);
+  }, []);
+
+  const filteredLinks = SOCIAL_LINKS.filter(
+    (l) => activeFilter === "all" || l.category === activeFilter
+  );
+
+  // Tilt interaction (lightweight, pointer-only)
+  const supportsPointer =
+    typeof window !== "undefined" &&
+    window.matchMedia("(any-pointer: fine)").matches;
+
+  const handleTilt = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      if (!supportsPointer) return;
+      const el = e.currentTarget as HTMLAnchorElement;
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const rotateX = (y / rect.height) * -10; // tilt limits
+      const rotateY = (x / rect.width) * 10;
+      el.style.transform = `translateY(-2px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    },
+    [supportsPointer]
+  );
+
+  const resetTilt = useCallback((el: HTMLAnchorElement) => {
+    el.style.transform = "translateY(0) rotateX(0deg) rotateY(0deg)";
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.12, delayChildren: 0.15 },
     },
   } as const;
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 24, scale: 0.95 },
+    hidden: { opacity: 0, y: 28, scale: 0.95 },
     show: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.55, ease: "easeOut" },
     },
   } as const;
 
@@ -88,17 +161,37 @@ export const SocialSection = () => {
     <section
       ref={sectionRef}
       id="social"
-      className="py-20 bg-gradient-to-br from-gray-50 via-[#ea9216]/5 to-gray-100 dark:from-[#1a1f24] dark:via-[#2d2f34] dark:to-[#1a1f24] relative overflow-hidden"
+      className="py-24 bg-gradient-to-br from-gray-50 via-[#ea9216]/5 to-gray-100 dark:from-[#121518] dark:via-[#222428] dark:to-[#121518] relative overflow-hidden"
     >
-      {/* Decorative background shapes */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="absolute -top-20 -left-20 w-72 h-72 bg-gradient-to-br from-[#ea9216]/40 to-[#d68614]/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tr from-purple-600/30 to-pink-500/20 rounded-full blur-3xl" />
+      {/* Particle backdrop */}
+      {motionAllowed && (
+        <div className="absolute inset-0 pointer-events-none">
+          {Array.from({ length: 26 }).map((_, i) => (
+            <span
+              key={i}
+              className="absolute rounded-full mix-blend-plus-lighter bg-gradient-to-br from-[#ea9216]/30 to-orange-400/20 blur-[3px] animate-pulse"
+              style={{
+                width: Math.random() * 12 + 6 + "px",
+                height: Math.random() * 12 + 6 + "px",
+                top: Math.random() * 100 + "%",
+                left: Math.random() * 100 + "%",
+                animationDelay: Math.random() * 4 + "s",
+                animationDuration: Math.random() * 6 + 4 + "s",
+              }}
+            />
+          ))}
+        </div>
+      )}
+      {/* Decorative soft glows */}
+      <div className="absolute inset-0 opacity-25 pointer-events-none">
+        <div className="absolute -top-32 -left-24 w-72 h-72 bg-gradient-to-br from-[#ea9216]/50 to-[#d68614]/40 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tr from-purple-600/40 to-pink-500/25 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center px-5 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/15 to-[#ea9216]/30 border border-[#ea9216]/30 mb-6">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/15 to-[#ea9216]/30 border border-[#ea9216]/30 mb-6">
+            <Sparkles className="w-4 h-4 text-[#ea9216]" />
             <span className="text-sm font-semibold text-[#ea9216] tracking-wide">
               Conecta con Nosotros
             </span>
@@ -107,11 +200,31 @@ export const SocialSection = () => {
             Nuestras Redes & Más
           </h2>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Sigue nuestra actividad, descubre proyectos recientes y ponte en
-            contacto rápido por el canal que prefieras. Twitch está marcado como
-            personal para separar el contenido de entretenimiento del trabajo
-            profesional.
+            Explora nuestros canales para seguir proyectos y avances. Filtra por
+            categoría si quieres contactar rápido, ver contenido social o
+            acceder al canal personal de Twitch.
           </p>
+        </div>
+
+        {/* Filters */}
+        <div className="flex flex-wrap justify-center gap-3 mb-10">
+          {FILTERS.map((f) => {
+            const active = activeFilter === f.id;
+            return (
+              <button
+                key={f.id}
+                onClick={() => setActiveFilter(f.id)}
+                className={`relative inline-flex items-center gap-2 px-5 py-2 rounded-full border text-sm font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ea9216] ${
+                  active
+                    ? "bg-[#ea9216] text-white border-[#ea9216] shadow-lg shadow-[#ea9216]/30"
+                    : "bg-white/80 dark:bg-[#2c3239]/70 text-gray-700 dark:text-gray-200 border-gray-300/50 dark:border-gray-600/50 hover:border-[#ea9216]/50"
+                }`}
+              >
+                <Filter className="w-4 h-4" />
+                {f.label}
+              </button>
+            );
+          })}
         </div>
 
         <motion.div
@@ -119,35 +232,37 @@ export const SocialSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7"
         >
-          {SOCIAL_LINKS.map((link) => (
+          {filteredLinks.map((link) => (
             <motion.a
               key={link.id}
               variants={cardVariants}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative p-6 rounded-3xl overflow-hidden border border-gray-200/40 dark:border-gray-700/40 bg-white/80 dark:bg-[#313841]/80 backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col"
+              onMouseMove={handleTilt}
+              onMouseLeave={(e) => resetTilt(e.currentTarget)}
+              className="group will-change-transform relative p-7 rounded-3xl overflow-hidden border border-gray-200/40 dark:border-gray-700/50 bg-white/85 dark:bg-[#313841]/80 backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col"
             >
               <div
                 className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity bg-gradient-to-r ${link.accent}`}
               />
-              <div className="flex items-center mb-4">
+              <div className="flex items-center mb-5">
                 <div
-                  className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br ${link.accent} text-white shadow-md relative overflow-hidden group-hover:scale-105 transition-transform`}
+                  className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br ${link.accent} text-white shadow-md relative overflow-hidden group-hover:scale-105 transition-transform`}
                 >
                   {link.type === "image" && link.imageSrc && (
                     <img
                       src={link.imageSrc}
                       alt={link.label}
-                      className="w-8 h-8 object-contain drop-shadow-sm"
+                      className="w-9 h-9 object-contain drop-shadow-sm"
                       loading="lazy"
                       decoding="async"
                     />
                   )}
                   {link.type === "icon" && link.icon && (
-                    <link.icon className="w-8 h-8" />
+                    <link.icon className="w-9 h-9" />
                   )}
                 </div>
                 <div className="ml-4">
@@ -155,14 +270,30 @@ export const SocialSection = () => {
                     {link.label}
                   </h3>
                   <p className="text-xs uppercase tracking-wide text-[#ea9216] font-semibold">
-                    {link.id === "twitch" ? "Personal" : "Oficial"}
+                    {link.category === "personal" ? "Personal" : "Oficial"}
                   </p>
                 </div>
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-300 flex-1 leading-relaxed">
                 {link.description}
               </p>
-              <div className="mt-5 flex items-center justify-between">
+              {/* Stats placeholders */}
+              <div className="mt-4 grid grid-cols-2 gap-3">
+                {link.stats?.map((s) => (
+                  <div
+                    key={s.metric}
+                    className="rounded-xl px-3 py-2 bg-gray-100/70 dark:bg-[#3a4149]/70 text-xs flex flex-col gap-0.5 border border-gray-200/40 dark:border-gray-600/40"
+                  >
+                    <span className="text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400 font-semibold">
+                      {s.metric}
+                    </span>
+                    <span className="text-gray-800 dark:text-gray-100 font-bold">
+                      {s.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 flex items-center justify-between">
                 <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
                   Abre en nueva pestaña
                 </span>
@@ -170,13 +301,13 @@ export const SocialSection = () => {
                   Visitar →
                 </span>
               </div>
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full bg-gradient-to-br from-[#ea9216]/20 to-[#d68614]/20 blur-xl group-hover:scale-125 transition-transform" />
+              <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full bg-gradient-to-br from-[#ea9216]/25 to-[#d68614]/25 blur-xl group-hover:scale-125 transition-transform" />
             </motion.a>
           ))}
         </motion.div>
 
         {/* Disclaimer for Twitch */}
-        <div className="mt-12 text-center max-w-2xl mx-auto">
+        <div className="mt-14 text-center max-w-2xl mx-auto">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#ea9216]/10 border border-[#ea9216]/30 mb-4">
             <Twitch className="w-4 h-4 text-[#ea9216] mr-2" />
             <span className="text-sm font-medium text-[#ea9216]">
