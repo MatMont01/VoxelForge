@@ -27,6 +27,10 @@
       Voxel Forge | Impresión 3D en Santa Cruz | Envíos a toda Bolivia
     </title>
     <meta
+      name="keywords"
+      content="impresion 3d santa cruz, impresion 3d bolivia, impresion 3d prototipos, servicios impresion 3d, piezas 3d personalizadas, maquetas 3d, figuras 3d, voxelforge"
+    />
+    <meta
       name="description"
       content="Impresión 3D profesional en Santa Cruz de la Sierra: prototipos, piezas personalizadas, arte y repuestos. Envíos a todos los departamentos de Bolivia. Atención rápida, materiales de calidad y asesoría experta."
     />
@@ -39,8 +43,21 @@
     <link rel="alternate" href="https://voxelforge.org/" hreflang="es-BO" />
     <link rel="alternate" href="https://voxelforge.org/" hreflang="x-default" />
 
-    <!-- Theme color (dark-only) -->
-    <meta name="theme-color" content="#313841" />
+    <!-- Theme color (auto adjusts via inline script) -->
+    <meta name="theme-color" content="#313841" id="theme-color-meta" />
+    <script>
+      (function () {
+        try {
+          const meta = document.getElementById("theme-color-meta");
+          const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
+          if (meta) {
+            meta.setAttribute("content", prefersDark ? "#313841" : "#ffffff");
+          }
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -387,6 +404,35 @@
                   "@type": "Answer",
                   "text": "Depende del tamaño y complejidad. Prototipos pequeños pueden estar listos en 24-72 horas."
                 }
+              }
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Inicio",
+                "item": "https://voxelforge.org/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Servicios",
+                "item": "https://voxelforge.org/#services"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Portafolio",
+                "item": "https://voxelforge.org/#portfolio"
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "Contacto",
+                "item": "https://voxelforge.org/#contact"
               }
             ]
           }

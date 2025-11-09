@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo, useState } from "react";
 import { SAMPLE_PROJECTS } from "../../constants/projects";
 import { motion } from "framer-motion";
 import { Play, Star, Sparkles, ArrowRight, ExternalLink } from "lucide-react";
@@ -6,58 +6,75 @@ import instagramLogo from "../../assets/SocialMediaLogo/instagram.png";
 import tiktokLogo from "../../assets/SocialMediaLogo/tiktok.png";
 // Portfolio images (real)
 import imgLampara from "../../assets/Portafolio/lampara antorcha minecraft.jpg";
+import imgLamparaWebp from "../../assets/Portafolio/lampara antorcha minecraft.webp";
 import imgMaqueta from "../../assets/Portafolio/maqueta arquitectura.jpg";
+import imgMaquetaWebp from "../../assets/Portafolio/maqueta arquitectura.webp";
 import imgSlifer from "../../assets/Portafolio/Slifer dragon rojo.jpg";
+import imgSliferWebp from "../../assets/Portafolio/Slifer dragon rojo.webp";
 import imgStandComic from "../../assets/Portafolio/stand comic con 2025.jpg";
+import imgStandComicWebp from "../../assets/Portafolio/stand comic con 2025.webp";
 import imgStandGamer from "../../assets/Portafolio/Stand Gamer Con 2025.jpg";
+import imgStandGamerWebp from "../../assets/Portafolio/Stand Gamer Con 2025.webp";
 import imgStandStar from "../../assets/Portafolio/stand star con 2025.jpg";
+import imgStandStarWebp from "../../assets/Portafolio/stand star con 2025.webp";
 import imgKitATST from "../../assets/Portafolio/Starwars kit card at st y caza tie .jpg";
+import imgKitATSTWebp from "../../assets/Portafolio/Starwars kit card at st y caza tie .webp";
 import imgXwing from "../../assets/Portafolio/Xwing Star wars.jpg";
+import imgXwingWebp from "../../assets/Portafolio/Xwing Star wars.webp";
 
 export const PortfolioSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(true);
   // Prepare real portfolio items
   const portfolioItems = useMemo(
     () => [
       {
         src: imgLampara,
+        webp: imgLamparaWebp,
         title: "Lámpara Antorcha Minecraft",
         desc: "Accesorio decorativo impreso con acabados nítidos.",
       },
       {
         src: imgMaqueta,
+        webp: imgMaquetaWebp,
         title: "Maqueta Arquitectura",
         desc: "Modelo arquitectónico de alta precisión.",
       },
       {
         src: imgSlifer,
+        webp: imgSliferWebp,
         title: "Slifer, Dragón del Cielo",
         desc: "Figura detallada, post-procesado y pintura.",
       },
       {
         src: imgStandComic,
+        webp: imgStandComicWebp,
         title: "Stand Comic Con 2025",
         desc: "Elementos impresos para exhibición temática.",
       },
       {
         src: imgStandGamer,
+        webp: imgStandGamerWebp,
         title: "Stand Gamer Con 2025",
         desc: "Decoraciones personalizadas para evento gamer.",
       },
       {
         src: imgStandStar,
+        webp: imgStandStarWebp,
         title: "Stand Star Con 2025",
         desc: "Props y piezas para ambientación sci‑fi.",
       },
       {
         src: imgKitATST,
+        webp: imgKitATSTWebp,
         title: "Kit AT‑ST y TIE",
         desc: "Modelos Star Wars ensamblables de colección.",
       },
       {
         src: imgXwing,
+        webp: imgXwingWebp,
         title: "X‑Wing Star Wars",
         desc: "Nave icónica impresa con gran definición.",
       },
@@ -73,7 +90,18 @@ export const PortfolioSection = () => {
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // No JS animations needed here; framer-motion handles simple viewport fades
+    // Pause marquee animations when the section is offscreen to save resources
+    const el = carouselRef.current ?? sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        setInView(entry.isIntersecting && entry.intersectionRatio > 0.2);
+      },
+      { threshold: [0, 0.2, 0.5, 1] }
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   const categories = [
@@ -234,28 +262,67 @@ export const PortfolioSection = () => {
             <div className="pointer-events-none absolute -top-20 -left-20 w-72 h-72 rounded-full bg-gradient-to-br from-[#ea9216]/20 to-[#d68614]/10 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-20 -right-10 w-80 h-80 rounded-full bg-gradient-to-tr from-purple-500/15 to-pink-500/10 blur-3xl" />
 
-            {/* Marquee track wrapper (pause on hover) */}
-            <div className="group relative">
-              <div className="flex gap-6 w-[200%] animate-marquee-ltr group-hover:[animation-play-state:paused]">
+            {/* Marquee track wrapper (no pause on hover for smoother feel) */}
+            <div className="relative py-4">
+              {/* Track 1 - LTR */}
+              <div
+                className="flex gap-6 w-[200%] animate-marquee-ltr will-change-transform"
+                style={{ animationPlayState: inView ? "running" : "paused" }}
+              >
                 {marqueeItems.map((item, idx) => (
                   <div
                     key={idx}
                     className="relative w-[320px] sm:w-[360px] lg:w-[420px] h-[220px] sm:h-[240px] lg:h-[260px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/30 dark:border-gray-700/40 bg-gray-100/70 dark:bg-[#2b323b]/70 hover:shadow-xl transition-all duration-300"
                   >
-                    <img
-                      src={item.src}
-                      alt={item.title}
-                      className="absolute inset-0 w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    {/* Overlay content on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
+                    <picture>
+                      <source srcSet={item.webp} type="image/webp" />
+                      <img
+                        src={item.src}
+                        alt={item.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </picture>
+                    {/* Overlay content on hover (no animation pause) */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end will-change-opacity">
                       <div className="p-4">
                         <h4 className="text-white font-bold text-lg leading-tight">
                           {item.title}
                         </h4>
                         <p className="text-white/90 text-sm">{item.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Track 2 - RTL */}
+              <div
+                className="mt-6 flex gap-6 w-[200%] animate-marquee-rtl will-change-transform"
+                style={{ animationPlayState: inView ? "running" : "paused" }}
+              >
+                {marqueeItems.map((item, idx) => (
+                  <div
+                    key={`rtl-${idx}`}
+                    className="relative w-[280px] sm:w-[320px] lg:w-[380px] h-[200px] sm:h-[220px] lg:h-[240px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/30 dark:border-gray-700/40 bg-gray-100/70 dark:bg-[#2b323b]/70 hover:shadow-xl transition-all duration-300"
+                  >
+                    <picture>
+                      <source srcSet={item.webp} type="image/webp" />
+                      <img
+                        src={item.src}
+                        alt={item.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </picture>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end will-change-opacity">
+                      <div className="p-3">
+                        <h4 className="text-white font-bold text-base leading-tight">
+                          {item.title}
+                        </h4>
+                        <p className="text-white/90 text-xs">{item.desc}</p>
                       </div>
                     </div>
                   </div>

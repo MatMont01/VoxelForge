@@ -9,8 +9,17 @@ function App() {
     document.documentElement.style.scrollBehavior = "smooth";
   }, []);
 
+  // Dynamic title refinement (could expand with router later)
+  useEffect(() => {
+    const baseTitle = "Voxel Forge";
+    const tagline = "Impresión 3D en Santa Cruz";
+    if (document.title.indexOf(baseTitle) === -1) {
+      document.title = `${baseTitle} | ${tagline}`;
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#313841] text-gray-100">
+    <div className="min-h-screen bg-[#313841] text-gray-100" lang="es">
       <Header />
       <CustomCursor />
       <div className="App">

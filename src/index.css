@@ -483,8 +483,8 @@ textarea:focus {
 
 /* Utility classes (Tailwind arbitrary properties can also be used) */
 .animate-marquee-ltr {
-  animation: marquee-ltr 40s linear infinite;
+  animation: marquee-ltr 50s linear infinite;
 }
 .animate-marquee-rtl {
-  animation: marquee-rtl 40s linear infinite;
+  animation: marquee-rtl 50s linear infinite;
 }
