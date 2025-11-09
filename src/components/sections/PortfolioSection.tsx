@@ -1,15 +1,75 @@
-import { useEffect, useRef } from "react";
-import { Carousel } from "../ui/Carousel";
+import { useEffect, useRef, useMemo } from "react";
 import { SAMPLE_PROJECTS } from "../../constants/projects";
 import { motion } from "framer-motion";
 import { Play, Star, Sparkles, ArrowRight, ExternalLink } from "lucide-react";
 import instagramLogo from "../../assets/SocialMediaLogo/instagram.png";
 import tiktokLogo from "../../assets/SocialMediaLogo/tiktok.png";
+// Portfolio images (real)
+import imgLampara from "../../assets/Portafolio/lampara antorcha minecraft.jpg";
+import imgMaqueta from "../../assets/Portafolio/maqueta arquitectura.jpg";
+import imgSlifer from "../../assets/Portafolio/Slifer dragon rojo.jpg";
+import imgStandComic from "../../assets/Portafolio/stand comic con 2025.jpg";
+import imgStandGamer from "../../assets/Portafolio/Stand Gamer Con 2025.jpg";
+import imgStandStar from "../../assets/Portafolio/stand star con 2025.jpg";
+import imgKitATST from "../../assets/Portafolio/Starwars kit card at st y caza tie .jpg";
+import imgXwing from "../../assets/Portafolio/Xwing Star wars.jpg";
 
 export const PortfolioSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+  // Prepare real portfolio items
+  const portfolioItems = useMemo(
+    () => [
+      {
+        src: imgLampara,
+        title: "Lámpara Antorcha Minecraft",
+        desc: "Accesorio decorativo impreso con acabados nítidos.",
+      },
+      {
+        src: imgMaqueta,
+        title: "Maqueta Arquitectura",
+        desc: "Modelo arquitectónico de alta precisión.",
+      },
+      {
+        src: imgSlifer,
+        title: "Slifer, Dragón del Cielo",
+        desc: "Figura detallada, post-procesado y pintura.",
+      },
+      {
+        src: imgStandComic,
+        title: "Stand Comic Con 2025",
+        desc: "Elementos impresos para exhibición temática.",
+      },
+      {
+        src: imgStandGamer,
+        title: "Stand Gamer Con 2025",
+        desc: "Decoraciones personalizadas para evento gamer.",
+      },
+      {
+        src: imgStandStar,
+        title: "Stand Star Con 2025",
+        desc: "Props y piezas para ambientación sci‑fi.",
+      },
+      {
+        src: imgKitATST,
+        title: "Kit AT‑ST y TIE",
+        desc: "Modelos Star Wars ensamblables de colección.",
+      },
+      {
+        src: imgXwing,
+        title: "X‑Wing Star Wars",
+        desc: "Nave icónica impresa con gran definición.",
+      },
+    ],
+    []
+  );
+
+  // Duplicate items for seamless marquee
+  const marqueeItems = useMemo(
+    () => [...portfolioItems, ...portfolioItems],
+    [portfolioItems]
+  );
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -160,7 +220,7 @@ export const PortfolioSection = () => {
           </div>
         </motion.div>
 
-        {/* Enhanced Carousel */}
+        {/* Infinite Marquee Gallery */}
         <motion.div
           ref={carouselRef}
           className="mb-16"
@@ -169,12 +229,39 @@ export const PortfolioSection = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <div className="relative bg-gray-100/80 dark:bg-[#313841]/60 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/30 dark:border-gray-700/30 shadow-2xl">
-            <Carousel
-              items={SAMPLE_PROJECTS}
-              autoPlay={true}
-              autoPlayInterval={5000}
-            />
+          <div className="relative overflow-hidden rounded-3xl border border-gray-200/30 dark:border-gray-700/30 shadow-2xl bg-white/70 dark:bg-[#313841]/60 backdrop-blur-xl">
+            {/* Glow accents */}
+            <div className="pointer-events-none absolute -top-20 -left-20 w-72 h-72 rounded-full bg-gradient-to-br from-[#ea9216]/20 to-[#d68614]/10 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -right-10 w-80 h-80 rounded-full bg-gradient-to-tr from-purple-500/15 to-pink-500/10 blur-3xl" />
+
+            {/* Marquee track wrapper (pause on hover) */}
+            <div className="group relative">
+              <div className="flex gap-6 w-[200%] animate-marquee-ltr group-hover:[animation-play-state:paused]">
+                {marqueeItems.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="relative w-[320px] sm:w-[360px] lg:w-[420px] h-[220px] sm:h-[240px] lg:h-[260px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/30 dark:border-gray-700/40 bg-gray-100/70 dark:bg-[#2b323b]/70 hover:shadow-xl transition-all duration-300"
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.title}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    {/* Overlay content on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
+                      <div className="p-4">
+                        <h4 className="text-white font-bold text-lg leading-tight">
+                          {item.title}
+                        </h4>
+                        <p className="text-white/90 text-sm">{item.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </motion.div>
 

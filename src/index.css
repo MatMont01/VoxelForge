@@ -461,3 +461,30 @@ textarea:focus {
   background-size: 200% 200%;
   animation: gradient-shift 3s ease infinite;
 }
+
+/* Marquee animations for portfolio */
+@keyframes marquee-ltr {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes marquee-rtl {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Utility classes (Tailwind arbitrary properties can also be used) */
+.animate-marquee-ltr {
+  animation: marquee-ltr 40s linear infinite;
+}
+.animate-marquee-rtl {
+  animation: marquee-rtl 40s linear infinite;
+}
