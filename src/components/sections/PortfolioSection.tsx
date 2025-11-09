@@ -117,6 +117,21 @@ export const PortfolioSection = () => {
         track1Width.current = track1Ref.current.scrollWidth;
       if (track2Ref.current)
         track2Width.current = track2Ref.current.scrollWidth;
+      // Initialize/normalize positions to keep ranges tight for seamless wrap
+      const half1 = track1Width.current / 2;
+      const half2 = track2Width.current / 2;
+      if (track1Ref.current && half1) {
+        while (track1Pos.current <= -half1) track1Pos.current += half1;
+        while (track1Pos.current > 0) track1Pos.current -= half1;
+        track1Ref.current.style.transform = `translateX(${track1Pos.current}px)`;
+      }
+      if (track2Ref.current && half2) {
+        // Start the rightward-scrolling track at -half so new items enter from the left
+        if (track2Pos.current === 0) track2Pos.current = -half2;
+        while (track2Pos.current >= 0) track2Pos.current -= half2;
+        while (track2Pos.current < -half2) track2Pos.current += half2;
+        track2Ref.current.style.transform = `translateX(${track2Pos.current}px)`;
+      }
     };
     measure();
     window.addEventListener("resize", measure);
@@ -154,7 +169,8 @@ export const PortfolioSection = () => {
           if (track1Pos.current > 0) track1Pos.current -= half1;
         }
         if (half2) {
-          if (track2Pos.current >= half2) track2Pos.current -= half2;
+          // Keep track2 within [-half2, 0) so it loops smoothly moving right
+          if (track2Pos.current >= 0) track2Pos.current -= half2;
           if (track2Pos.current < -half2) track2Pos.current += half2;
         }
         // Apply transforms (imperative to avoid excessive re-renders)
@@ -205,7 +221,7 @@ export const PortfolioSection = () => {
         track2Pos.current = dragStartPos.current + dx;
         const half = track2Width.current / 2;
         if (half) {
-          while (track2Pos.current >= half) track2Pos.current -= half;
+          while (track2Pos.current >= 0) track2Pos.current -= half;
           while (track2Pos.current < -half) track2Pos.current += half;
         }
         if (track2Ref.current)
