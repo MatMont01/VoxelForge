@@ -1,5 +1,13 @@
 import { useRef } from "react";
-import { Box, Hammer, Sparkles, Calendar, Heart } from "lucide-react";
+import {
+  Calendar,
+  Heart,
+  Award,
+  Target,
+  Box,
+  Hammer,
+  Sparkles,
+} from "lucide-react";
 import { COMPANY_HISTORY } from "../../constants";
 import { motion } from "framer-motion";
 
@@ -7,139 +15,253 @@ export const CombinedAboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 28 },
     show: (delay = 0) => ({
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut", delay },
+      transition: { duration: 0.65, ease: "easeOut", delay },
     }),
   } as const;
+
+  const values = [
+    {
+      icon: Award,
+      title: "Calidad Premium",
+      description:
+        "Materiales de primera y calibraciones finas para detalles limpios en cada pieza.",
+      accent: "from-blue-500 to-indigo-600",
+      glow: "shadow-blue-500/30",
+    },
+    {
+      icon: Target,
+      title: "Precisión",
+      description:
+        "Ajustes milimétricos y perfiles optimizados para resultados confiables.",
+      accent: "from-[#ea9216] to-[#d68614]",
+      glow: "shadow-orange-500/30",
+    },
+    {
+      icon: Heart,
+      title: "Pasión",
+      description:
+        "Tratamos cada proyecto como propio: acabado, pulido y presentación cuidada.",
+      accent: "from-pink-500 to-purple-600",
+      glow: "shadow-pink-500/30",
+    },
+  ];
 
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-[#1a1f3a] dark:via-[#2d1b69] dark:to-[#1a1f3a] relative overflow-hidden"
+      className="py-24 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-[#12141c] dark:via-[#1c2330] dark:to-[#12141c] relative overflow-hidden"
     >
-      {/* soft ambient glow */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none">
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-gradient-to-br from-[#ea9216]/30 to-yellow-400/20 blur-3xl" />
+      {/* Ambient background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-[#ea9216]/25 via-yellow-400/10 to-transparent blur-3xl opacity-50" />
+        <div className="absolute bottom-[-180px] right-[-120px] w-[720px] h-[720px] rounded-full bg-gradient-to-tr from-purple-600/20 via-pink-500/10 to-transparent blur-3xl opacity-40" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/20 border border-[#ea9216]/20 mb-6">
-            <Heart className="w-4 h-4 text-[#ea9216] mr-2" />
-            <span className="text-sm font-medium text-[#ea9216]">
-              Quiénes Somos
+        {/* Heading */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center px-5 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/15 to-[#ea9216]/30 border border-[#ea9216]/30 mb-6 backdrop-blur-sm shadow-inner">
+            <Heart className="w-4 h-4 text-[#ea9216] mr-2 animate-pulse" />
+            <span className="text-sm font-semibold text-[#ea9216] tracking-wide">
+              Nuestra Historia
             </span>
           </div>
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-4xl md:text-6xl font-bold mb-4"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-4xl md:text-6xl font-bold mb-6 font-cunia"
           >
             <span className="bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent">
               Sobre Nosotros
             </span>
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 }}
-            className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
-            Creamos piezas de alta calidad con tecnología de impresión 3D y
-            obsesión por el detalle, desde Santa Cruz para toda Bolivia.
+            Voxel Forge nació como un hobby nocturno y evolucionó a un taller
+            apasionado que combina{" "}
+            <span className="text-[#ea9216] font-semibold">
+              precisión digital
+            </span>{" "}
+            con{" "}
+            <span className="text-[#ea9216] font-semibold">
+              artesanía manual
+            </span>
+            .
           </motion.p>
         </div>
 
-        {/* 2-up merged content: significado y historia */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto">
-          {/* Significado Voxel + Forge (resumen) */}
+        {/* Brand meaning + Origin story */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 max-w-7xl mx-auto mb-18">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
-            className="bg-white/90 dark:bg-[#1f2430]/80 backdrop-blur-xl rounded-3xl p-8 border border-white/30 dark:border-gray-700/40 shadow-2xl"
+            viewport={{ once: true, amount: 0.35 }}
+            className="relative rounded-3xl p-10 bg-white/90 dark:bg-[#1f2430]/80 backdrop-blur-xl border border-white/30 dark:border-gray-700/40 shadow-2xl overflow-hidden"
           >
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-600/10 opacity-0 hover:opacity-100 transition-opacity duration-700" />
             <div className="flex items-center mb-6">
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                <Box className="w-7 h-7 text-white" />
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                <Box className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <h3 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
                 VOXEL
               </h3>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-              El voxel es el “pixel en 3D”, la unidad mínima de un objeto
-              tridimensional. Es el fundamento digital de todo lo que
-              imprimimos.
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
+              Un <strong>voxel</strong> es como un pixel, pero en tres
+              dimensiones: la unidad mínima que construye el volumen de un
+              modelo. Cada pieza que imprimimos comenzó como miles de estos
+              cubitos conceptuales organizados con intención.
             </p>
             <div className="flex items-center mb-6">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#ea9216] to-red-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                <Hammer className="w-7 h-7 text-white" />
+              <div className="w-16 h-16 bg-gradient-to-br from-[#ea9216] to-red-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                <Hammer className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <h3 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
                 FORGE
               </h3>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              Forjar es transformar ideas en realidad con técnica y pasión. En
-              Voxel Forge unimos ambos mundos: la precisión digital y la
-              artesanía del acabado.
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+              Forjar significa transformar materia en algo útil y bello. Nuestra
+              "forja" mezcla software, calibración y acabado manual para
+              convertir ideas y archivos en objetos reales.
             </p>
+            <div className="rounded-xl bg-gradient-to-r from-gray-100 to-gray-50 dark:from-[#2a2f3a] dark:to-[#262b34] border border-gray-200/60 dark:border-gray-700/60 p-5 shadow-md">
+              <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                ¿Por qué el nombre?
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                Queríamos un nombre que refleje{" "}
+                <span className="text-[#ea9216] font-semibold">
+                  origen digital
+                </span>{" "}
+                y{" "}
+                <span className="text-[#ea9216] font-semibold">
+                  transformación física
+                </span>
+                . "Voxel" representa la construcción invisible; "Forge" la
+                acción de materializar.
+              </p>
+            </div>
           </motion.div>
 
-          {/* Historia y valores breves */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
-            className="bg-white/90 dark:bg-[#1f2430]/80 backdrop-blur-xl rounded-3xl p-8 border border-white/30 dark:border-gray-700/40 shadow-2xl"
+            viewport={{ once: true, amount: 0.35 }}
+            className="rounded-3xl p-10 bg-white/90 dark:bg-[#1f2430]/80 backdrop-blur-xl border border-white/30 dark:border-gray-700/40 shadow-2xl"
           >
             <div className="flex items-center mb-6">
-              <div className="w-14 h-14 bg-[#ea9216] rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                <Calendar className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <Calendar className="w-8 h-8 text-[#ea9216] mr-3" />
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
                 Desde {COMPANY_HISTORY.foundedYear}
               </h3>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
               {COMPANY_HISTORY.story}
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#2a2f3a] border border-gray-200/60 dark:border-gray-700/60">
-                <span className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
+              <div className="rounded-xl px-5 py-4 bg-gray-50 dark:bg-[#2a303a] border border-gray-200/60 dark:border-gray-700/60">
+                <span className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wide">
                   Misión
                 </span>
-                <p className="text-sm text-gray-800 dark:text-gray-200">
+                <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
                   {COMPANY_HISTORY.mission}
                 </p>
               </div>
-              <div className="rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#2a2f3a] border border-gray-200/60 dark:border-gray-700/60">
-                <span className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">
+              <div className="rounded-xl px-5 py-4 bg-gray-50 dark:bg-[#2a303a] border border-gray-200/60 dark:border-gray-700/60">
+                <span className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wide">
                   Visión
                 </span>
-                <p className="text-sm text-gray-800 dark:text-gray-200">
+                <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
                   {COMPANY_HISTORY.vision}
                 </p>
               </div>
             </div>
+            <div className="rounded-xl bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/25 border border-[#ea9216]/30 p-5 shadow-inner">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center">
+                <Sparkles className="w-4 h-4 text-[#ea9216] mr-2" /> Del Hobby
+                al Taller Profesional
+              </h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                De una sola impresora a un flujo optimizado con equipos
+                avanzados y procesos pulidos para clientes y proyectos
+                personales que enriquecen nuestra experiencia.
+              </p>
+            </div>
           </motion.div>
         </div>
 
-        {/* Cierre corto */}
-        <div className="text-center mt-12">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/20 border border-[#ea9216]/20">
+        {/* Values */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          className="mt-4 max-w-7xl mx-auto"
+        >
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/20 border border-[#ea9216]/25 mb-6">
+              <Sparkles className="w-4 h-4 text-[#ea9216] mr-2" />
+              <span className="text-sm font-medium text-[#ea9216]">
+                Nuestros Pilares
+              </span>
+            </div>
+            <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 via-[#ea9216] to-gray-900 dark:from-white dark:via-[#ea9216] dark:to-white bg-clip-text text-transparent mb-4">
+              Valores
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Principios que sostienen cada diseño, calibración y entrega.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {values.map((val) => {
+              const Icon = val.icon;
+              return (
+                <div
+                  key={val.title}
+                  className="relative group rounded-3xl p-8 bg-gradient-to-br from-white/95 via-gray-50/90 to-white/95 dark:from-[#1f2430]/90 dark:via-[#202a38]/85 dark:to-[#1f2430]/90 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/40 shadow-xl hover:shadow-2xl transition-all duration-700 overflow-hidden"
+                >
+                  <div
+                    className={`absolute inset-0 opacity-0 group-hover:opacity-10 bg-gradient-to-br ${val.accent} transition-opacity duration-700`}
+                  />
+                  <div
+                    className={`w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center bg-gradient-to-r ${val.accent} shadow-2xl ${val.glow} group-hover:scale-105 transition-transform`}
+                  >
+                    <Icon className="w-10 h-10 text-white" />
+                  </div>
+                  <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-[#ea9216] transition-colors">
+                    {val.title}
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {val.description}
+                  </p>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms]" />
+                </div>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Closing badge */}
+        <div className="text-center mt-16">
+          <div className="inline-flex items-center px-5 py-2 rounded-full bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/25 border border-[#ea9216]/30 shadow-sm">
             <Sparkles className="w-4 h-4 text-[#ea9216] mr-2" />
-            <span className="text-sm font-medium text-[#ea9216]">
+            <span className="text-sm font-medium text-[#ea9216] tracking-wide">
               Calidad • Precisión • Pasión
             </span>
           </div>

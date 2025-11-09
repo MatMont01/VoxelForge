@@ -3,11 +3,11 @@ import { HeroSection } from "../components/sections/NewHeroSection";
 import { ServicesSection } from "../components/sections/ServicesSection";
 import { SocialSection } from "../components/sections/SocialSection";
 import { PortfolioSection } from "../components/sections/PortfolioSection";
-import { CombinedAboutSection } from "../components/sections/CombinedAboutSection";
+import { CombinedAboutSection } from "../components/sections/CombinedAboutSection.tsx";
 import { DesignsSection } from "../components/sections/DesignsSection";
 import { EquipmentSection } from "../components/sections/EquipmentSection";
 import { ContactSection } from "../components/sections/ContactSection";
-import { FloatingWhatsApp } from "../components/ui/FloatingWhatsApp";
+import { FloatingWhatsApp } from "../components/ui/FloatingWhatsApp.tsx";
 
 export const HomePage = () => {
   return (
