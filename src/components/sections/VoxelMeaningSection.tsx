@@ -1,5 +1,12 @@
 import { useRef } from "react";
-import { Box, Hammer, Sparkles, Zap, Layers, Infinity } from "lucide-react";
+import {
+  Box,
+  Hammer,
+  Sparkles,
+  Zap,
+  Layers,
+  Infinity as InfinityIcon,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { isLowEndDevice } from "../../utils/perf";
 
@@ -56,7 +63,9 @@ export const VoxelMeaningSection = () => {
           className="floating-cube absolute bottom-20 right-10 w-7 h-7 bg-gradient-to-br from-pink-500/30 to-red-600/30 rotate-45"
           style={{
             clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-            animation: `${lowEnd ? "pulse" : "bounce"} 5.5s ease-in-out infinite`,
+            animation: `${
+              lowEnd ? "pulse" : "bounce"
+            } 5.5s ease-in-out infinite`,
           }}
         ></div>
       </div>
@@ -121,7 +130,7 @@ export const VoxelMeaningSection = () => {
         {/* Main Content */}
         <div className="max-w-7xl mx-auto">
           {/* Voxel + Forge Explanation */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
             {/* VOXEL */}
             <motion.div
               ref={voxelRef}
@@ -164,7 +173,7 @@ export const VoxelMeaningSection = () => {
                   </div>
 
                   <div className="flex items-start">
-                    <Infinity className="w-6 h-6 text-purple-600 dark:text-purple-400 mr-4 mt-1 flex-shrink-0" />
+                    <InfinityIcon className="w-6 h-6 text-purple-600 dark:text-purple-400 mr-4 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                         Infinitas Posibilidades
