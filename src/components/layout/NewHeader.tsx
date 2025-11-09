@@ -19,6 +19,25 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open and close on Escape
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = prevOverflow || "";
+    }
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMenuOpen(false);
+    };
+    if (isMenuOpen) window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow || "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isMenuOpen]);
+
   // Framer Motion variants for simple entrance and item stagger
   const navVariants = {
     hidden: { opacity: 0, y: -10 },
@@ -100,6 +119,8 @@ export const Header = () => {
               className="md:hidden p-3 text-gray-700 dark:text-gray-300 hover:text-[#ea9216] transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Abrir menú"
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
               <div className="relative w-6 h-6">
                 <span
@@ -123,46 +144,49 @@ export const Header = () => {
         </div>
 
         {/* Mobile Navigation (unified scrollable menu) */}
-        <div
-          className={`md:hidden transition-all duration-400 ${
-            isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
-        >
-          <div className="mt-4 rounded-2xl shadow-2xl border border-gray-200/30 dark:border-gray-700/40 bg-white/95 dark:bg-[#313841]/95 backdrop-blur-xl overflow-hidden">
-            <div className="max-h-[70vh] overflow-y-auto overscroll-contain custom-scrollbar px-2 py-4">
-              {NAVIGATION_ITEMS.map((item, index) => (
-                <button
-                  key={item.name}
-                  onClick={() => handleNavClick(item.href)}
-                  className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-[#ea9216] hover:bg-gray-50 dark:hover:bg-gray-700/60 rounded-xl transition-colors group"
-                  style={{
-                    transform: `translateX(${isMenuOpen ? "0" : "-12px"})`,
-                    opacity: isMenuOpen ? 1 : 0,
-                    transition: "opacity .45s ease, transform .45s ease",
-                    transitionDelay: `${index * 0.05}s`,
-                  }}
-                >
-                  <span className="relative flex-1">
-                    {item.name}
-                    <span className="absolute left-0 -bottom-0.5 h-0.5 w-0 bg-[#ea9216] group-hover:w-full transition-all duration-300" />
-                  </span>
-                  <span className="ml-4 text-[#ea9216] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs font-semibold">
-                    Ir
-                  </span>
-                </button>
-              ))}
+        {isMenuOpen && (
+          <>
+            <div
+              className="fixed inset-0 md:hidden z-[55] bg-black/20 dark:bg-black/30 backdrop-blur-[2px]"
+              onClick={() => setIsMenuOpen(false)}
+              aria-hidden="true"
+            ></div>
+            <div id="mobile-menu" className="md:hidden z-[60] relative">
+              <div className="mt-4 rounded-2xl shadow-2xl border border-gray-200/30 dark:border-gray-700/40 bg-white/95 dark:bg-[#313841]/95 backdrop-blur-xl overflow-hidden">
+                <div className="max-h-[70vh] overflow-y-auto overscroll-contain custom-scrollbar px-2 py-4">
+                  {NAVIGATION_ITEMS.map((item, index) => (
+                    <button
+                      key={item.name}
+                      onClick={() => handleNavClick(item.href)}
+                      className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-[#ea9216] hover:bg-gray-50 dark:hover:bg-gray-700/60 rounded-xl transition-colors group"
+                      style={{
+                        transform: `translateX(0)`,
+                        transition: "opacity .35s ease, transform .35s ease",
+                        transitionDelay: `${index * 0.05}s`,
+                      }}
+                    >
+                      <span className="relative flex-1">
+                        {item.name}
+                        <span className="absolute left-0 -bottom-0.5 h-0.5 w-0 bg-[#ea9216] group-hover:w-full transition-all duration-300" />
+                      </span>
+                      <span className="ml-4 text-[#ea9216] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs font-semibold">
+                        Ir
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                <div className="px-4 py-3 border-t border-gray-200/30 dark:border-gray-700/40 bg-gray-50/70 dark:bg-[#2b323b]/70">
+                  <button
+                    onClick={() => handleNavClick("#contact")}
+                    className="w-full bg-gradient-to-r from-[#ea9216] to-[#d68614] text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+                  >
+                    Cotizar Proyecto
+                  </button>
+                </div>
+              </div>
             </div>
-            {/* CTA at bottom */}
-            <div className="px-4 py-3 border-t border-gray-200/30 dark:border-gray-700/40 bg-gray-50/70 dark:bg-[#2b323b]/70">
-              <button
-                onClick={() => handleNavClick("#contact")}
-                className="w-full bg-gradient-to-r from-[#ea9216] to-[#d68614] text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
-              >
-                Cotizar Proyecto
-              </button>
-            </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </motion.header>
   );
