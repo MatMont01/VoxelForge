@@ -178,7 +178,7 @@ export const PortfolioSection = () => {
             {[
               {
                 number: displayTotalProjects,
-                label: "Proyectos completados (incluye personales)",
+                label: "Proyectos completados",
                 icon: "🎯",
                 suffix: "+",
               },
