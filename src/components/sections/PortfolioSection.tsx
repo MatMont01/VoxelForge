@@ -1,5 +1,6 @@
 import { useEffect, useRef, useMemo, useState } from "react";
 import { SAMPLE_PROJECTS } from "../../constants/projects";
+import { isLowEndDevice } from "../../utils/perf";
 import { motion } from "framer-motion";
 import {
   Play,
@@ -34,6 +35,17 @@ export const PortfolioSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const track1Ref = useRef<HTMLDivElement>(null);
+  const track2Ref = useRef<HTMLDivElement>(null);
+  const track1Pos = useRef(0);
+  const track2Pos = useRef(0);
+  const track1Width = useRef(0);
+  const track2Width = useRef(0);
+  const draggingTrack = useRef<1 | 2 | null>(null);
+  const dragStartX = useRef(0);
+  const dragStartPos = useRef(0);
+  const isDragging = useRef(false);
+  const lowEnd = isLowEndDevice?.() ?? false;
   const [inView, setInView] = useState(true);
   const [openOverlays, setOpenOverlays] = useState<Set<string>>(new Set());
   // Prepare real portfolio items
@@ -99,19 +111,154 @@ export const PortfolioSection = () => {
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Pause marquee animations when the section is offscreen to save resources
+    // Measure track widths after mount
+    const measure = () => {
+      if (track1Ref.current)
+        track1Width.current = track1Ref.current.scrollWidth;
+      if (track2Ref.current)
+        track2Width.current = track2Ref.current.scrollWidth;
+    };
+    measure();
+    window.addEventListener("resize", measure);
+
+    // IntersectionObserver to pause autoplay when off-screen
     const el = carouselRef.current ?? sectionRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        setInView(entry.isIntersecting && entry.intersectionRatio > 0.2);
-      },
-      { threshold: [0, 0.2, 0.5, 1] }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+    let io: IntersectionObserver | null = null;
+    if (el) {
+      io = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          setInView(entry.isIntersecting && entry.intersectionRatio > 0.15);
+        },
+        { threshold: [0, 0.15, 0.5, 1] }
+      );
+      io.observe(el);
+    }
+
+    let prevTime = performance.now();
+    const speed = lowEnd ? 18 : 28; // px per second base speed
+
+    const step = (time: number) => {
+      const dt = time - prevTime;
+      prevTime = time;
+      if (inView && !isDragging.current) {
+        // Track1 moves left (negative), Track2 moves right (positive)
+        track1Pos.current -= (speed * dt) / 1000;
+        track2Pos.current += (speed * dt) / 1000;
+
+        // Wrap logic for infinite effect (duplicate arrays)
+        const half1 = track1Width.current / 2;
+        const half2 = track2Width.current / 2;
+        if (half1) {
+          if (track1Pos.current <= -half1) track1Pos.current += half1;
+          if (track1Pos.current > 0) track1Pos.current -= half1;
+        }
+        if (half2) {
+          if (track2Pos.current >= half2) track2Pos.current -= half2;
+          if (track2Pos.current < -half2) track2Pos.current += half2;
+        }
+        // Apply transforms (imperative to avoid excessive re-renders)
+        if (track1Ref.current) {
+          track1Ref.current.style.transform = `translateX(${track1Pos.current}px)`;
+        }
+        if (track2Ref.current) {
+          track2Ref.current.style.transform = `translateX(${track2Pos.current}px)`;
+        }
+      }
+      requestAnimationFrame(step);
+    };
+    const rafId = requestAnimationFrame(step);
+
+    // Pointer handlers (mouse + touch unified via pointer events)
+    const startDrag = (track: 1 | 2, clientX: number) => {
+      draggingTrack.current = track;
+      dragStartX.current = clientX;
+      dragStartPos.current =
+        track === 1 ? track1Pos.current : track2Pos.current;
+      isDragging.current = true;
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      const target = e.target as HTMLElement;
+      if (!track1Ref.current || !track2Ref.current) return;
+      if (track1Ref.current.contains(target)) {
+        startDrag(1, e.clientX);
+      } else if (track2Ref.current.contains(target)) {
+        startDrag(2, e.clientX);
+      } else {
+        return;
+      }
+      (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    };
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDragging.current || draggingTrack.current == null) return;
+      const dx = e.clientX - dragStartX.current;
+      if (draggingTrack.current === 1) {
+        track1Pos.current = dragStartPos.current + dx;
+        const half = track1Width.current / 2;
+        if (half) {
+          while (track1Pos.current <= -half) track1Pos.current += half;
+          while (track1Pos.current > 0) track1Pos.current -= half;
+        }
+        if (track1Ref.current)
+          track1Ref.current.style.transform = `translateX(${track1Pos.current}px)`;
+      } else {
+        track2Pos.current = dragStartPos.current + dx;
+        const half = track2Width.current / 2;
+        if (half) {
+          while (track2Pos.current >= half) track2Pos.current -= half;
+          while (track2Pos.current < -half) track2Pos.current += half;
+        }
+        if (track2Ref.current)
+          track2Ref.current.style.transform = `translateX(${track2Pos.current}px)`;
+      }
+    };
+    const endDrag = () => {
+      isDragging.current = false;
+      draggingTrack.current = null;
+    };
+    window.addEventListener("pointerdown", onPointerDown, { passive: true });
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("pointerup", endDrag, { passive: true });
+    window.addEventListener("pointercancel", endDrag, { passive: true });
+
+    // Keyboard accessibility (arrow keys nudge when focused)
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (!track1Ref.current || !track2Ref.current) return;
+      const activeEl = document.activeElement;
+      const nudge = 60;
+      if (activeEl && track1Ref.current.contains(activeEl)) {
+        if (e.key === "ArrowLeft") track1Pos.current -= nudge;
+        if (e.key === "ArrowRight") track1Pos.current += nudge;
+        const half = track1Width.current / 2;
+        if (half) {
+          if (track1Pos.current <= -half) track1Pos.current += half;
+          if (track1Pos.current > 0) track1Pos.current -= half;
+        }
+        track1Ref.current.style.transform = `translateX(${track1Pos.current}px)`;
+      } else if (activeEl && track2Ref.current.contains(activeEl)) {
+        if (e.key === "ArrowLeft") track2Pos.current -= nudge;
+        if (e.key === "ArrowRight") track2Pos.current += nudge;
+        const half = track2Width.current / 2;
+        if (half) {
+          if (track2Pos.current >= half) track2Pos.current -= half;
+          if (track2Pos.current < -half) track2Pos.current += half;
+        }
+        track2Ref.current.style.transform = `translateX(${track2Pos.current}px)`;
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", endDrag);
+      window.removeEventListener("pointercancel", endDrag);
+      window.removeEventListener("keydown", onKeyDown);
+      if (io && el) io.disconnect();
+      cancelAnimationFrame(rafId);
+    };
+  }, [inView, lowEnd]);
 
   const categories = [
     ...new Set(SAMPLE_PROJECTS.map((project) => project.category)),
@@ -308,15 +455,17 @@ export const PortfolioSection = () => {
 
             {/* Marquee track wrapper (no pause on hover for smoother feel) */}
             <div className="relative py-4">
-              {/* Track 1 - LTR */}
+              {/* Track 1 - manual autoplay + drag */}
               <div
-                className="flex gap-6 w-[200%] animate-marquee-ltr will-change-transform"
-                style={{ animationPlayState: inView ? "running" : "paused" }}
+                ref={track1Ref}
+                className="flex gap-6 w-[200%] will-change-transform select-none cursor-grab active:cursor-grabbing touch-pan-y"
+                aria-label="Galería desplazable manual y automática (carril 1)"
+                tabIndex={0}
               >
                 {marqueeItems.map((item, idx) => (
                   <div
                     key={idx}
-                    className="relative w-[320px] sm:w-[360px] lg:w-[420px] h-[220px] sm:h-[240px] lg:h-[260px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/30 dark:border-gray-700/40 bg-gray-100/70 dark:bg-[#2b323b]/70 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    className="relative w-[320px] sm:w-[360px] lg:w-[420px] h-[220px] sm:h-[240px] lg:h-[260px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/30 dark:border-gray-700/40 bg-gray-100/70 dark:bg-[#2b323b]/70 hover:shadow-xl transition-all duration-300"
                     role="button"
                     tabIndex={0}
                     onClick={() => {
@@ -344,14 +493,15 @@ export const PortfolioSection = () => {
                       <img
                         src={item.src}
                         alt={item.title}
-                        className="absolute inset-0 w-full h-full object-cover"
+                        width={420}
+                        height={260}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-[1.04]"
                         loading="lazy"
                         decoding="async"
                       />
                     </picture>
-                    {/* Overlay content: hover + tap toggle */}
                     <div
-                      className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end will-change-opacity ${
+                      className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end ${
                         openOverlays.has(`ltr-${idx}`) ? "opacity-100" : ""
                       }`}
                     >
@@ -365,16 +515,17 @@ export const PortfolioSection = () => {
                   </div>
                 ))}
               </div>
-
-              {/* Track 2 - RTL */}
+              {/* Track 2 - manual autoplay + drag */}
               <div
-                className="mt-6 flex gap-6 w-[200%] animate-marquee-rtl will-change-transform"
-                style={{ animationPlayState: inView ? "running" : "paused" }}
+                ref={track2Ref}
+                className="mt-6 flex gap-6 w-[200%] will-change-transform select-none cursor-grab active:cursor-grabbing touch-pan-y"
+                aria-label="Galería desplazable manual y automática (carril 2)"
+                tabIndex={0}
               >
                 {marqueeItems.map((item, idx) => (
                   <div
                     key={`rtl-${idx}`}
-                    className="relative w-[280px] sm:w-[320px] lg:w-[380px] h-[200px] sm:h-[220px] lg:h-[240px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/30 dark:border-gray-700/40 bg-gray-100/70 dark:bg-[#2b323b]/70 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    className="relative w-[280px] sm:w-[320px] lg:w-[380px] h-[200px] sm:h-[220px] lg:h-[240px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/30 dark:border-gray-700/40 bg-gray-100/70 dark:bg-[#2b323b]/70 hover:shadow-xl transition-all duration-300"
                     role="button"
                     tabIndex={0}
                     onClick={() => {
@@ -402,13 +553,15 @@ export const PortfolioSection = () => {
                       <img
                         src={item.src}
                         alt={item.title}
-                        className="absolute inset-0 w-full h-full object-cover"
+                        width={380}
+                        height={240}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-[1.05]"
                         loading="lazy"
                         decoding="async"
                       />
                     </picture>
                     <div
-                      className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end will-change-opacity ${
+                      className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end ${
                         openOverlays.has(`rtl-${idx}`) ? "opacity-100" : ""
                       }`}
                     >
