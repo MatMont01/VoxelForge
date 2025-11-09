@@ -122,30 +122,45 @@ export const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation (unified scrollable menu) */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-500 ${
-            isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          className={`md:hidden transition-all duration-400 ${
+            isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         >
-          <div className="px-4 py-6 space-y-3 bg-white/95 dark:bg-[#313841]/95 backdrop-blur-xl rounded-2xl mt-4 shadow-2xl border border-gray-200/20 dark:border-gray-700/30">
-            {NAVIGATION_ITEMS.map((item, index) => (
+          <div className="mt-4 rounded-2xl shadow-2xl border border-gray-200/30 dark:border-gray-700/40 bg-white/95 dark:bg-[#313841]/95 backdrop-blur-xl overflow-hidden">
+            <div className="max-h-[70vh] overflow-y-auto overscroll-contain custom-scrollbar px-2 py-4">
+              {NAVIGATION_ITEMS.map((item, index) => (
+                <button
+                  key={item.name}
+                  onClick={() => handleNavClick(item.href)}
+                  className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-[#ea9216] hover:bg-gray-50 dark:hover:bg-gray-700/60 rounded-xl transition-colors group"
+                  style={{
+                    transform: `translateX(${isMenuOpen ? "0" : "-12px"})`,
+                    opacity: isMenuOpen ? 1 : 0,
+                    transition: "opacity .45s ease, transform .45s ease",
+                    transitionDelay: `${index * 0.05}s`,
+                  }}
+                >
+                  <span className="relative flex-1">
+                    {item.name}
+                    <span className="absolute left-0 -bottom-0.5 h-0.5 w-0 bg-[#ea9216] group-hover:w-full transition-all duration-300" />
+                  </span>
+                  <span className="ml-4 text-[#ea9216] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs font-semibold">
+                    Ir
+                  </span>
+                </button>
+              ))}
+            </div>
+            {/* CTA at bottom */}
+            <div className="px-4 py-3 border-t border-gray-200/30 dark:border-gray-700/40 bg-gray-50/70 dark:bg-[#2b323b]/70">
               <button
-                key={item.name}
-                onClick={() => handleNavClick(item.href)}
-                className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-[#ea9216] hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-300 group"
-                style={{
-                  transform: `translateX(${isMenuOpen ? "0" : "-20px"})`,
-                  opacity: isMenuOpen ? 1 : 0,
-                  transitionDelay: `${index * 0.1}s`,
-                }}
+                onClick={() => handleNavClick("#contact")}
+                className="w-full bg-gradient-to-r from-[#ea9216] to-[#d68614] text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
               >
-                <span className="relative">
-                  {item.name}
-                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#ea9216] group-hover:w-full transition-all duration-300" />
-                </span>
+                Cotizar Proyecto
               </button>
-            ))}
+            </div>
           </div>
         </div>
       </div>
