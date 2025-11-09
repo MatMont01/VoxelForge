@@ -7,6 +7,9 @@ import {
   Box,
   Hammer,
   Sparkles,
+  Layers,
+  Infinity,
+  Zap,
 } from "lucide-react";
 import { COMPANY_HISTORY } from "../../constants";
 import { motion } from "framer-motion";
@@ -102,109 +105,177 @@ export const CombinedAboutSection = () => {
           </motion.p>
         </div>
 
-        {/* Brand meaning + Origin story */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 max-w-7xl mx-auto mb-18">
+        {/* VOXEL + FORGE (from legacy design) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-7xl mx-auto mb-16">
+          {/* VOXEL card */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
-            className="relative rounded-3xl p-10 bg-white/90 dark:bg-[#1f2430]/80 backdrop-blur-xl border border-white/30 dark:border-gray-700/40 shadow-2xl overflow-hidden"
+            className="relative bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-gray-700/50 shadow-2xl hover:shadow-[#ea9216]/20 transition-all duration-500"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-600/10 opacity-0 hover:opacity-100 transition-opacity duration-700" />
-            <div className="flex items-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+            <div className="flex items-center mb-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mr-6 shadow-2xl">
                 <Box className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
+              <h3 className="text-4xl font-bold text-gray-900 dark:text-white">
                 VOXEL
               </h3>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-              Un <strong>voxel</strong> es como un pixel, pero en tres
-              dimensiones: la unidad mínima que construye el volumen de un
-              modelo. Cada pieza que imprimimos comenzó como miles de estos
-              cubitos conceptuales organizados con intención.
-            </p>
-            <div className="flex items-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#ea9216] to-red-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                <Hammer className="w-8 h-8 text-white" />
+
+            <div className="space-y-6">
+              <div className="flex items-start">
+                <Layers className="w-6 h-6 text-blue-600 dark:text-blue-400 mr-4 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    Pixel 3D
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Un{" "}
+                    <strong className="text-blue-500 dark:text-blue-400">
+                      voxel
+                    </strong>{" "}
+                    es la unidad mínima de un objeto tridimensional, como un
+                    pixel pero en 3D. Representa el{" "}
+                    <strong className="text-gray-800 dark:text-white">
+                      fundamento digital
+                    </strong>{" "}
+                    de toda creación.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
-                FORGE
-              </h3>
-            </div>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-              Forjar significa transformar materia en algo útil y bello. Nuestra
-              "forja" mezcla software, calibración y acabado manual para
-              convertir ideas y archivos en objetos reales.
-            </p>
-            <div className="rounded-xl bg-gradient-to-r from-gray-100 to-gray-50 dark:from-[#2a2f3a] dark:to-[#262b34] border border-gray-200/60 dark:border-gray-700/60 p-5 shadow-md">
-              <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                ¿Por qué el nombre?
-              </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                Queríamos un nombre que refleje{" "}
-                <span className="text-[#ea9216] font-semibold">
-                  origen digital
-                </span>{" "}
-                y{" "}
-                <span className="text-[#ea9216] font-semibold">
-                  transformación física
-                </span>
-                . "Voxel" representa la construcción invisible; "Forge" la
-                acción de materializar.
-              </p>
+
+              <div className="flex items-start">
+                <Infinity className="w-6 h-6 text-purple-600 dark:text-purple-400 mr-4 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    Infinitas Posibilidades
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Cada voxel es una{" "}
+                    <strong className="text-purple-600 dark:text-purple-400">
+                      posibilidad infinita
+                    </strong>
+                    . Combinados, crean mundos, objetos y sueños tangibles.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/10 dark:to-purple-500/10 rounded-xl p-6 border border-blue-500/30 dark:border-blue-500/20">
+                <p className="text-blue-700 dark:text-blue-200 italic text-center font-medium">
+                  "Cada impresión 3D comienza con miles de voxels que definen su
+                  forma digital"
+                </p>
+              </div>
             </div>
           </motion.div>
 
+          {/* FORGE card */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
-            className="rounded-3xl p-10 bg-white/90 dark:bg-[#1f2430]/80 backdrop-blur-xl border border-white/30 dark:border-gray-700/40 shadow-2xl"
+            className="relative bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-gray-700/50 shadow-2xl hover:shadow-[#ea9216]/20 transition-all duration-500"
           >
-            <div className="flex items-center mb-6">
-              <Calendar className="w-8 h-8 text-[#ea9216] mr-3" />
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
-                Desde {COMPANY_HISTORY.foundedYear}
+            <div className="flex items-center mb-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#ea9216] to-red-600 rounded-2xl flex items-center justify-center mr-6 shadow-2xl">
+                <Hammer className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-4xl font-bold text-gray-900 dark:text-white">
+                FORGE
               </h3>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-              {COMPANY_HISTORY.story}
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
-              <div className="rounded-xl px-5 py-4 bg-gray-50 dark:bg-[#2a303a] border border-gray-200/60 dark:border-gray-700/60">
-                <span className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wide">
-                  Misión
-                </span>
-                <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
-                  {COMPANY_HISTORY.mission}
+
+            <div className="space-y-6">
+              <div className="flex items-start">
+                <Zap className="w-6 h-6 text-[#ea9216] mr-4 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    Forja Creativa
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <strong className="text-[#ea9216]">Forjar</strong> significa
+                    crear con maestría, transformar materias primas en obras de
+                    arte funcionales con fuego y pasión.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start">
+                <Sparkles className="w-6 h-6 text-yellow-600 dark:text-yellow-400 mr-4 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    Transformación
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Tomamos tus{" "}
+                    <strong className="text-yellow-600 dark:text-yellow-400">
+                      ideas digitales
+                    </strong>{" "}
+                    y las forjamos en realidad física, layer por layer.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-[#ea9216]/10 to-red-500/10 rounded-xl p-6 border border-[#ea9216]/30 dark:border-[#ea9216]/20">
+                <p className="text-orange-700 dark:text-orange-200 italic text-center font-medium">
+                  "En nuestra forja digital, cada filamento se convierte en una
+                  pieza única"
                 </p>
               </div>
-              <div className="rounded-xl px-5 py-4 bg-gray-50 dark:bg-[#2a303a] border border-gray-200/60 dark:border-gray-700/60">
-                <span className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wide">
-                  Visión
-                </span>
-                <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
-                  {COMPANY_HISTORY.vision}
-                </p>
-              </div>
-            </div>
-            <div className="rounded-xl bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/25 border border-[#ea9216]/30 p-5 shadow-inner">
-              <h4 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center">
-                <Sparkles className="w-4 h-4 text-[#ea9216] mr-2" /> Del Hobby
-                al Taller Profesional
-              </h4>
-              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                De una sola impresora a un flujo optimizado con equipos
-                avanzados y procesos pulidos para clientes y proyectos
-                personales que enriquecen nuestra experiencia.
-              </p>
             </div>
           </motion.div>
         </div>
+
+        {/* Story + Misión/Visión (from current combined), placed below */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="rounded-3xl p-10 bg-white/90 dark:bg-[#1f2430]/80 backdrop-blur-xl border border-white/30 dark:border-gray-700/40 shadow-2xl max-w-5xl mx-auto mb-6"
+        >
+          <div className="flex items-center mb-6">
+            <Calendar className="w-8 h-8 text-[#ea9216] mr-3" />
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+              Desde {COMPANY_HISTORY.foundedYear}
+            </h3>
+          </div>
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+            {COMPANY_HISTORY.story}
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
+            <div className="rounded-xl px-5 py-4 bg-gray-50 dark:bg-[#2a303a] border border-gray-200/60 dark:border-gray-700/60">
+              <span className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wide">
+                Misión
+              </span>
+              <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
+                {COMPANY_HISTORY.mission}
+              </p>
+            </div>
+            <div className="rounded-xl px-5 py-4 bg-gray-50 dark:bg-[#2a303a] border border-gray-200/60 dark:border-gray-700/60">
+              <span className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wide">
+                Visión
+              </span>
+              <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
+                {COMPANY_HISTORY.vision}
+              </p>
+            </div>
+          </div>
+          <div className="rounded-xl bg-gradient-to-r from-[#ea9216]/10 to-[#ea9216]/25 border border-[#ea9216]/30 p-5 shadow-inner">
+            <h4 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center">
+              <Sparkles className="w-4 h-4 text-[#ea9216] mr-2" /> Del Hobby al
+              Taller Profesional
+            </h4>
+            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+              De una sola impresora a un flujo optimizado con equipos avanzados
+              y procesos pulidos para clientes y proyectos personales que
+              enriquecen nuestra experiencia.
+            </p>
+          </div>
+        </motion.div>
 
         {/* Values */}
         <motion.div
