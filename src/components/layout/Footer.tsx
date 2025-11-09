@@ -4,6 +4,7 @@ import { CONTACT_INFO, BRAND_COLORS } from "../../constants";
 import { formatWhatsAppUrl, formatEmail } from "../../utils/helpers";
 import instagramLogo from "../../assets/SocialMediaLogo/instagram.png";
 import tiktokLogo from "../../assets/SocialMediaLogo/tiktok.png";
+import { Facebook, Twitch } from "lucide-react";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -171,6 +172,20 @@ export const Footer = () => {
                 </div>
               </a>
               <a
+                href="https://www.facebook.com/VoxelForgeSCZ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 text-gray-300 dark:text-gray-400 hover:text-blue-400 transition-colors group"
+              >
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Facebook className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <div className="font-medium">Facebook</div>
+                  <div className="text-xs text-gray-400">VoxelForgeSCZ</div>
+                </div>
+              </a>
+              <a
                 href="https://www.tiktok.com/@voxelforge_scz"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -190,6 +205,21 @@ export const Footer = () => {
                 <div>
                   <div className="font-medium">TikTok</div>
                   <div className="text-xs text-gray-400">@voxelforge_scz</div>
+                </div>
+              </a>
+              <a
+                href="https://www.twitch.tv/eronii_sama"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 text-gray-300 dark:text-gray-400 hover:text-purple-300 transition-colors group"
+                title="Canal personal"
+              >
+                <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Twitch className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <div className="font-medium">Twitch</div>
+                  <div className="text-xs text-gray-400">eronii_sama</div>
                 </div>
               </a>
             </div>

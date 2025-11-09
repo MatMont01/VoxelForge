@@ -1,7 +1,15 @@
 import { useEffect, useRef, useMemo, useState } from "react";
 import { SAMPLE_PROJECTS } from "../../constants/projects";
 import { motion } from "framer-motion";
-import { Play, Star, Sparkles, ArrowRight, ExternalLink } from "lucide-react";
+import {
+  Play,
+  Star,
+  Sparkles,
+  ArrowRight,
+  ExternalLink,
+  Facebook,
+  Twitch,
+} from "lucide-react";
 import instagramLogo from "../../assets/SocialMediaLogo/instagram.png";
 import tiktokLogo from "../../assets/SocialMediaLogo/tiktok.png";
 // Portfolio images (real)
@@ -222,26 +230,63 @@ export const PortfolioSection = () => {
 
           {/* Social Media Showcase */}
           <div className="mb-8">
-            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500/10 to-purple-500/10 backdrop-blur-sm rounded-2xl border border-pink-200/30 dark:border-pink-700/30">
-              <img
-                src={instagramLogo}
-                alt="Instagram"
-                className="w-5 h-5 mr-3"
-                width={20}
-                height={20}
-                loading="lazy"
-                decoding="async"
-              />
-              <span className="text-gray-700 dark:text-gray-300 mr-3">
+            <div className="inline-flex flex-wrap gap-4 items-center px-6 py-3 bg-gradient-to-r from-pink-500/10 to-purple-500/10 backdrop-blur-sm rounded-2xl border border-pink-200/30 dark:border-pink-700/30">
+              <span className="text-gray-700 dark:text-gray-300">
                 Síguenos para ver más proyectos:
               </span>
               <a
                 href="https://www.instagram.com/voxelforge_scz/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-pink-500 hover:text-pink-600 font-semibold hover:underline transition-colors"
+                className="inline-flex items-center text-pink-500 hover:text-pink-600 font-semibold hover:underline transition-colors"
               >
-                @voxelforge_scz
+                <img
+                  src={instagramLogo}
+                  alt="Instagram"
+                  className="w-5 h-5 mr-2"
+                  width={20}
+                  height={20}
+                  loading="lazy"
+                  decoding="async"
+                />
+                Instagram
+              </a>
+              <span className="text-gray-400">•</span>
+              <a
+                href="https://www.tiktok.com/@voxelforge_scz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-gray-800 dark:text-gray-200 hover:text-white font-semibold hover:underline transition-colors"
+              >
+                <img
+                  src={tiktokLogo}
+                  alt="TikTok"
+                  className="w-5 h-5 mr-2"
+                  width={20}
+                  height={20}
+                  loading="lazy"
+                  decoding="async"
+                />
+                TikTok
+              </a>
+              <span className="text-gray-400">•</span>
+              <a
+                href="https://www.facebook.com/VoxelForgeSCZ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold hover:underline transition-colors"
+              >
+                <Facebook className="w-5 h-5 mr-2" /> Facebook
+              </a>
+              <span className="text-gray-400">•</span>
+              <a
+                href="https://www.twitch.tv/eronii_sama"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-purple-600 hover:text-purple-700 font-semibold hover:underline transition-colors"
+                title="Canal personal"
+              >
+                <Twitch className="w-5 h-5 mr-2" /> Twitch
               </a>
             </div>
           </div>
@@ -494,7 +539,7 @@ export const PortfolioSection = () => {
                 <p className="text-gray-600 dark:text-gray-400 mb-4">
                   Síguenos en nuestras redes sociales
                 </p>
-                <div className="flex justify-center space-x-6">
+                <div className="flex flex-wrap justify-center gap-4">
                   <a
                     href="https://www.instagram.com/voxelforge_scz/"
                     target="_blank"
@@ -515,6 +560,17 @@ export const PortfolioSection = () => {
                     </span>
                   </a>
                   <a
+                    href="https://www.facebook.com/VoxelForgeSCZ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 backdrop-blur-sm rounded-2xl border border-blue-200/30 dark:border-blue-700/30 hover:from-blue-500/20 hover:to-indigo-500/20 transition-all duration-300 hover:scale-105"
+                  >
+                    <Facebook className="w-5 h-5 mr-3 text-blue-600 group-hover:scale-110 transition-transform" />
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">
+                      Facebook
+                    </span>
+                  </a>
+                  <a
                     href="https://www.tiktok.com/@voxelforge_scz"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -531,6 +587,17 @@ export const PortfolioSection = () => {
                     />
                     <span className="text-gray-700 dark:text-gray-300 font-medium">
                       TikTok
+                    </span>
+                  </a>
+                  <a
+                    href="https://www.twitch.tv/eronii_sama"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center px-6 py-3 bg-gradient-to-r from-purple-500/10 to-fuchsia-500/10 backdrop-blur-sm rounded-2xl border border-purple-200/30 dark:border-purple-700/30 hover:from-purple-500/20 hover:to-fuchsia-500/20 transition-all duration-300 hover:scale-105"
+                  >
+                    <Twitch className="w-5 h-5 mr-3 text-purple-600 group-hover:scale-110 transition-transform" />
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">
+                      Twitch
                     </span>
                   </a>
                 </div>
