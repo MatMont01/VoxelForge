@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Moon } from "lucide-react";
 import { useTheme } from "../../hooks/useTheme";
 import { NAVIGATION_ITEMS, BRAND_COLORS } from "../../constants";
 import { scrollToSection } from "../../utils/helpers";
@@ -8,7 +8,7 @@ import { Button } from "../ui/Button";
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { darkMode, toggleDarkMode } = useTheme();
+  useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,20 +65,15 @@ export const Header = () => {
 
           {/* Theme Toggle & Mobile Menu */}
           <div className="flex items-center space-x-4">
+            {/* Theme toggle disabled: dark mode is permanent */}
             <Button
               variant="ghost"
               size="sm"
-              onClick={toggleDarkMode}
-              className="p-2"
-              aria-label={
-                darkMode ? "Activar modo claro" : "Activar modo oscuro"
-              }
+              className="p-2 opacity-50 cursor-not-allowed"
+              aria-label="Modo oscuro fijado"
+              disabled
             >
-              {darkMode ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
+              <Moon className="w-5 h-5" />
             </Button>
 
             {/* Mobile menu button */}
