@@ -5,19 +5,12 @@ import { Button } from "../ui/Button";
 import { scrollToSection } from "../../utils/helpers";
 import logoSolo from "../../assets/VoxelForgeLogos/voxel-forge-logo-solo.svg";
 import { isLowEndDevice } from "../../utils/perf";
-import { useParallax } from "../../hooks/useParallax";
 
 export const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
   const scrollArrowRef = useRef<HTMLDivElement>(null);
-  const bgBlobRef = useRef<HTMLDivElement>(null);
-  const dotsRef = useRef<HTMLDivElement>(null);
   const lowEnd = isLowEndDevice();
   // Arrow visibility/animation removed to keep perf high on low-end devices
-
-  // Subtle parallax on background accents
-  useParallax(bgBlobRef, 0.08);
-  useParallax(dotsRef, 0.12);
 
   const features = [
     {
@@ -46,17 +39,11 @@ export const HeroSection = () => {
       id="home"
       className="min-h-screen pt-28 md:pt-32 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#eeeeee] via-white to-gray-100 dark:from-[#313841] dark:via-[#3a4750] dark:to-[#313841]"
     >
-      {/* Decorative Background Shape (parallax) */}
-      <div
-        ref={bgBlobRef}
-        className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-gradient-to-br from-[#ea9216]/20 to-[#ea9216]/5 blur-3xl rounded-[50%_20%_80%_30%] will-change-transform"
-      />
+      {/* Decorative Background Shape (static for perf) */}
+      <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-gradient-to-br from-[#ea9216]/20 to-[#ea9216]/5 blur-3xl rounded-[50%_20%_80%_30%]" />
 
       {/* Additional Background Elements */}
-      <div
-        ref={dotsRef}
-        className="absolute top-0 left-0 w-full h-full opacity-10 will-change-transform"
-      >
+      <div className="absolute top-0 left-0 w-full h-full opacity-10">
         <div className="absolute top-1/3 left-1/4 w-2 h-2 bg-[#ea9216] rounded-full md:animate-pulse"></div>
         <div className="absolute top-2/3 left-3/4 w-3 h-3 bg-[#ea9216] rounded-full md:animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-[#ea9216] rounded-full md:animate-pulse delay-500"></div>
