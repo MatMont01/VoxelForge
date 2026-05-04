@@ -1,32 +1,31 @@
-import { useEffect } from "react";
-import { HomePage } from "./pages/HomePage";
-import { Header } from "./components/layout/NewHeader";
-import { CustomCursor } from "./components/ui";
+import { About } from "./components/About";
+import { CinematicHero } from "./components/CinematicHero";
+import { Contact } from "./components/Contact";
+import { Equipment } from "./components/Equipment";
+import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
+import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
+import { Materials } from "./components/Materials";
+import { Portfolio } from "./components/Portfolio";
+import { Process } from "./components/Process";
+import { Services } from "./components/Services";
 
-function App() {
-  // Ensure smooth scrolling globally
-  useEffect(() => {
-    document.documentElement.style.scrollBehavior = "smooth";
-  }, []);
-
-  // Dynamic title refinement (could expand with router later)
-  useEffect(() => {
-    const baseTitle = "Voxel Forge";
-    const tagline = "Impresión 3D en Santa Cruz";
-    if (document.title.indexOf(baseTitle) === -1) {
-      document.title = `${baseTitle} | ${tagline}`;
-    }
-  }, []);
-
+export default function App() {
   return (
-    <div className="min-h-screen bg-[#313841] text-gray-100" lang="es">
+    <div className="min-h-screen bg-[#101114] text-white">
       <Header />
-      <CustomCursor />
-      <div className="App">
-        <HomePage />
-      </div>
+      <main>
+        <CinematicHero />
+        <Services />
+        <Process />
+        <Portfolio />
+        <Materials />
+        <Equipment />
+        <About />
+        <Contact />
+      </main>
+      <FloatingWhatsApp />
+      <Footer />
     </div>
   );
 }
-
-export default App;
