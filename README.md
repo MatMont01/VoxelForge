@@ -1,34 +1,34 @@
 # Voxel Forge
 
-Sitio web de Voxel Forge, taller de impresion 3D en Santa Cruz de la Sierra, Bolivia.
+Sitio oficial de Voxel Forge, taller de impresión 3D en Santa Cruz de la
+Sierra, Bolivia. La página está hecha con React, TypeScript, Vite y Tailwind CSS
+para GitHub Pages con dominio personalizado `voxelforge.org`.
 
-## Stack
-
-- React 19
-- Vite
-- TypeScript
-- Tailwind CSS 4
-- Three.js con carga diferida para la escena WebGL
-- GitHub Pages mediante Actions
-
-## Comandos
+## Desarrollo
 
 ```bash
 npm install
 npm run dev
-npm run build
-npm run preview
-npm run lint
 ```
+
+## Verificación
+
+```bash
+npm run lint
+npm run build
+```
+
+El build optimiza imágenes del portafolio, genera favicons, crea la imagen Open
+Graph `og-1200x630.jpg` y deja listo el contenido de `dist/` para GitHub Pages.
+
+## Deploy
+
+El workflow `.github/workflows/deploy.yml` publica automáticamente al hacer push
+a `main` usando GitHub Pages. El dominio se conserva mediante `public/CNAME`.
 
 ## Estructura
 
-- `src/data/site.ts`: contenido editable de negocio, servicios, portafolio, FAQ y contacto.
-- `src/components`: secciones visuales del sitio.
-- `src/assets`: logos, fotos de portafolio, fuentes e imagenes reales.
-- `public`: archivos SEO, favicon, 404 para SPA y dominio personalizado.
-- `.github/workflows/deploy.yml`: despliegue automatico a GitHub Pages desde `main`.
-
-## SEO
-
-El sitio incluye metadatos Open Graph/Twitter, canonical, robots, sitemap, JSON-LD para `Organization`, `LocalBusiness`, `OfferCatalog`, `FAQPage` y fallback `noscript`.
+- `src/data/site.ts`: datos editables del negocio, servicios, portafolio,
+  materiales, equipo y FAQ.
+- `src/components/`: secciones visuales del sitio.
+- `public/`: SEO estático, sitemap, robots, manifest y soporte GitHub Pages.

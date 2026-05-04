@@ -15,17 +15,17 @@ export function Portfolio() {
       : portfolioItems.filter((item) => item.category === active);
 
   return (
-    <section id="portfolio" data-stage className="portfolio-stage chapter-section section-band text-white">
-      <div className="chapter-inner mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+    <section id="portfolio" className="section-band bg-[#e9eef0] text-[#151515]">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <p className="eyebrow text-[#82e6c9]">Piezas forjadas</p>
-            <h2 className="section-title">
+            <p className="eyebrow text-[#215d70]">Portafolio</p>
+            <h2 className="section-title text-[#151515]">
               Piezas reales, eventos reales, acabados visibles.
             </h2>
-            <p className="section-copy text-white/68">
-              Una selección de trabajos impresos por Voxel Forge: piezas de
-              colección, maquetas, props y producción temática para eventos.
+            <p className="section-copy text-[#4e585c]">
+              Una selección de trabajos impresos por Voxel Forge. El grid está
+              listo para crecer con nuevas categorías y casos de estudio.
             </p>
           </div>
 
@@ -36,8 +36,8 @@ export function Portfolio() {
                 onClick={() => setActive(category)}
                 className={`inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-bold transition ${
                   active === category
-                    ? "border-[#82e6c9] bg-[#82e6c9] text-[#111114]"
-                    : "border-white/14 bg-white/8 text-white/72 hover:bg-white/14 hover:text-white"
+                    ? "border-[#215d70] bg-[#215d70] text-white"
+                    : "border-[#151515]/14 bg-white/50 text-[#151515] hover:bg-white"
                 }`}
                 type="button"
                 role="tab"
@@ -86,7 +86,7 @@ export function Portfolio() {
 
         <button
           onClick={() => scrollToHash("#contact")}
-          className="mt-8 inline-flex items-center gap-2 rounded-md bg-[#ff7a2f] px-4 py-3 font-bold text-[#111114] transition hover:bg-[#ffb25f]"
+          className="mt-8 inline-flex items-center gap-2 rounded-md bg-[#151515] px-4 py-3 font-bold text-white transition hover:bg-[#215d70]"
         >
           Quiero algo parecido
           <ArrowRight className="h-4 w-4" />

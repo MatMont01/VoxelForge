@@ -19,8 +19,8 @@ export function Contact() {
   }, [details, material, service]);
 
   return (
-    <section id="contact" data-stage className="contact-stage chapter-section section-band text-white">
-      <div className="chapter-inner mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+    <section id="contact" className="section-band bg-[#101114] text-white">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="eyebrow text-[#ffb25f]">Contacto</p>

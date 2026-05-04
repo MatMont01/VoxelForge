@@ -1,157 +1,103 @@
-<!DOCTYPE html>
-<html lang="es" class="dark">
+<!doctype html>
+<html lang="es-BO">
   <head>
     <meta charset="UTF-8" />
-    <!-- Favicon principal (SVG circular) y PNGs generados en build -->
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      sizes="any"
-      href="/voxel-forge-icon.svg"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#101114" />
+
+    <title>Voxel Forge | Impresión 3D en Santa Cruz de la Sierra, Bolivia</title>
+    <meta
+      name="description"
+      content="Impresión 3D profesional en Santa Cruz: prototipos, piezas personalizadas, maquetas, figuras y envíos a toda Bolivia."
     />
+    <meta
+      name="keywords"
+      content="impresión 3D Santa Cruz, impresión 3D Bolivia, prototipos 3D, piezas personalizadas 3D, maquetas 3D, figuras 3D, Voxel Forge"
+    />
+    <meta name="application-name" content="Voxel Forge" />
+    <meta name="author" content="Voxel Forge" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://voxelforge.org/" />
+    <link rel="alternate" href="https://voxelforge.org/" hreflang="es-BO" />
+    <link rel="alternate" href="https://voxelforge.org/" hreflang="x-default" />
+
+    <meta name="geo.region" content="BO-S" />
+    <meta name="geo.placename" content="Santa Cruz de la Sierra" />
+    <meta name="geo.position" content="-17.7833;-63.1821" />
+    <meta name="ICBM" content="-17.7833, -63.1821" />
+
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/voxel-forge-icon.svg" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="shortcut icon" href="/voxel-forge-icon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark" />
-    <title>Voxel Forge | Impresión 3D profesional en Santa Cruz, Bolivia</title>
-    <meta
-      name="keywords"
-      content="impresion 3d santa cruz, impresion 3d bolivia, voxel forge, voxelforge, prototipado 3d, piezas 3d personalizadas, maquetas 3d, figuras 3d, bambu lab p1s, servicios impresion 3d"
-    />
-    <meta
-      name="description"
-      content="Voxel Forge es una forja digital de impresión 3D en Santa Cruz de la Sierra: prototipos, piezas funcionales, figuras, maquetas y producción para eventos con envíos a toda Bolivia."
-    />
-    <meta name="author" content="Voxel Forge" />
-    <meta name="format-detection" content="telephone=yes" />
-    <meta name="geo.region" content="BO-S" />
-    <meta name="geo.placename" content="Santa Cruz de la Sierra" />
-    <meta name="application-name" content="Voxel Forge" />
-    <link rel="canonical" href="https://voxelforge.org/" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <meta name="googlebot" content="index, follow, max-image-preview:large" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Hreflang -->
-    <link rel="alternate" href="https://voxelforge.org/" hreflang="es-BO" />
-    <link rel="alternate" href="https://voxelforge.org/" hreflang="x-default" />
-
-    <!-- Theme color (auto adjusts via inline script) -->
-    <meta name="theme-color" content="#313841" id="theme-color-meta" />
-    <script>
-      (function () {
-        try {
-          const meta = document.getElementById("theme-color-meta");
-          const prefersDark = window.matchMedia(
-            "(prefers-color-scheme: dark)"
-          ).matches;
-          if (meta) {
-            meta.setAttribute("content", prefersDark ? "#313841" : "#ffffff");
-          }
-        } catch (e) {}
-      })();
-    </script>
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://voxelforge.org/" />
+    <meta property="og:site_name" content="Voxel Forge" />
+    <meta property="og:locale" content="es_BO" />
     <meta
       property="og:title"
-      content="Voxel Forge | Impresión 3D profesional en Santa Cruz"
+      content="Voxel Forge | Impresión 3D en Santa Cruz de la Sierra"
     />
     <meta
       property="og:description"
-      content="Una forja digital para prototipos, piezas personalizadas, maquetas, figuras y producción para eventos. Envíos a toda Bolivia."
+      content="Prototipos, piezas personalizadas, maquetas, figuras y producción para eventos con envíos a toda Bolivia."
     />
-    <meta property="og:site_name" content="Voxel Forge" />
-    <meta property="og:locale" content="es_BO" />
-    <meta property="og:locale:alternate" content="es_LA" />
-    <!-- Imagen principal para tarjetas sociales: estándar 1200x630 -->
-    <meta
-      property="og:image"
-      content="https://voxelforge.org/og-1200x630.jpg"
-    />
-    <meta
-      property="og:image:secure_url"
-      content="https://voxelforge.org/og-1200x630.jpg"
-    />
-    <meta
-      property="og:image:alt"
-      content="Voxel Forge - Impresión 3D en Santa Cruz"
-    />
+    <meta property="og:image" content="https://voxelforge.org/og-1200x630.jpg" />
+    <meta property="og:image:secure_url" content="https://voxelforge.org/og-1200x630.jpg" />
+    <meta property="og:image:alt" content="Voxel Forge - Impresión 3D en Santa Cruz" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <!-- Fallback SVG si la JPG no está disponible aún -->
-    <meta property="og:image" content="https://voxelforge.org/og-image.svg" />
-    <meta property="og:image:type" content="image/svg+xml" />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Voxel Forge | Impresión 3D profesional en Santa Cruz"
+      content="Voxel Forge | Impresión 3D en Santa Cruz de la Sierra"
     />
     <meta
       name="twitter:description"
-      content="Prototipos, piezas personalizadas, maquetas y figuras con envíos a toda Bolivia."
+      content="Impresión 3D profesional: prototipos, piezas funcionales, figuras, maquetas y envíos en Bolivia."
     />
-    <meta
-      name="twitter:image"
-      content="https://voxelforge.org/og-1200x630.jpg"
-    />
-    <meta
-      name="twitter:image:alt"
-      content="Voxel Forge - Impresión 3D en Santa Cruz"
-    />
+    <meta name="twitter:image" content="https://voxelforge.org/og-1200x630.jpg" />
+    <meta name="twitter:image:alt" content="Voxel Forge - Impresión 3D en Santa Cruz" />
 
-    <!-- Dark background fallback before app styles load -->
-    <style>
-      body {
-        background: #313841;
-      }
-    </style>
-
-    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
           {
             "@type": "Organization",
+            "@id": "https://voxelforge.org/#organization",
             "name": "Voxel Forge",
             "url": "https://voxelforge.org/",
             "logo": "https://voxelforge.org/voxel-forge-icon.svg",
             "sameAs": [
               "https://www.instagram.com/voxelforge_scz/",
-              "https://www.tiktok.com/@voxelforge_scz"
+              "https://www.tiktok.com/@voxelforge_scz",
+              "https://www.facebook.com/VoxelForgeSCZ"
             ],
-            "contactPoint": [
-              {
-                "@type": "ContactPoint",
-                "telephone": "+59174697838",
-                "email": "voxelforge1502@gmail.com",
-                "contactType": "customer service",
-                "areaServed": "BO",
-                "availableLanguage": ["es"]
-              }
-            ]
-          },
-          {
-            "@type": "WebSite",
-            "name": "Voxel Forge",
-            "url": "https://voxelforge.org/",
-            "inLanguage": "es-BO"
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+59174697838",
+              "email": "voxelforge1502@gmail.com",
+              "contactType": "customer service",
+              "areaServed": "BO",
+              "availableLanguage": ["es"]
+            }
           },
           {
             "@type": "LocalBusiness",
             "@id": "https://voxelforge.org/#business",
             "name": "Voxel Forge",
             "alternateName": "Voxel Forge Santa Cruz",
+            "description": "Impresión 3D profesional en Santa Cruz de la Sierra: prototipos, piezas personalizadas, maquetas, figuras y producción para eventos.",
             "url": "https://voxelforge.org/",
-            "image": "https://voxelforge.org/voxel-forge-logo-rectangular.jpg",
+            "image": "https://voxelforge.org/og-1200x630.jpg",
             "logo": "https://voxelforge.org/voxel-forge-icon.svg",
             "telephone": "+59174697838",
             "email": "voxelforge1502@gmail.com",
@@ -163,6 +109,17 @@
               "addressRegion": "Santa Cruz",
               "addressCountry": "BO"
             },
+            "areaServed": [
+              "Santa Cruz",
+              "La Paz",
+              "Cochabamba",
+              "Chuquisaca",
+              "Oruro",
+              "Potosí",
+              "Tarija",
+              "Beni",
+              "Pando"
+            ],
             "openingHoursSpecification": [
               {
                 "@type": "OpeningHoursSpecification",
@@ -177,105 +134,91 @@
                 "closes": "17:00"
               }
             ],
-            "areaServed": [
-              "Santa Cruz",
-              "La Paz",
-              "Cochabamba",
-              "Chuquisaca",
-              "Oruro",
-              "Potosí",
-              "Tarija",
-              "Beni",
-              "Pando"
-            ],
             "sameAs": [
               "https://www.instagram.com/voxelforge_scz/",
-              "https://www.tiktok.com/@voxelforge_scz"
+              "https://www.tiktok.com/@voxelforge_scz",
+              "https://www.facebook.com/VoxelForgeSCZ"
             ],
             "hasOfferCatalog": {
               "@type": "OfferCatalog",
-              "name": "Servicios",
+              "name": "Servicios de impresión 3D",
               "itemListElement": [
                 {
                   "@type": "Offer",
                   "itemOffered": {
                     "@type": "Service",
-                    "name": "Impresión 3D de prototipos"
+                    "name": "Impresión 3D a pedido",
+                    "areaServed": "BO"
                   }
                 },
                 {
                   "@type": "Offer",
                   "itemOffered": {
                     "@type": "Service",
-                    "name": "Piezas personalizadas"
+                    "name": "Diseño y modelado 3D",
+                    "areaServed": "BO"
                   }
                 },
                 {
                   "@type": "Offer",
                   "itemOffered": {
                     "@type": "Service",
-                    "name": "Modelos y maquetas"
+                    "name": "Prototipado rápido",
+                    "areaServed": "BO"
                   }
                 },
                 {
                   "@type": "Offer",
                   "itemOffered": {
                     "@type": "Service",
-                    "name": "Arte y figuras 3D"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Repuestos y componentes"
+                    "name": "Producción 3D para eventos",
+                    "areaServed": "BO"
                   }
                 }
               ]
             }
           },
           {
-            "@type": "ItemList",
-            "name": "Servicios de Impresión 3D",
-            "itemListElement": [
-              { "@type": "Service", "name": "Impresión 3D de prototipos" },
-              { "@type": "Service", "name": "Piezas personalizadas" },
-              { "@type": "Service", "name": "Modelos y maquetas" },
-              { "@type": "Service", "name": "Arte y figuras 3D" },
-              { "@type": "Service", "name": "Repuestos y componentes" }
-            ]
+            "@type": "WebSite",
+            "@id": "https://voxelforge.org/#website",
+            "name": "Voxel Forge",
+            "url": "https://voxelforge.org/",
+            "inLanguage": "es-BO",
+            "publisher": { "@id": "https://voxelforge.org/#organization" }
           },
           {
             "@type": "FAQPage",
+            "@id": "https://voxelforge.org/#faq",
             "mainEntity": [
               {
                 "@type": "Question",
-                "name": "¿Qué materiales ofrecen?",
+                "name": "¿Qué necesito para cotizar una impresión 3D?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Trabajamos con PLA, PETG, ABS, ASA, PC, PA y otros materiales según la necesidad del proyecto."
+                  "text": "Puedes enviar un archivo STL, un enlace, fotos de referencia o medidas. Voxel Forge te guía por WhatsApp si falta información."
                 }
               },
               {
                 "@type": "Question",
-                "name": "¿Hacen envíos?",
+                "name": "¿Voxel Forge hace envíos fuera de Santa Cruz?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Sí, realizamos envíos a toda Bolivia. Consulta tiempos y costos según tu ubicación."
+                  "text": "Sí. Voxel Forge coordina envíos a todos los departamentos de Bolivia según tamaño, urgencia y disponibilidad."
                 }
               },
               {
                 "@type": "Question",
-                "name": "¿Cuánto tarda un pedido?",
+                "name": "¿Qué materiales de impresión 3D trabajan?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Depende del tamaño y complejidad. Prototipos pequeños pueden estar listos en 24-72 horas."
+                  "text": "Trabajan con PLA, PETG, ABS, ASA, PC, PA y otros materiales según la necesidad del proyecto."
                 }
               }
             ]
           },
           {
             "@type": "BreadcrumbList",
+            "@id": "https://voxelforge.org/#breadcrumbs",
             "itemListElement": [
               {
                 "@type": "ListItem",
@@ -307,76 +250,153 @@
       }
     </script>
 
-    <!-- Start Single Page Apps for GitHub Pages -->
-    <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // MIT License
-      // https://github.com/rafgraph/spa-github-pages
-      // This script checks to see if a redirect is present in the query string,
-      // converts it back into the correct url and adds it to the
-      // browser's history using window.history.replaceState(...),
-      // which won't cause the browser to attempt to load the new url.
-      // When the single page app is loaded further down in this file,
-      // the correct url will be waiting in the browser's history for
-      // the single page app to route accordingly.
-      (function (l) {
-        if (l.search[1] === "/") {
-          var decoded = l.search
+    <script>
+      (function (location) {
+        if (location.search[1] === "/") {
+          var decoded = location.search
             .slice(1)
             .split("&")
-            .map(function (s) {
-              return s.replace(/~and~/g, "&");
+            .map(function (part) {
+              return part.replace(/~and~/g, "&");
             })
             .join("?");
           window.history.replaceState(
             null,
             null,
-            l.pathname.slice(0, -1) + decoded + l.hash
+            location.pathname.slice(0, -1) + decoded + location.hash
           );
         }
       })(window.location);
     </script>
-    <!-- End Single Page Apps for GitHub Pages -->
+
+    <style>
+      body {
+        background: #101114;
+      }
+      #consent-banner {
+        position: fixed;
+        z-index: 60;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        max-width: 680px;
+        margin: auto;
+        display: none;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: #15171b;
+        color: #f8fafc;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+        padding: 16px;
+      }
+      #consent-banner p {
+        margin: 0;
+        font: 14px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      #consent-banner .cb-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      #consent-banner button {
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 6px;
+        background: transparent;
+        color: #f8fafc;
+        cursor: pointer;
+        padding: 10px 14px;
+      }
+      #consent-banner .cb-primary {
+        border-color: #ff7a2f;
+        background: #ff7a2f;
+        color: #111114;
+        font-weight: 700;
+      }
+    </style>
+    <script>
+      (function () {
+        var KEY = "vf_ga_consent";
+        function loadGA() {
+          if (window.__vfGaLoaded) return;
+          window.__vfGaLoaded = true;
+          var script = document.createElement("script");
+          script.async = true;
+          script.src = "https://www.googletagmanager.com/gtag/js?id=G-L88Z4WZLDP";
+          document.head.appendChild(script);
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function () {
+            window.dataLayer.push(arguments);
+          };
+          window.gtag("js", new Date());
+          window.gtag("config", "G-L88Z4WZLDP");
+        }
+        window.addEventListener("DOMContentLoaded", function () {
+          var banner = document.getElementById("consent-banner");
+          var accept = document.getElementById("consent-accept");
+          var decline = document.getElementById("consent-decline");
+          var dnt =
+            navigator.doNotTrack === "1" ||
+            window.doNotTrack === "1" ||
+            window.globalPrivacyControl === true;
+          var stored = "";
+          try {
+            stored = localStorage.getItem(KEY) || "";
+          } catch (error) {}
+          if (stored === "granted") {
+            loadGA();
+            return;
+          }
+          if (!stored && !dnt && banner) banner.style.display = "block";
+          if (accept) {
+            accept.addEventListener("click", function () {
+              try {
+                localStorage.setItem(KEY, "granted");
+              } catch (error) {}
+              if (banner) banner.style.display = "none";
+              loadGA();
+            });
+          }
+          if (decline) {
+            decline.addEventListener("click", function () {
+              try {
+                localStorage.setItem(KEY, "denied");
+              } catch (error) {}
+              if (banner) banner.style.display = "none";
+            });
+          }
+        });
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- SEO fallback for non-JS crawlers -->
     <noscript>
-      <section
-        style="
-          max-width: 960px;
-          margin: 2rem auto;
-          padding: 1rem;
-          color: #111;
-          background: #fff;
-          border-radius: 12px;
-        "
-      >
-        <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem">
-          Voxel Forge — Impresión 3D en Santa Cruz (envíos a toda Bolivia)
-        </h1>
-        <p style="margin: 0.5rem 0">
-          Prototipos, piezas personalizadas, figuras y repuestos. Materiales:
-          PLA, PETG, ABS, ASA, PC, PA. Atención rápida y asesoría experta.
+      <main style="max-width: 980px; margin: 2rem auto; padding: 1rem; color: #111; background: #fff; border-radius: 8px;">
+        <h1>Voxel Forge - Impresión 3D en Santa Cruz de la Sierra</h1>
+        <p>
+          Prototipos, piezas personalizadas, maquetas, figuras, producción para
+          eventos y envíos a toda Bolivia.
         </p>
-        <ul style="margin: 0.5rem 0 0.5rem 1.25rem">
-          <li>Impresión 3D a pedido y prototipado rápido</li>
-          <li>Diseño/modelado 3D y postprocesado</li>
-          <li>
-            Envíos a Santa Cruz, La Paz, Cochabamba, Chuquisaca, Oruro, Potosí,
-            Tarija, Beni y Pando
-          </li>
-        </ul>
-        <p style="margin: 0.5rem 0">
-          Contacto:
+        <p>
+          WhatsApp:
+          <a href="https://wa.me/59174697838">+591 746 97838</a>
+          | Email:
           <a href="mailto:voxelforge1502@gmail.com">voxelforge1502@gmail.com</a>
-          · WhatsApp: <a href="https://wa.me/59174697838">+591 746 97838</a>
         </p>
-        <p style="margin: 0.5rem 0">
-          Horarios: Lun–Jue 18:00–22:00 · Vie–Dom 08:00–17:00
-        </p>
-      </section>
+        <p>Materiales: PLA, PETG, ABS, ASA, PC, PA y otros según el proyecto.</p>
+      </main>
     </noscript>
+    <div id="consent-banner" role="dialog" aria-live="polite" aria-label="Consentimiento de analytics">
+      <p>
+        Usamos Google Analytics solo con tu consentimiento para medir visitas y
+        mejorar la página.
+      </p>
+      <div class="cb-actions">
+        <button id="consent-decline" type="button">Rechazar</button>
+        <button id="consent-accept" class="cb-primary" type="button">Aceptar</button>
+      </div>
+    </div>
   </body>
 </html>

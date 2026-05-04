@@ -2,8 +2,8 @@ import { processSteps } from "../data/site";
 
 export function Process() {
   return (
-    <section id="process" data-stage className="process-stage chapter-section section-band text-white">
-      <div className="chapter-inner mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+    <section id="process" className="section-band bg-[#111418] text-white">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
           <div>
             <p className="eyebrow text-[#82e6c9]">Proceso</p>

@@ -62,14 +62,11 @@ export const business = {
 } as const;
 
 export const navigation = [
-  { label: "Forja", href: "#story" },
-  { label: "Nombre", href: "#meaning" },
   { label: "Servicios", href: "#services" },
   { label: "Proceso", href: "#process" },
   { label: "Portafolio", href: "#portfolio" },
   { label: "Materiales", href: "#materials" },
   { label: "Equipo", href: "#equipment" },
-  { label: "FAQ", href: "#faq" },
   { label: "Contacto", href: "#contact" },
 ] as const;
 
@@ -127,33 +124,6 @@ export const services = [
   },
 ] as const;
 
-export const forgeStory = [
-  {
-    phase: "01",
-    title: "La chispa",
-    lead: "Todo empieza como archivo, boceto, foto o medida.",
-    text: "Revisamos geometría, tamaño, tolerancias y propósito para saber si la pieza debe verse increíble, resistir uso real o producirse en serie.",
-  },
-  {
-    phase: "02",
-    title: "La cámara",
-    lead: "El proyecto entra al laminador como metal a la fragua.",
-    text: "Orientación, soportes, relleno, temperatura, velocidad y material definen cómo se va a construir cada capa.",
-  },
-  {
-    phase: "03",
-    title: "La forja",
-    lead: "La boquilla deposita filamento fundido capa por capa.",
-    text: "El calor, el movimiento y la repetibilidad convierten datos digitales en volumen físico con control de detalle.",
-  },
-  {
-    phase: "04",
-    title: "La pieza",
-    lead: "Se enfría, se revisa, se limpia y queda lista para entregar.",
-    text: "Coordinamos acabado, empaque, recojo o envío a cualquier departamento de Bolivia.",
-  },
-] as const;
-
 export const processSteps = [
   {
     title: "Envío",
@@ -170,21 +140,6 @@ export const processSteps = [
   {
     title: "Entrega",
     text: "Imprimimos, revisamos calidad y coordinamos recojo o envío nacional.",
-  },
-] as const;
-
-export const meaning = [
-  {
-    term: "Voxel",
-    title: "El pixel del volumen",
-    text: "Un voxel es la unidad minima de un objeto tridimensional. Representa la precision digital que define forma, escala y detalle antes de imprimir.",
-    signature: "Datos, geometria y control.",
-  },
-  {
-    term: "Forge",
-    title: "La forja que transforma",
-    text: "Forge habla del oficio: calor, material y criterio tecnico para convertir un archivo o idea en una pieza fisica lista para usarse.",
-    signature: "Filamento, capas y acabado.",
   },
 ] as const;
 

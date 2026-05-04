@@ -59,7 +59,7 @@ export function Header() {
               {business.name}
             </span>
             <span className="block pt-1 text-xs uppercase text-white/52">
-              taller de impresión 3D
+              3D printing studio
             </span>
           </span>
         </button>
