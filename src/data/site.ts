@@ -268,6 +268,48 @@ export const timeline = [
   },
 ] as const;
 
+export const forgeStory = [
+  {
+    phase: "01",
+    title: "Modelado",
+    lead: "La idea se vuelve archivo listo para imprimir.",
+    text: "Traducimos referencias en geometría limpia, con tolerancias reales y detalles que sí salen en impresión.",
+  },
+  {
+    phase: "02",
+    title: "Laminado",
+    lead: "Definimos material, capas y tiempo de fabricación.",
+    text: "Ajustamos parámetros, soportes y orientación para maximizar detalle y resistencia.",
+  },
+  {
+    phase: "03",
+    title: "Impresión",
+    lead: "La pieza toma forma con ritmo y precisión.",
+    text: "Supervisamos el proceso para asegurar paredes sólidas, superficies limpias y consistencia.",
+  },
+  {
+    phase: "04",
+    title: "Acabado",
+    lead: "Lijado, ensamblaje y presentación final.",
+    text: "Dejamos la pieza lista para usar, vender o exhibir con el look correcto.",
+  },
+] as const;
+
+export const meaning = [
+  {
+    term: "Voxel",
+    title: "Precisión digital",
+    text: "Cada capa es un pixel en 3D. Eso nos da control sobre forma, detalle y escala.",
+    signature: "Geometría clara",
+  },
+  {
+    term: "Forge",
+    title: "Oficio de taller",
+    text: "No solo imprimimos: calibramos, ajustamos y terminamos piezas como en una forja real.",
+    signature: "Acabado con criterio",
+  },
+] as const;
+
 export const faq = [
   {
     question: "¿Qué necesito para cotizar?",
