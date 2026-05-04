@@ -2,13 +2,6 @@
 <html lang="es" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <!-- Preconnects for faster third-party loads -->
-    <link
-      rel="preconnect"
-      href="https://www.googletagmanager.com"
-      crossorigin
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Favicon principal (SVG circular) y PNGs generados en build -->
     <link
       rel="icon"
@@ -23,17 +16,19 @@
     <link rel="shortcut icon" href="/voxel-forge-icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
-    <title>
-      Voxel Forge | Impresión 3D en Santa Cruz | Envíos a toda Bolivia
-    </title>
+    <title>Voxel Forge | Impresión 3D profesional en Santa Cruz, Bolivia</title>
     <meta
       name="keywords"
-      content="impresion 3d santa cruz, impresion 3d bolivia, impresion 3d prototipos, servicios impresion 3d, piezas 3d personalizadas, maquetas 3d, figuras 3d, voxelforge"
+      content="impresion 3d santa cruz, impresion 3d bolivia, voxel forge, voxelforge, prototipado 3d, piezas 3d personalizadas, maquetas 3d, figuras 3d, bambu lab p1s, servicios impresion 3d"
     />
     <meta
       name="description"
-      content="Impresión 3D profesional en Santa Cruz de la Sierra: prototipos, piezas personalizadas, arte y repuestos. Envíos a todos los departamentos de Bolivia. Atención rápida, materiales de calidad y asesoría experta."
+      content="Voxel Forge es una forja digital de impresión 3D en Santa Cruz de la Sierra: prototipos, piezas funcionales, figuras, maquetas y producción para eventos con envíos a toda Bolivia."
     />
+    <meta name="author" content="Voxel Forge" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="geo.region" content="BO-S" />
+    <meta name="geo.placename" content="Santa Cruz de la Sierra" />
     <meta name="application-name" content="Voxel Forge" />
     <link rel="canonical" href="https://voxelforge.org/" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -64,11 +59,11 @@
     <meta property="og:url" content="https://voxelforge.org/" />
     <meta
       property="og:title"
-      content="Voxel Forge | Impresión 3D en Santa Cruz | Envíos a toda Bolivia"
+      content="Voxel Forge | Impresión 3D profesional en Santa Cruz"
     />
     <meta
       property="og:description"
-      content="Prototipos y piezas personalizadas en 3D. Envíos a todos los departamentos de Bolivia. Materiales de calidad, atención rápida y asesoría experta."
+      content="Una forja digital para prototipos, piezas personalizadas, maquetas, figuras y producción para eventos. Envíos a toda Bolivia."
     />
     <meta property="og:site_name" content="Voxel Forge" />
     <meta property="og:locale" content="es_BO" />
@@ -97,11 +92,11 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Voxel Forge | Impresión 3D en Santa Cruz | Envíos a toda Bolivia"
+      content="Voxel Forge | Impresión 3D profesional en Santa Cruz"
     />
     <meta
       name="twitter:description"
-      content="Prototipos y piezas personalizadas en 3D. Envíos a todos los departamentos de Bolivia. Materiales de calidad, atención rápida y asesoría experta."
+      content="Prototipos, piezas personalizadas, maquetas y figuras con envíos a toda Bolivia."
     />
     <meta
       name="twitter:image"
@@ -111,129 +106,6 @@
       name="twitter:image:alt"
       content="Voxel Forge - Impresión 3D en Santa Cruz"
     />
-
-    <!-- Consent-based GA4 loader (no carga Analytics sin consentimiento) -->
-    <style>
-      #consent-banner {
-        position: fixed;
-        z-index: 60;
-        left: 16px;
-        right: 16px;
-        bottom: 16px;
-        max-width: 680px;
-        margin: auto;
-        background: #ffffff;
-        color: #111827;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        padding: 16px;
-        display: none;
-      }
-      html.dark #consent-banner {
-        background: #3a4750;
-        color: #f3f4f6;
-      }
-      #consent-banner .cb-actions {
-        display: flex;
-        gap: 8px;
-        margin-top: 12px;
-        flex-wrap: wrap;
-      }
-      #consent-banner .cb-btn {
-        padding: 10px 14px;
-        border-radius: 8px;
-        border: 1px solid #e5e7eb;
-        background: #fff;
-        color: #111827;
-        cursor: pointer;
-      }
-      #consent-banner .cb-btn-primary {
-        background: #ea9216;
-        color: #fff;
-        border-color: #ea9216;
-      }
-      html.dark #consent-banner .cb-btn {
-        background: #313841;
-        color: #f3f4f6;
-        border-color: #4b5563;
-      }
-      html.dark #consent-banner .cb-btn-primary {
-        background: #ea9216;
-        border-color: #ea9216;
-      }
-      #consent-banner p {
-        margin: 0;
-        font-size: 14px;
-        line-height: 1.5;
-      }
-      #consent-banner a {
-        color: #ea9216;
-        text-decoration: underline;
-      }
-    </style>
-    <script>
-      (function () {
-        const CONSENT_KEY = "vf_ga_consent";
-        function loadGA4() {
-          if (window.__gaLoaded) return;
-          window.__gaLoaded = true;
-          var s = document.createElement("script");
-          s.async = true;
-          s.src = "https://www.googletagmanager.com/gtag/js?id=G-L88Z4WZLDP";
-          document.head.appendChild(s);
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          window.gtag = gtag;
-          gtag("js", new Date());
-          gtag("config", "G-L88Z4WZLDP");
-        }
-        function initConsent() {
-          try {
-            const dnt =
-              navigator.doNotTrack == "1" ||
-              window.doNotTrack == "1" ||
-              navigator.msDoNotTrack == "1" ||
-              window.globalPrivacyControl === true;
-            const stored = localStorage.getItem(CONSENT_KEY);
-            const banner = document.getElementById("consent-banner");
-            if (stored === "granted") {
-              if (banner) banner.style.display = "none";
-              loadGA4();
-              return;
-            }
-            if (stored === "denied" || dnt) {
-              if (banner) banner.style.display = "none";
-              return;
-            }
-            if (banner) banner.style.display = "block";
-          } catch (e) {}
-        }
-        window.addEventListener("DOMContentLoaded", function () {
-          var accept = document.getElementById("consent-accept");
-          var decline = document.getElementById("consent-decline");
-          if (accept)
-            accept.addEventListener("click", function () {
-              try {
-                localStorage.setItem(CONSENT_KEY, "granted");
-              } catch (e) {}
-              var b = document.getElementById("consent-banner");
-              if (b) b.style.display = "none";
-              loadGA4();
-            });
-          if (decline)
-            decline.addEventListener("click", function () {
-              try {
-                localStorage.setItem(CONSENT_KEY, "denied");
-              } catch (e) {}
-              var b = document.getElementById("consent-banner");
-              if (b) b.style.display = "none";
-            });
-          initConsent();
-        });
-      })();
-    </script>
 
     <!-- Dark background fallback before app styles load -->
     <style>
@@ -271,12 +143,7 @@
             "@type": "WebSite",
             "name": "Voxel Forge",
             "url": "https://voxelforge.org/",
-            "inLanguage": "es",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": "https://voxelforge.org/?q={search_term_string}",
-              "query-input": "required name=search_term_string"
-            }
+            "inLanguage": "es-BO"
           },
           {
             "@type": "LocalBusiness",
@@ -511,25 +378,5 @@
         </p>
       </section>
     </noscript>
-    <!-- Consent banner -->
-    <div
-      id="consent-banner"
-      role="dialog"
-      aria-live="polite"
-      aria-label="Consentimiento de analytics"
-    >
-      <p>
-        Usamos cookies solo para medir el uso del sitio (Google Analytics 4).
-        ¿Nos das tu consentimiento para recopilar estadísticas anónimas?
-      </p>
-      <div class="cb-actions">
-        <button id="consent-decline" class="cb-btn" type="button">
-          Rechazar
-        </button>
-        <button id="consent-accept" class="cb-btn cb-btn-primary" type="button">
-          Aceptar
-        </button>
-      </div>
-    </div>
   </body>
 </html>

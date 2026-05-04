@@ -1,37 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Voxel Forge - Impresion 3D en Santa Cruz</title>
+  <desc id="desc">Tarjeta social de Voxel Forge, forja digital de impresion 3D en Bolivia.</desc>
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ea9216"/>
-      <stop offset="100%" stop-color="#d6740f"/>
+    <linearGradient id="ember" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffbf6b"/>
+      <stop offset="100%" stop-color="#ff7a2f"/>
     </linearGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#ffffff" stroke-opacity=".06"/>
+    </pattern>
   </defs>
-  <rect width="1200" height="630" fill="#313841"/>
-  <g transform="translate(100,100)">
-    <rect x="0" y="0" width="1000" height="430" rx="28" fill="#3a4750"/>
-    <rect x="0" y="0" width="1000" height="430" rx="28" fill="url(#g)" opacity="0.08"/>
-    <circle cx="140" cy="215" r="96" fill="url(#g)"/>
-    <circle cx="140" cy="215" r="78" fill="#ffffff" opacity="0.18"/>
-    <text x="140" y="240" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="84" font-weight="800" text-anchor="middle" fill="#ffffff">VF</text>
-
-    <text x="300" y="190" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="56" font-weight="800" fill="#ffffff">Voxel Forge</text>
-    <text x="300" y="235" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="28" fill="#e5e7eb">Impresión 3D en Santa Cruz</text>
-    <rect x="300" y="260" width="360" height="6" rx="3" fill="url(#g)"/>
-    <text x="300" y="310" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="22" fill="#e5e7eb">
-      Prototipos y piezas personalizadas • Materiales de calidad • Atención rápida
-    </text>
+  <rect width="1200" height="630" fill="#08090c"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="980" cy="120" r="260" fill="#82e6c9" opacity=".12"/>
+  <circle cx="120" cy="530" r="340" fill="#ff7a2f" opacity=".18"/>
+  <g transform="translate(96 88)">
+    <rect x="0" y="0" width="86" height="86" rx="14" fill="url(#ember)"/>
+    <path d="M43 20 62 31v23L43 65 24 54V31l19-11Z" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
+    <path d="m24 31 19 12 19-12M43 43v22" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="0" y="190" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="112" font-weight="900" letter-spacing="-2">VOXEL FORGE</text>
+    <text x="0" y="258" fill="#ffbf6b" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="800">Forjamos tu mundo</text>
+    <text x="0" y="330" fill="#e8edf2" font-family="Arial, Helvetica, sans-serif" font-size="30">Impresion 3D profesional en Santa Cruz</text>
+    <text x="0" y="376" fill="#aeb7c2" font-family="Arial, Helvetica, sans-serif" font-size="25">Prototipos, piezas personalizadas, maquetas, figuras y eventos.</text>
   </g>
-</svg>
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs>
-    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#313841"/>
-      <stop offset="100%" stop-color="#3a4750"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="630" fill="url(#g)"/>
-  <g font-family="'Cunia', sans-serif" text-anchor="middle">
-    <text x="600" y="280" font-size="96" fill="#ffffff">Voxel <tspan fill="#ea9216">Forge</tspan></text>
-    <text x="600" y="360" font-size="36" fill="#e5e7eb">Impresión 3D en Santa Cruz</text>
+  <g transform="translate(760 320)" opacity=".92">
+    <rect x="0" y="120" width="280" height="42" fill="#c45f18"/>
+    <rect x="34" y="82" width="56" height="80" fill="#ff7a2f"/>
+    <rect x="102" y="36" width="56" height="126" fill="#ff9a3f"/>
+    <rect x="170" y="70" width="56" height="92" fill="#d96d20"/>
+    <path d="M-26 162H306" stroke="#ffbf6b" stroke-width="8" stroke-linecap="round"/>
   </g>
 </svg>
