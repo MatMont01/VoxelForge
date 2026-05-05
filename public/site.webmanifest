@@ -1,18 +1,19 @@
 {
   "name": "Voxel Forge",
   "short_name": "Voxel Forge",
-  "description": "Impresión 3D profesional en Santa Cruz de la Sierra, Bolivia.",
+  "description": "Impresion 3D, modelado, prototipado y piezas funcionales en Santa Cruz de la Sierra, Bolivia.",
   "lang": "es-BO",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#101114",
-  "theme_color": "#101114",
+  "background_color": "#111418",
+  "theme_color": "#111418",
   "icons": [
     {
       "src": "/voxel-forge-icon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ]
 }

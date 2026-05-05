@@ -1,32 +1,59 @@
-import logoSolo from "../assets/VoxelForgeLogos/voxel-forge-logo-solo.svg";
-import logoCircular from "../assets/VoxelForgeLogos/voxel-forge-logo-circular.png";
-import logoRectangular from "../assets/VoxelForgeLogos/voxel-forge-logo-rectangular.jpg";
-import printerImage from "../assets/3DPrinters/p1sPrinter.png";
-import instagramIcon from "../assets/SocialMediaLogo/instagram.png";
-import tiktokIcon from "../assets/SocialMediaLogo/tiktok.png";
-import imgLampara from "../assets/Portafolio/lampara antorcha minecraft.jpg";
-import imgLamparaWebp from "../assets/Portafolio/lampara antorcha minecraft.webp";
-import imgMaqueta from "../assets/Portafolio/maqueta arquitectura.jpg";
-import imgMaquetaWebp from "../assets/Portafolio/maqueta arquitectura.webp";
-import imgSlifer from "../assets/Portafolio/Slifer dragon rojo.jpg";
-import imgSliferWebp from "../assets/Portafolio/Slifer dragon rojo.webp";
-import imgStandComic from "../assets/Portafolio/stand comic con 2025.jpg";
-import imgStandComicWebp from "../assets/Portafolio/stand comic con 2025.webp";
-import imgStandGamer from "../assets/Portafolio/Stand Gamer Con 2025.jpg";
-import imgStandGamerWebp from "../assets/Portafolio/Stand Gamer Con 2025.webp";
-import imgStandStar from "../assets/Portafolio/stand star con 2025.jpg";
-import imgStandStarWebp from "../assets/Portafolio/stand star con 2025.webp";
-import imgKitAtst from "../assets/Portafolio/Starwars kit card at st y caza tie .jpg";
-import imgKitAtstWebp from "../assets/Portafolio/Starwars kit card at st y caza tie .webp";
-import imgXwing from "../assets/Portafolio/Xwing Star wars.jpg";
-import imgXwingWebp from "../assets/Portafolio/Xwing Star wars.webp";
+import logoCircular from "../assets/logos/voxel-forge-logo-circular.png";
+import logoRectangular from "../assets/logos/voxel-forge-logo-rectangular.jpg";
+import logoSolo from "../assets/logos/voxel-forge-logo-solo.svg";
+import facebookLogo from "../assets/social/facebook.svg";
+import instagramLogo from "../assets/social/instagram.png";
+import imgLampara from "../assets/portfolio/lampara antorcha minecraft.webp";
+import imgMaqueta from "../assets/portfolio/maqueta arquitectura.webp";
+import imgSlifer from "../assets/portfolio/Slifer dragon rojo.webp";
+import imgStandComic from "../assets/portfolio/stand comic con 2025.webp";
+import imgStandGamer from "../assets/portfolio/Stand Gamer Con 2025.webp";
+import imgStandStar from "../assets/portfolio/stand star con 2025.webp";
+import imgKitAtst from "../assets/portfolio/Starwars kit card at st y caza tie .webp";
+import imgXwing from "../assets/portfolio/Xwing Star wars.webp";
+import imgGuardianSword from "../assets/portfolio/guardian-sword-3d-print.jpg";
+import filamentSpoolDetail from "../assets/printers/filament-spool-detail.jpg";
+import networkPrintingDetail from "../assets/printers/network-printing-detail.jpg";
+import anycubicKobraFront from "../assets/printers/anycubic kobra x.png";
+import anycubicKobraAngle from "../assets/printers/anycubic-kobra-x.webp";
+import printerImage from "../assets/printers/closed-machine.png";
+import remotePrintingDetail from "../assets/printers/remote-printing-detail.jpg";
+import tiktokLogo from "../assets/social/tiktok.png";
+import twitchLogo from "../assets/social/twitch.svg";
+import whatsappLogo from "../assets/social/whatsapp.svg";
+
+export const assets = {
+  logos: {
+    solo: logoSolo,
+    circular: logoCircular,
+    rectangular: logoRectangular,
+  },
+  socialIcons: {
+    instagram: instagramLogo,
+    tiktok: tiktokLogo,
+    facebook: facebookLogo,
+    twitch: twitchLogo,
+    whatsapp: whatsappLogo,
+  },
+  printer: printerImage,
+  printerDetails: {
+    openFrame: anycubicKobraAngle,
+    openFrameFront: anycubicKobraFront,
+    filament: filamentSpoolDetail,
+    remote: remotePrintingDetail,
+    network: networkPrintingDetail,
+  },
+  inspiration: {
+    guardianSword: imgGuardianSword,
+  },
+} as const;
 
 export const business = {
   name: "Voxel Forge",
   tagline: "Forjamos tu mundo",
-  headline: "Impresión 3D profesional en Santa Cruz",
+  headline: "Impresión 3D profesional en Santa Cruz de la Sierra",
   description:
-    "Prototipos, piezas funcionales, figuras, maquetas y producción para eventos con acabados cuidados y envíos a toda Bolivia.",
+    "Prototipos, piezas funcionales, figuras, maquetas y producción para eventos con múltiples máquinas, acabados cuidados y envíos a toda Bolivia.",
   siteUrl: "https://voxelforge.org/",
   email: "voxelforge1502@gmail.com",
   whatsappNumber: "59174697838",
@@ -34,60 +61,80 @@ export const business = {
   location: "Santa Cruz de la Sierra, Bolivia",
   foundedYear: 2022,
   priceRange: "$$",
-  hours: ["Lun-Jue 18:00-22:00", "Vie-Dom 08:00-17:00"],
-  serviceAreas: [
-    "Santa Cruz",
-    "La Paz",
-    "Cochabamba",
-    "Chuquisaca",
-    "Oruro",
-    "Potosí",
-    "Tarija",
-    "Beni",
-    "Pando",
-  ],
-  assets: {
-    logoSolo,
-    logoCircular,
-    logoRectangular,
-    printerImage,
-    instagramIcon,
-    tiktokIcon,
-  },
+  hours: ["Lun-Jue 18:00-22:00", "Viernes 18:00-00:00", "Sáb-Dom 08:00-17:00"],
   social: {
     instagram: "https://www.instagram.com/voxelforge_scz/",
     tiktok: "https://www.tiktok.com/@voxelforge_scz",
     facebook: "https://www.facebook.com/VoxelForgeSCZ",
+    twitch: "https://www.twitch.tv/eronii_sama",
   },
 } as const;
 
+export const serviceAreas = [
+  "Santa Cruz",
+  "La Paz",
+  "Cochabamba",
+  "Chuquisaca",
+  "Oruro",
+  "Potosí",
+  "Tarija",
+  "Beni",
+  "Pando",
+] as const;
+
 export const navigation = [
-  { label: "Servicios", href: "#services" },
+  { label: "Inicio", href: "#home" },
+  { label: "Marca", href: "#meaning" },
   { label: "Proceso", href: "#process" },
-  { label: "Portafolio", href: "#portfolio" },
-  { label: "Materiales", href: "#materials" },
-  { label: "Equipo", href: "#equipment" },
-  { label: "Contacto", href: "#contact" },
+  { label: "Galería", href: "#portfolio" },
+  { label: "Taller", href: "#equipment" },
+  { label: "Servicios", href: "#services" },
+  { label: "Redes", href: "#social" },
+  { label: "Cotizar", href: "#contact" },
 ] as const;
 
 export const metrics = [
   { value: "2000+", label: "proyectos impresos" },
   { value: "12000h+", label: "horas de impresión" },
   { value: "9", label: "departamentos con envío" },
-  { value: "500 mm/s", label: "capacidad P1S" },
+  { value: "flujo", label: "equipos coordinados" },
+] as const;
+
+export const companyProfile = {
+  history:
+    "Voxel Forge comenzó en 2022 con una Ender 3 V2. Lo que empezó como un hobby se convirtió en un taller dedicado a convertir ideas, referencias y archivos en piezas físicas para clientes, eventos y proyectos personales.",
+  mission:
+    "Transformar ideas en objetos tangibles mediante impresión 3D de alta calidad, asesoría técnica y materiales elegidos según el uso real de cada pieza.",
+  vision:
+    "Ser un referente de impresión 3D personalizada en Bolivia, reconocido por piezas bien resueltas, comunicación clara y entregas confiables.",
+} as const;
+
+export const meaning = [
+  {
+    term: "Voxel",
+    title: "El pixel del volumen",
+    text: "Un voxel es la unidad mínima de un objeto tridimensional. Representa la precisión digital que define forma, escala y detalle antes de imprimir.",
+    signature: "Datos, geometría y control.",
+  },
+  {
+    term: "Forge",
+    title: "La forja que transforma",
+    text: "Forge habla del oficio: calor, material y criterio técnico para convertir un archivo o idea en una pieza física lista para usarse.",
+    signature: "Filamento, capas y acabado.",
+  },
 ] as const;
 
 export const services = [
   {
     title: "Impresión 3D a pedido",
     summary:
-      "Cotizamos por pieza, tiempo, material y acabado. Puedes enviar STL, enlace o idea inicial.",
+      "Cotización por pieza, tiempo, material y acabado. Puedes enviar STL, enlace o idea inicial.",
     bullets: [
       "PLA, PETG, ABS, ASA, PC, PA y más",
       "Piezas decorativas o funcionales",
       "Asesoría antes de imprimir",
     ],
-    accent: "service-orange",
+    tone: "Molten",
   },
   {
     title: "Diseño y modelado",
@@ -98,7 +145,7 @@ export const services = [
       "Ajustes por tolerancia y ensamble",
       "Entrega de archivo cuando aplica",
     ],
-    accent: "service-cyan",
+    tone: "Blueprint",
   },
   {
     title: "Prototipado rápido",
@@ -109,7 +156,7 @@ export const services = [
       "Revisión de resistencia",
       "Versiones sucesivas del diseño",
     ],
-    accent: "service-green",
+    tone: "Pulse",
   },
   {
     title: "Producción para eventos",
@@ -120,26 +167,34 @@ export const services = [
       "Series pequeñas y medianas",
       "Acabado y presentación",
     ],
-    accent: "service-violet",
+    tone: "Stage",
   },
 ] as const;
 
-export const processSteps = [
+export const forgeStory = [
   {
-    title: "Envío",
-    text: "Compartes archivo, enlace, fotos, medidas o referencia del proyecto.",
+    phase: "01",
+    title: "La chispa",
+    lead: "Todo empieza como archivo, boceto, foto o medida.",
+    text: "Se revisa geometría, tamaño, tolerancias y propósito para saber si la pieza debe verse increíble, resistir uso real o producirse en serie.",
   },
   {
-    title: "Laminado",
-    text: "Calculamos tiempo, consumo de material, orientación y soportes.",
+    phase: "02",
+    title: "La cámara",
+    lead: "El proyecto entra al laminador como metal a la fragua.",
+    text: "Orientación, soportes, relleno, temperatura, velocidad y material definen cómo se va a construir cada capa.",
   },
   {
-    title: "Ajuste",
-    text: "Definimos material, color, resistencia, tolerancias y acabado.",
+    phase: "03",
+    title: "La forja",
+    lead: "La boquilla deposita filamento fundido capa por capa.",
+    text: "El calor, el movimiento y la repetibilidad convierten datos digitales en volumen físico con control de detalle.",
   },
   {
-    title: "Entrega",
-    text: "Imprimimos, revisamos calidad y coordinamos recojo o envío nacional.",
+    phase: "04",
+    title: "La pieza",
+    lead: "Se enfría, se revisa, se limpia y queda lista para entregar.",
+    text: "Coordinamos acabado, empaque, recojo o envío a cualquier departamento de Bolivia.",
   },
 ] as const;
 
@@ -149,64 +204,64 @@ export const portfolioItems = [
     category: "Decoración",
     material: "PLA translúcido",
     description: "Iluminación temática con cuerpo modular y brillo cálido.",
-    src: imgLampara,
-    webp: imgLamparaWebp,
+    accent: "#d4872d",
+    image: imgLampara,
   },
   {
     title: "Maqueta arquitectónica",
     category: "Arquitectura",
     material: "PLA",
     description: "Volúmenes precisos para presentación y revisión espacial.",
-    src: imgMaqueta,
-    webp: imgMaquetaWebp,
+    accent: "#56b2ad",
+    image: imgMaqueta,
   },
   {
     title: "Slifer, dragón rojo",
     category: "Colección",
     material: "PLA y pintura",
     description: "Figura de colección con postproceso y acabado brillante.",
-    src: imgSlifer,
-    webp: imgSliferWebp,
+    accent: "#b8563b",
+    image: imgSlifer,
   },
   {
     title: "Stand Comic Con 2025",
     category: "Eventos",
     material: "PLA",
     description: "Piezas temáticas listas para exhibición y venta.",
-    src: imgStandComic,
-    webp: imgStandComicWebp,
+    accent: "#d6b45b",
+    image: imgStandComic,
   },
   {
     title: "Stand Gamer Con 2025",
     category: "Eventos",
     material: "PLA",
     description: "Producción de accesorios y props para activación gamer.",
-    src: imgStandGamer,
-    webp: imgStandGamerWebp,
+    accent: "#74a06a",
+    image: imgStandGamer,
   },
   {
     title: "Stand Star Con 2025",
     category: "Eventos",
     material: "PLA",
     description: "Ambientación sci-fi con piezas seriadas y exhibibles.",
-    src: imgStandStar,
-    webp: imgStandStarWebp,
+    accent: "#6d91bc",
+    image: imgStandStar,
   },
   {
     title: "Kit AT-ST y caza TIE",
     category: "Colección",
     material: "PLA",
     description: "Modelos ensamblables con detalle fino y escala de mesa.",
-    src: imgKitAtst,
-    webp: imgKitAtstWebp,
+    accent: "#9f8d7a",
+    image: imgKitAtst,
   },
   {
     title: "X-Wing Star Wars",
     category: "Colección",
     material: "PLA",
     description: "Modelo con base, torretas y piezas de exposición.",
-    src: imgXwing,
-    webp: imgXwingWebp,
+    accent: "#c3c9bf",
+    image: imgXwing,
   },
 ] as const;
 
@@ -234,21 +289,115 @@ export const materials = [
 ] as const;
 
 export const equipment = {
-  name: "Bambu Lab P1S",
+  name: "Taller multimaquina",
   image: printerImage,
   specs: [
-    ["Volumen", "256 x 256 x 256 mm"],
-    ["Capa", "0.08 - 0.35 mm"],
-    ["Velocidad", "hasta 500 mm/s"],
-    ["Conectividad", "WiFi"],
+    ["Capacidad", "flujo paralelo"],
+    ["Formato", "piezas medianas"],
+    ["Materiales", "PLA, PETG, ABS, ASA"],
+    ["Flujo", "control y monitoreo"],
   ],
   features: [
     "Auto calibración",
-    "Detección de filamento",
-    "Recuperación ante cortes",
-    "Perfiles optimizados",
+    "Reparto de producción",
+    "Pruebas en paralelo",
+    "Perfiles por material",
   ],
 } as const;
+
+export const machineFleet = [
+  {
+    name: "Máquina cerrada",
+    count: "cámara estable",
+    role: "detalle, control térmico y repetibilidad",
+    text: "Apoya piezas con acabado limpio, mayor estabilidad de cámara y materiales que piden más control.",
+  },
+  {
+    name: "Máquinas abiertas",
+    count: "producción paralela",
+    role: "capacidad paralela y variantes",
+    text: "Permiten dividir trabajo, probar opciones a la vez y acelerar pedidos sin depender de una sola cola.",
+  },
+  {
+    name: "Taller multimaquina",
+    count: "capacidad flexible",
+    role: "producción ajustada al proyecto",
+    text: "Las máquinas pueden cambiar; lo importante es elegir material, orientación, relleno y acabado para que la pieza cumpla su función.",
+  },
+] as const;
+
+export const capabilityHighlights = [
+  {
+    title: "No son juguetes",
+    text: "Una impresora 3D bien calibrada fabrica piezas útiles cuando el diseño, el material y la orientación se eligen con criterio.",
+  },
+  {
+    title: "Material según uso",
+    text: "PLA para detalle visual, PETG para uso diario, ABS o ASA para calor/exterior y PC o PA para exigencias más técnicas.",
+  },
+  {
+    title: "Producción con criterio",
+    text: "Revisamos geometría, soportes, relleno y acabado antes de imprimir para evitar piezas bonitas pero inútiles.",
+  },
+] as const;
+
+export const socialLinks = [
+  {
+    label: "Instagram",
+    url: business.social.instagram,
+    type: "Oficial",
+    description: "Fotos de piezas, eventos, prototipos y proyectos terminados.",
+    icon: assets.socialIcons.instagram,
+  },
+  {
+    label: "TikTok",
+    url: business.social.tiktok,
+    type: "Oficial",
+    description: "Videos cortos del proceso de impresión y resultados reales.",
+    icon: assets.socialIcons.tiktok,
+  },
+  {
+    label: "Facebook",
+    url: business.social.facebook,
+    type: "Oficial",
+    description: "Publicaciones, novedades, eventos y contacto directo.",
+    icon: assets.socialIcons.facebook,
+  },
+  {
+    label: "Twitch",
+    url: business.social.twitch,
+    type: "Personal",
+    description: "Canal personal separado del contenido comercial de Voxel Forge.",
+    icon: assets.socialIcons.twitch,
+  },
+] as const;
+
+export const designResources = [
+  {
+    name: "MakerWorld",
+    url: "https://makerworld.com/",
+    category: "Modelos gratuitos",
+    description: "Biblioteca de diseños listos para revisar, ajustar e imprimir.",
+  },
+  {
+    name: "Cults3D",
+    url: "https://cults3d.com/",
+    category: "Gratis y premium",
+    description: "Comunidad con modelos decorativos, funcionales y de colección.",
+  },
+  {
+    name: "Maker Online",
+    url: "https://www.makeronline.com/en/",
+    category: "Ideas y archivos",
+    description: "Otra fuente útil para buscar referencias imprimibles.",
+  },
+  {
+    name: "Creality Cloud",
+    url: "https://www.crealitycloud.com/",
+    category: "Modelos y herramientas",
+    description: "Catálogo para explorar diseños antes de cotizar la pieza.",
+  },
+] as const;
 
 export const timeline = [
   {
@@ -258,55 +407,18 @@ export const timeline = [
   },
   {
     year: "2024",
-    title: "Salto premium",
-    text: "Se integró una Bambu Lab P1S para mejorar velocidad y precisión.",
+    title: "Más control",
+    text: "Se sumó una máquina cerrada para mejorar velocidad, estabilidad y precisión.",
   },
   {
     year: "2025",
     title: "Eventos y comunidad",
     text: "Participación en Comic Con, Gamer Con y Star Con con piezas temáticas.",
   },
-] as const;
-
-export const forgeStory = [
   {
-    phase: "01",
-    title: "Modelado",
-    lead: "La idea se vuelve archivo listo para imprimir.",
-    text: "Traducimos referencias en geometría limpia, con tolerancias reales y detalles que sí salen en impresión.",
-  },
-  {
-    phase: "02",
-    title: "Laminado",
-    lead: "Definimos material, capas y tiempo de fabricación.",
-    text: "Ajustamos parámetros, soportes y orientación para maximizar detalle y resistencia.",
-  },
-  {
-    phase: "03",
-    title: "Impresión",
-    lead: "La pieza toma forma con ritmo y precisión.",
-    text: "Supervisamos el proceso para asegurar paredes sólidas, superficies limpias y consistencia.",
-  },
-  {
-    phase: "04",
-    title: "Acabado",
-    lead: "Lijado, ensamblaje y presentación final.",
-    text: "Dejamos la pieza lista para usar, vender o exhibir con el look correcto.",
-  },
-] as const;
-
-export const meaning = [
-  {
-    term: "Voxel",
-    title: "Precisión digital",
-    text: "Cada capa es un pixel en 3D. Eso nos da control sobre forma, detalle y escala.",
-    signature: "Geometría clara",
-  },
-  {
-    term: "Forge",
-    title: "Oficio de taller",
-    text: "No solo imprimimos: calibramos, ajustamos y terminamos piezas como en una forja real.",
-    signature: "Acabado con criterio",
+    year: "2026",
+    title: "Taller multimaquina",
+    text: "Se suman apoyos abiertos para repartir producción y atender series pequeñas con más margen.",
   },
 ] as const;
 
@@ -331,4 +443,16 @@ export const faq = [
     answer:
       "Sí. Podemos modelar desde referencia, boceto o medidas, especialmente si la pieza requiere ajuste o ensamble.",
   },
+  {
+    question: "¿Las impresoras 3D sirven para piezas reales?",
+    answer:
+      "Sí. La diferencia está en el diseño, el material y la calibración. Podemos imprimir piezas visuales, decorativas, prototipos o componentes funcionales según la necesidad.",
+  },
 ] as const;
+
+export const defaultWhatsAppMessage =
+  "Hola Voxel Forge, quiero cotizar un proyecto de impresión 3D.";
+
+export function createWhatsAppLink(message = defaultWhatsAppMessage) {
+  return `https://wa.me/${business.whatsappNumber}?text=${encodeURIComponent(message)}`;
+}

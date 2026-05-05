@@ -8,11 +8,15 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.vite/
 dist
 dist-ssr
-.playwright-cli
-output
 *.local
+output/
+test-results/
+playwright-report/
+.playwright-mcp/
+voxel-*.png
 
 # Editor directories and files
 .vscode/*
