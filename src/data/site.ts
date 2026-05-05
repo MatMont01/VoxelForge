@@ -1,22 +1,20 @@
-import logoCircular from "../assets/logos/voxel-forge-logo-circular.png";
-import logoRectangular from "../assets/logos/voxel-forge-logo-rectangular.jpg";
+import logoCircular from "../assets/logos/voxel-forge-logo-circular-optimized.webp";
 import logoSolo from "../assets/logos/voxel-forge-logo-solo.svg";
 import facebookLogo from "../assets/social/facebook.svg";
 import instagramLogo from "../assets/social/instagram.png";
-import imgLampara from "../assets/portfolio/lampara antorcha minecraft.webp";
-import imgMaqueta from "../assets/portfolio/maqueta arquitectura.webp";
-import imgSlifer from "../assets/portfolio/Slifer dragon rojo.webp";
-import imgStandComic from "../assets/portfolio/stand comic con 2025.webp";
-import imgStandGamer from "../assets/portfolio/Stand Gamer Con 2025.webp";
-import imgStandStar from "../assets/portfolio/stand star con 2025.webp";
-import imgKitAtst from "../assets/portfolio/Starwars kit card at st y caza tie .webp";
-import imgXwing from "../assets/portfolio/Xwing Star wars.webp";
+import imgLampara from "../assets/portfolio/lampara-antorcha-minecraft-optimized.webp";
+import imgMaqueta from "../assets/portfolio/maqueta-arquitectura-optimized.webp";
+import imgSlifer from "../assets/portfolio/slifer-dragon-rojo-optimized.webp";
+import imgStandComic from "../assets/portfolio/stand-comic-con-2025-optimized.webp";
+import imgStandGamer from "../assets/portfolio/stand-gamer-con-2025-optimized.webp";
+import imgStandStar from "../assets/portfolio/stand-star-con-2025-optimized.webp";
+import imgKitAtst from "../assets/portfolio/starwars-kit-card-optimized.webp";
+import imgXwing from "../assets/portfolio/xwing-star-wars-optimized.webp";
 import imgGuardianSword from "../assets/portfolio/guardian-sword-3d-print.jpg";
-import filamentSpoolDetail from "../assets/printers/filament-spool-detail.jpg";
+import filamentSpoolDetail from "../assets/printers/filament-spool-detail-optimized.webp";
 import networkPrintingDetail from "../assets/printers/network-printing-detail.jpg";
-import anycubicKobraFront from "../assets/printers/anycubic kobra x.png";
-import anycubicKobraAngle from "../assets/printers/anycubic-kobra-x.webp";
-import printerImage from "../assets/printers/closed-machine.png";
+import anycubicKobraFront from "../assets/printers/anycubic-kobra-x-front-optimized.webp";
+import printerImage from "../assets/printers/closed-machine-optimized.webp";
 import remotePrintingDetail from "../assets/printers/remote-printing-detail.jpg";
 import tiktokLogo from "../assets/social/tiktok.png";
 import twitchLogo from "../assets/social/twitch.svg";
@@ -26,7 +24,6 @@ export const assets = {
   logos: {
     solo: logoSolo,
     circular: logoCircular,
-    rectangular: logoRectangular,
   },
   socialIcons: {
     instagram: instagramLogo,
@@ -37,7 +34,6 @@ export const assets = {
   },
   printer: printerImage,
   printerDetails: {
-    openFrame: anycubicKobraAngle,
     openFrameFront: anycubicKobraFront,
     filament: filamentSpoolDetail,
     remote: remotePrintingDetail,

@@ -8,6 +8,14 @@ type AnimatedParts = {
   printedPiece?: THREE.Object3D;
 };
 
+type PerformanceNavigator = Navigator & {
+  deviceMemory?: number;
+  connection?: {
+    saveData?: boolean;
+    effectiveType?: string;
+  };
+};
+
 function disposeObject(object: THREE.Object3D) {
   object.traverse((child) => {
     const mesh = child as THREE.Mesh;
@@ -42,6 +50,17 @@ export function ForgeScene() {
     if (!mount) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const performanceNavigator = navigator as PerformanceNavigator;
+    const connection = performanceNavigator.connection;
+    const lowPowerMode =
+      reduceMotion ||
+      connection?.saveData ||
+      connection?.effectiveType === "2g" ||
+      connection?.effectiveType === "slow-2g" ||
+      (performanceNavigator.deviceMemory ?? 16) <= 8 ||
+      (navigator.hardwareConcurrency ?? 8) <= 6;
+    const pixelRatioLimit = lowPowerMode ? 1 : 1.18;
+    const useRealtimeShadows = !lowPowerMode;
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x070809, 0.045);
 
@@ -50,14 +69,14 @@ export function ForgeScene() {
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: true,
-      powerPreference: "high-performance",
+      antialias: !lowPowerMode,
+      powerPreference: lowPowerMode ? "default" : "high-performance",
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.35));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, pixelRatioLimit));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.08;
-    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.enabled = useRealtimeShadows;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     mount.appendChild(renderer.domElement);
 
@@ -65,7 +84,7 @@ export function ForgeScene() {
 
     const key = new THREE.DirectionalLight(0xffd6a0, 2.4);
     key.position.set(3.4, 5.4, 4.8);
-    key.castShadow = true;
+    key.castShadow = useRealtimeShadows;
     key.shadow.mapSize.set(1024, 1024);
     scene.add(key);
 
@@ -102,8 +121,8 @@ export function ForgeScene() {
         model.traverse((child) => {
           const mesh = child as THREE.Mesh;
           if (mesh.isMesh) {
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
+            mesh.castShadow = useRealtimeShadows;
+            mesh.receiveShadow = useRealtimeShadows;
           }
         });
         root.add(model);
@@ -127,6 +146,7 @@ export function ForgeScene() {
 
     const resize = () => {
       const { width, height } = mount.getBoundingClientRect();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, pixelRatioLimit));
       renderer.setSize(width, height, false);
       camera.aspect = width / Math.max(height, 1);
       camera.position.set(width < 760 ? 0.4 : 0.1, width < 760 ? 1.48 : 1.55, width < 760 ? 8.9 : 7.8);
@@ -141,9 +161,31 @@ export function ForgeScene() {
     resize();
 
     let frame = 0;
-    let animationId = 0;
+    let animationId: number | null = null;
+    let isInViewport = true;
+    let documentVisible = !document.hidden;
 
-    const render = () => {
+    const shouldAnimate = () => mounted && isInViewport && documentVisible;
+    const requestRender = () => {
+      if (animationId === null) animationId = window.requestAnimationFrame(render);
+    };
+
+    const handleVisibility = () => {
+      documentVisible = !document.hidden;
+      requestRender();
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    const intersectionObserver = new IntersectionObserver(([entry]) => {
+      isInViewport = entry.isIntersecting;
+      requestRender();
+    });
+    intersectionObserver.observe(mount);
+
+    function render() {
+      animationId = null;
+      if (!shouldAnimate()) return;
+
       frame += reduceMotion ? 0 : 0.016;
 
       root.rotation.y = pointer.x * 0.035 + Math.sin(frame * 0.32) * 0.018;
@@ -165,13 +207,15 @@ export function ForgeScene() {
 
       forgeGlow.intensity = 2.8 + Math.sin(frame * 2.6) * 0.35;
       renderer.render(scene, camera);
-      animationId = window.requestAnimationFrame(render);
-    };
-    render();
+      requestRender();
+    }
+    requestRender();
 
     return () => {
       mounted = false;
-      window.cancelAnimationFrame(animationId);
+      if (animationId !== null) window.cancelAnimationFrame(animationId);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      intersectionObserver.disconnect();
       window.removeEventListener("pointermove", handlePointer);
       resizeObserver.disconnect();
       renderer.domElement.remove();

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useMemo, useRef } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import {
   motion,
@@ -42,6 +42,11 @@ const ForgeScene = lazy(() =>
   import("./ForgeScene").then((module) => ({ default: module.ForgeScene })),
 );
 
+type IdleWindow = Window & {
+  requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+  cancelIdleCallback?: (handle: number) => void;
+};
+
 const continuumMarks = [
   { left: "8%", delay: "0s", scale: 0.82 },
   { left: "18%", delay: "-1.4s", scale: 1.1 },
@@ -56,6 +61,39 @@ function ScrollProgress() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 24, mass: 0.2 });
 
   return <motion.div className="scroll-progress" style={{ scaleX }} />;
+}
+
+function DeferredForgeScene() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const idleWindow = window as IdleWindow;
+    let disposed = false;
+    const reveal = () => {
+      if (!disposed) setReady(true);
+    };
+    const usedIdleCallback = Boolean(idleWindow.requestIdleCallback);
+    const handle = idleWindow.requestIdleCallback
+      ? idleWindow.requestIdleCallback(reveal, { timeout: 1800 })
+      : window.setTimeout(reveal, 1100);
+
+    return () => {
+      disposed = true;
+      if (usedIdleCallback && idleWindow.cancelIdleCallback) {
+        idleWindow.cancelIdleCallback(handle);
+      } else {
+        window.clearTimeout(handle);
+      }
+    };
+  }, []);
+
+  if (!ready) return <div className="hero-webgl--fallback" />;
+
+  return (
+    <Suspense fallback={<div className="hero-webgl--fallback" />}>
+      <ForgeScene />
+    </Suspense>
+  );
 }
 
 function ForgeContinuum() {
@@ -117,15 +155,13 @@ function HeroChapter() {
     <section className="cinema hero-chapter" id="home" ref={ref} aria-labelledby="hero-title">
       <div className="cinema__sticky hero-stage">
         <div className="hero-webgl hero-webgl--forge">
-          <Suspense fallback={<div className="hero-webgl--fallback" />}>
-            <ForgeScene />
-          </Suspense>
+          <DeferredForgeScene />
         </div>
         <motion.div className="hero-lab" style={{ y: printerY, scale: printerScale, rotate: labRotate }} aria-hidden="true">
           <div className="hero-lab__plate" />
-          <img className="hero-kobra hero-kobra--left" src={assets.printerDetails.openFrameFront} alt="" />
-          <img className="hero-kobra hero-kobra--right" src={assets.printerDetails.openFrameFront} alt="" />
-          <img className="hero-printer" src={assets.printer} alt="" />
+          <img className="hero-kobra hero-kobra--left" src={assets.printerDetails.openFrameFront} alt="" decoding="async" />
+          <img className="hero-kobra hero-kobra--right" src={assets.printerDetails.openFrameFront} alt="" decoding="async" />
+          <img className="hero-printer" src={assets.printer} alt="" decoding="async" fetchPriority="high" />
         </motion.div>
         <motion.div className="hero-shade" style={{ opacity: shadeOpacity }} />
         <motion.div className="container hero-content" style={{ y: titleY }}>
@@ -182,6 +218,8 @@ function MeaningChapter() {
             className="meaning-logo"
             src={assets.logos.circular}
             alt="Logo circular de Voxel Forge"
+            loading="lazy"
+            decoding="async"
             style={{ scale: logoScale }}
           />
           <div className="chapter-copy">
@@ -315,7 +353,7 @@ function PortfolioChapter() {
                 key={item.title}
                 style={{ "--i": index, "--accent": item.accent } as CSSProperties}
               >
-                <img src={item.image} alt={`${item.title} impreso por Voxel Forge`} loading="lazy" />
+                <img src={item.image} alt={`${item.title} impreso por Voxel Forge`} loading="lazy" decoding="async" />
                 <div>
                   <span>{String(index + 1).padStart(2, "0")} / {item.category}</span>
                   <h3>{item.title}</h3>
@@ -381,14 +419,14 @@ function EquipmentChapter() {
               <span className="machine-route machine-route--one" />
               <span className="machine-route machine-route--two" />
             </div>
-            <img className="main-machine" src={equipment.image} alt="Máquina cerrada del taller de impresión 3D" />
+            <img className="main-machine" src={equipment.image} alt="Máquina cerrada del taller de impresión 3D" loading="lazy" decoding="async" />
             {machinePanels.map((panel, index) => (
               <motion.figure
                 className={`machine-photo machine-photo--${index + 1}`}
                 key={panel.title}
                 style={{ y: panelY }}
               >
-                <img src={panel.image} alt={panel.title} loading="lazy" />
+                <img src={panel.image} alt={panel.title} loading="lazy" decoding="async" />
                 <figcaption>
                   <small>{panel.label}</small>
                   <strong>{panel.title}</strong>
@@ -452,7 +490,7 @@ function ServicesMaterialsChapter() {
   return (
     <section className="chapter services-chapter" id="services" aria-labelledby="services-title">
       <div className="service-atmosphere" aria-hidden="true">
-        <img src={assets.printerDetails.network} alt="" loading="lazy" />
+        <img src={assets.printerDetails.network} alt="" loading="lazy" decoding="async" />
         <span className="service-atmosphere__line service-atmosphere__line--one" />
         <span className="service-atmosphere__line service-atmosphere__line--two" />
       </div>
@@ -502,7 +540,7 @@ function SocialResourcesChapter() {
             {socialLinks.map((item) => (
               <a key={item.label} className="social-card" href={item.url} target="_blank" rel="noreferrer">
                 <span className="social-card__icon">
-                  {item.icon ? <img src={item.icon} alt="" /> : <ExternalLink aria-hidden="true" size={20} />}
+                  {item.icon ? <img src={item.icon} alt="" loading="lazy" decoding="async" /> : <ExternalLink aria-hidden="true" size={20} />}
                 </span>
                 <span>
                   <small>{item.type}</small>
@@ -532,12 +570,12 @@ function ContactFinale() {
     <section className="finale" id="contact" aria-labelledby="contact-title">
       <div className="finale-collage" aria-hidden="true">
         {portfolioItems.slice(0, 5).map((item, index) => (
-          <img key={item.title} src={item.image} alt="" style={{ "--i": index } as CSSProperties} />
+          <img key={item.title} src={item.image} alt="" loading="lazy" decoding="async" style={{ "--i": index } as CSSProperties} />
         ))}
       </div>
       <div className="container finale-content">
         <div className="finale-copy">
-          <img className="finale-logo" src={assets.logos.circular} alt="Voxel Forge" />
+          <img className="finale-logo" src={assets.logos.circular} alt="Voxel Forge" loading="lazy" decoding="async" />
           <p className="kicker">Cotización directa</p>
           <h2 id="contact-title">Manda archivo, foto, medida o idea.</h2>
           <p>
@@ -568,7 +606,7 @@ function ContactFinale() {
         </div>
         <div className="finale-terminal" aria-label="Flujo de cotización">
           <div className="finale-terminal__media">
-            <img src={assets.inspiration.guardianSword} alt="" />
+            <img src={assets.inspiration.guardianSword} alt="" loading="lazy" decoding="async" />
             <span>prop impreso</span>
             <a
               href="https://learn.adafruit.com/breath-of-the-wild-guardian-sword-led-3d-printed/overview"
@@ -585,6 +623,7 @@ function ContactFinale() {
                 src={item.image}
                 alt={`${item.title} de Voxel Forge`}
                 loading="lazy"
+                decoding="async"
                 style={{ "--i": index } as CSSProperties}
               />
             ))}

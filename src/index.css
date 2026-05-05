@@ -1785,6 +1785,21 @@ section[id] {
     #08090b;
 }
 
+.chapter,
+.finale,
+.site-footer {
+  content-visibility: auto;
+}
+
+.services-chapter,
+.social-chapter {
+  contain-intrinsic-size: 1120px;
+}
+
+.finale {
+  contain-intrinsic-size: 1180px;
+}
+
 .services-chapter {
   min-height: 112dvh;
   padding: 156px 0 140px;
@@ -2621,11 +2636,26 @@ section[id] {
   }
 
   .hero-content {
+    width: calc(100vw - 28px);
     padding-top: 0;
+    max-width: calc(100vw - 28px);
+    margin-inline: 14px;
   }
 
   .hero-content h1 {
     font-size: clamp(3rem, 18vw, 4.8rem);
+  }
+
+  .hero-statement,
+  .hero-text,
+  .kicker {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-text {
+    font-size: clamp(0.96rem, 4vw, 1.06rem);
+    line-height: 1.58;
   }
 
   .hero-printer {

@@ -52,7 +52,7 @@ def cube(name, location, dimensions, material, bevel=0.0, rotation=(0, 0, 0)):
     if bevel:
         modifier = obj.modifiers.new(f"{name}_soft_edges", "BEVEL")
         modifier.width = bevel
-        modifier.segments = 5
+        modifier.segments = 3
         obj.modifiers.new(f"{name}_weighted_normals", "WEIGHTED_NORMAL")
     return obj
 
@@ -75,8 +75,8 @@ def cylinder(name, location, radius, depth, material, vertices=48, rotation=(0, 
 
 def torus(name, location, major_radius, minor_radius, material, rotation=(0, 0, 0)):
     bpy.ops.mesh.primitive_torus_add(
-        major_segments=72,
-        minor_segments=10,
+        major_segments=44,
+        minor_segments=8,
         major_radius=major_radius,
         minor_radius=minor_radius,
         location=location,
@@ -93,9 +93,9 @@ def torus(name, location, major_radius, minor_radius, material, rotation=(0, 0, 
 def path_curve(name, points, material, bevel_depth=0.018):
     curve = bpy.data.curves.new(name, type="CURVE")
     curve.dimensions = "3D"
-    curve.resolution_u = 16
+    curve.resolution_u = 8
     curve.bevel_depth = bevel_depth
-    curve.bevel_resolution = 5
+    curve.bevel_resolution = 3
     spline = curve.splines.new("POLY")
     spline.points.add(len(points) - 1)
     for point, coords in zip(spline.points, points):
@@ -195,7 +195,7 @@ def build_model(output_path: Path) -> None:
     print_piece = bpy.data.objects.new("PrintedPiece", None)
     bpy.context.collection.objects.link(print_piece)
     print_piece.parent = bed_empty
-    for index in range(16):
+    for index in range(14):
         ring = torus(
             f"printed layer {index:02d}",
             (0, 0.02, 0.8 + index * 0.045),
@@ -248,10 +248,10 @@ def build_model(output_path: Path) -> None:
         (1.22, silver_filament, "4"),
     ]
     for x, spool_mat, number in spool_specs:
-        parent_to(cylinder(f"spool filament {number}", (x, 0.04, 4.08), 0.32, 0.26, spool_mat, 72, (0, math.pi / 2, 0)), model_root)
-        parent_to(cylinder(f"spool left flange {number}", (x - 0.15, 0.04, 4.08), 0.36, 0.035, dark, 72, (0, math.pi / 2, 0)), model_root)
-        parent_to(cylinder(f"spool right flange {number}", (x + 0.15, 0.04, 4.08), 0.36, 0.035, dark, 72, (0, math.pi / 2, 0)), model_root)
-        parent_to(cylinder(f"spool hub {number}", (x, 0.04, 4.08), 0.09, 0.36, rail, 48, (0, math.pi / 2, 0)), model_root)
+        parent_to(cylinder(f"spool filament {number}", (x, 0.04, 4.08), 0.32, 0.26, spool_mat, 44, (0, math.pi / 2, 0)), model_root)
+        parent_to(cylinder(f"spool left flange {number}", (x - 0.15, 0.04, 4.08), 0.36, 0.035, dark, 44, (0, math.pi / 2, 0)), model_root)
+        parent_to(cylinder(f"spool right flange {number}", (x + 0.15, 0.04, 4.08), 0.36, 0.035, dark, 44, (0, math.pi / 2, 0)), model_root)
+        parent_to(cylinder(f"spool hub {number}", (x, 0.04, 4.08), 0.09, 0.36, rail, 36, (0, math.pi / 2, 0)), model_root)
         parent_to(cube(f"spool bracket {number}", (x, 0.12, 3.58), (0.1, 0.14, 0.76), white, 0.04), model_root)
         parent_to(text_label(f"spool number {number}", number, (x, -0.16, 4.46), 0.08, black), model_root)
 
