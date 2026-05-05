@@ -1785,21 +1785,6 @@ section[id] {
     #08090b;
 }
 
-.chapter,
-.finale,
-.site-footer {
-  content-visibility: auto;
-}
-
-.services-chapter,
-.social-chapter {
-  contain-intrinsic-size: 1120px;
-}
-
-.finale {
-  contain-intrinsic-size: 1180px;
-}
-
 .services-chapter {
   min-height: 112dvh;
   padding: 156px 0 140px;

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useMemo, useRef } from "react";
 import type { CSSProperties } from "react";
 import {
   motion,
@@ -42,11 +42,6 @@ const ForgeScene = lazy(() =>
   import("./ForgeScene").then((module) => ({ default: module.ForgeScene })),
 );
 
-type IdleWindow = Window & {
-  requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
-  cancelIdleCallback?: (handle: number) => void;
-};
-
 const continuumMarks = [
   { left: "8%", delay: "0s", scale: 0.82 },
   { left: "18%", delay: "-1.4s", scale: 1.1 },
@@ -61,39 +56,6 @@ function ScrollProgress() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 24, mass: 0.2 });
 
   return <motion.div className="scroll-progress" style={{ scaleX }} />;
-}
-
-function DeferredForgeScene() {
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const idleWindow = window as IdleWindow;
-    let disposed = false;
-    const reveal = () => {
-      if (!disposed) setReady(true);
-    };
-    const usedIdleCallback = Boolean(idleWindow.requestIdleCallback);
-    const handle = idleWindow.requestIdleCallback
-      ? idleWindow.requestIdleCallback(reveal, { timeout: 1800 })
-      : window.setTimeout(reveal, 1100);
-
-    return () => {
-      disposed = true;
-      if (usedIdleCallback && idleWindow.cancelIdleCallback) {
-        idleWindow.cancelIdleCallback(handle);
-      } else {
-        window.clearTimeout(handle);
-      }
-    };
-  }, []);
-
-  if (!ready) return <div className="hero-webgl--fallback" />;
-
-  return (
-    <Suspense fallback={<div className="hero-webgl--fallback" />}>
-      <ForgeScene />
-    </Suspense>
-  );
 }
 
 function ForgeContinuum() {
@@ -155,7 +117,9 @@ function HeroChapter() {
     <section className="cinema hero-chapter" id="home" ref={ref} aria-labelledby="hero-title">
       <div className="cinema__sticky hero-stage">
         <div className="hero-webgl hero-webgl--forge">
-          <DeferredForgeScene />
+          <Suspense fallback={<div className="hero-webgl--fallback" />}>
+            <ForgeScene />
+          </Suspense>
         </div>
         <motion.div className="hero-lab" style={{ y: printerY, scale: printerScale, rotate: labRotate }} aria-hidden="true">
           <div className="hero-lab__plate" />
