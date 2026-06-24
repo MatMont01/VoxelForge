@@ -69,7 +69,7 @@ export const landingPage: LandingPageContent = {
     },
     machine: {
       src: equipment.image,
-      alt: "Impresora 3D cerrada del taller Voxel Forge",
+      alt: "Impresora 3D cerrada usada por Voxel Forge para fabricar piezas personalizadas",
     },
     logo: {
       src: assets.logos.circular,
@@ -131,7 +131,7 @@ export const landingPage: LandingPageContent = {
   meaning: {
     title: "Del archivo a una pieza con oficio.",
     body:
-      "Voxel Forge une precisión digital y mano de taller: medimos, orientamos y terminamos cada pieza para que no sea solo imprimible, sino útil, exhibible o lista para entregar.",
+      "En Voxel Forge unimos precisión digital y mano de taller: medimos, orientamos y terminamos tu pieza para que no sea solo imprimible, sino útil, exhibible o lista para entregar.",
     logo: {
       src: assets.logos.circular,
       alt: "Logo circular oficial de Voxel Forge",
@@ -191,14 +191,14 @@ export const landingPage: LandingPageContent = {
   portfolio: {
     title: "Piezas con escala, detalle y contexto.",
     body:
-      "La galería funciona como una mesa de taller: piezas inclinadas, tamaños distintos y fotos reales para que el usuario entienda rápido el tipo de resultado.",
+      "Mira trabajos reales con escala, material y contexto para que entiendas rápido qué tipo de resultado podemos fabricar para ti.",
     featured: portfolioPieces[6],
     pieces: portfolioPieces,
   },
   services: {
     title: "La pieza define el camino.",
     body:
-      "El usuario no tiene que saber de impresión 3D para pedir una pieza. Solo necesita mandar una referencia; el taller traduce eso a material, escala y acabado.",
+      "No necesitas saber de impresión 3D para pedir una pieza. Nos mandas una referencia y nosotros la traducimos a material, escala y acabado.",
     materialsImage: {
       src: assets.filaments.pla,
       alt: "Carretes de filamento PLA, PETG, ABS y materiales técnicos en el taller Voxel Forge",

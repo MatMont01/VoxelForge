@@ -78,7 +78,7 @@ export const business = {
   tagline: "Forjamos tu mundo",
   headline: "Impresión 3D profesional en Santa Cruz de la Sierra",
   description:
-    "Prototipos, piezas funcionales, figuras, maquetas y producción para eventos con múltiples máquinas, acabados cuidados y envíos a toda Bolivia.",
+    "Imprimimos prototipos, piezas funcionales, figuras, maquetas y producción para eventos con materiales bien elegidos, acabados cuidados y envíos a toda Bolivia.",
   siteUrl: "https://voxelforge.org/",
   email: "voxelforge1502@gmail.com",
   whatsappNumber: "59174697838",
@@ -127,11 +127,11 @@ export const metrics = [
 
 export const companyProfile = {
   history:
-    "Voxel Forge comenzó en 2022 con una Ender 3 V2. Lo que empezó como un hobby se convirtió en un taller dedicado a convertir ideas, referencias y archivos en piezas físicas para clientes, eventos y proyectos personales.",
+    "Empezamos Voxel Forge en 2022 con una Ender 3 V2. Lo que nació como un hobby se convirtió en un taller donde convertimos ideas, referencias y archivos en piezas físicas para clientes, eventos y proyectos personales.",
   mission:
-    "Transformar ideas en objetos tangibles mediante impresión 3D de alta calidad, asesoría técnica y materiales elegidos según el uso real de cada pieza.",
+    "Convertimos tu idea en una pieza tangible mediante impresión 3D de alta calidad, asesoría técnica y materiales elegidos según el uso real que tendrá.",
   vision:
-    "Ser un referente de impresión 3D personalizada en Bolivia, reconocido por piezas bien resueltas, comunicación clara y entregas confiables.",
+    "Queremos ser un referente de impresión 3D personalizada en Bolivia por piezas bien resueltas, comunicación clara y entregas confiables.",
 } as const;
 
 export const meaning = [
@@ -144,7 +144,7 @@ export const meaning = [
   {
     term: "Forge",
     title: "La forja que transforma",
-    text: "Forge habla del oficio: calor, material y criterio técnico para convertir un archivo o idea en una pieza física lista para usarse.",
+    text: "Forge habla del oficio: calor, material y criterio técnico para convertir tu archivo o idea en una pieza física lista para usarse.",
     signature: "Filamento, capas y acabado.",
   },
 ] as const;
@@ -205,7 +205,7 @@ export const forgeStory = [
     phase: "01",
     title: "La chispa",
     lead: "Todo empieza como archivo, boceto, foto o medida.",
-    text: "Se revisa geometría, tamaño, tolerancias y propósito para saber si la pieza debe verse increíble, resistir uso real o producirse en serie.",
+    text: "Revisamos geometría, tamaño, tolerancias y propósito para saber si tu pieza debe verse increíble, resistir uso real o producirse en serie.",
   },
   {
     phase: "02",
@@ -223,7 +223,7 @@ export const forgeStory = [
     phase: "04",
     title: "La pieza",
     lead: "Se enfría, se revisa, se limpia y queda lista para entregar.",
-    text: "Coordinamos acabado, empaque, recojo o envío a cualquier departamento de Bolivia.",
+    text: "Coordinamos acabado, empaque, recojo o envío para que recibas la pieza en Santa Cruz o cualquier departamento de Bolivia.",
   },
 ] as const;
 
@@ -347,22 +347,22 @@ export const machineFleet = [
     name: "Taller multimaquina",
     count: "capacidad flexible",
     role: "producción ajustada al proyecto",
-    text: "Las máquinas pueden cambiar; lo importante es elegir material, orientación, relleno y acabado para que la pieza cumpla su función.",
+    text: "Adaptamos la máquina, el material, la orientación, el relleno y el acabado para que tu pieza cumpla su función.",
   },
 ] as const;
 
 export const capabilityHighlights = [
   {
     title: "No son juguetes",
-    text: "Una impresora 3D bien calibrada fabrica piezas útiles cuando el diseño, el material y la orientación se eligen con criterio.",
+    text: "Fabricamos piezas útiles cuando el diseño, el material y la orientación se eligen con criterio desde el inicio.",
   },
   {
     title: "Material según uso",
-    text: "PLA para detalle visual, PETG para uso diario, ABS o ASA para calor/exterior y TPU/Flex para piezas con absorción o contacto.",
+    text: "Te orientamos entre PLA, PETG, ABS, ASA o TPU/Flex según si necesitas detalle visual, uso diario, calor, exterior o flexibilidad.",
   },
   {
     title: "Producción con criterio",
-    text: "Revisamos geometría, soportes, relleno y acabado antes de imprimir para evitar piezas bonitas pero inútiles.",
+    text: "Revisamos geometría, soportes, relleno y acabado antes de imprimir para evitar una pieza bonita pero inútil.",
   },
 ] as const;
 
@@ -416,7 +416,7 @@ export const designResources = [
     name: "Maker Online",
     url: "https://www.makeronline.com/en/",
     category: "Ideas y archivos",
-    description: "Otra fuente útil para buscar referencias imprimibles.",
+    description: "Otra fuente útil para encontrar referencias que podamos revisar contigo.",
     icon: makerOnlineLogo,
   },
   {
@@ -455,7 +455,7 @@ export const faq = [
   {
     question: "¿Qué necesito para cotizar?",
     answer:
-      "Puedes enviar un archivo STL, un enlace, fotos de referencia o medidas. Si falta algo, te guiamos por WhatsApp.",
+      "Puedes enviarnos un archivo STL, un enlace, fotos de referencia o medidas. Si falta algo, te guiamos por WhatsApp.",
   },
   {
     question: "¿Hacen envíos fuera de Santa Cruz?",

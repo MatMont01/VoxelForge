@@ -15,8 +15,8 @@ export function ContactSection({ content }: ContactSectionProps) {
             <p className="vf-kicker">Modelos listos</p>
             <h2 id="resources-title">Ideas para cotizar sin diseñar desde cero.</h2>
             <p>
-              Puedes buscar un modelo gratuito o premium, descargarlo o enviarnos el enlace.
-              Revisamos si se puede imprimir, qué material conviene y cuánto costaría hacerlo.
+              Busca un modelo gratuito o premium, descárgalo o envíanos el enlace.
+              Nosotros revisamos si se puede imprimir, qué material conviene y cuánto costaría hacerlo.
             </p>
           </div>
           <div className="vf-resource-grid" data-reveal>
@@ -47,7 +47,7 @@ export function ContactSection({ content }: ContactSectionProps) {
             <h2 id="faq-title">Lo básico para pedir una pieza.</h2>
             <p>
               Respuestas directas antes de mandar tu archivo, foto o referencia.
-              La idea es que sepas rápido si tu pieza puede avanzar.
+              Queremos que sepas rápido si tu pieza puede avanzar.
             </p>
           </div>
           <div className="vf-faq-grid" data-reveal>
