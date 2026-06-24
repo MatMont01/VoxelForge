@@ -1,21 +1,34 @@
 import logoCircular from "../assets/logos/voxel-forge-logo-circular-optimized.webp";
 import logoSolo from "../assets/logos/voxel-forge-logo-solo.svg";
+import generatedContactWorkshop from "../assets/generated/contact-kobra-logo.webp";
+import generatedHeroWorkshop from "../assets/generated/hero-workshop-p1s-logo.webp";
 import facebookLogo from "../assets/social/facebook.svg";
 import instagramLogo from "../assets/social/instagram.png";
-import imgLampara from "../assets/portfolio/lampara-antorcha-minecraft-optimized.webp";
-import imgMaqueta from "../assets/portfolio/maqueta-arquitectura-optimized.webp";
-import imgSlifer from "../assets/portfolio/slifer-dragon-rojo-optimized.webp";
-import imgStandComic from "../assets/portfolio/stand-comic-con-2025-optimized.webp";
-import imgStandGamer from "../assets/portfolio/stand-gamer-con-2025-optimized.webp";
-import imgStandStar from "../assets/portfolio/stand-star-con-2025-optimized.webp";
-import imgKitAtst from "../assets/portfolio/starwars-kit-card-optimized.webp";
-import imgXwing from "../assets/portfolio/xwing-star-wars-optimized.webp";
+import filamentAbsAsa from "../assets/generated/filament-abs-asa.webp";
+import filamentPetg from "../assets/generated/filament-petg.webp";
+import filamentPla from "../assets/generated/filament-pla.webp";
+import filamentTpuFlex from "../assets/generated/filament-tpu-flex.webp";
+import imgLampara from "../assets/generated/portfolio-lamp.webp";
+import imgMaqueta from "../assets/generated/portfolio-maqueta.webp";
+import imgSlifer from "../assets/generated/portfolio-slifer.webp";
+import imgStandComic from "../assets/generated/portfolio-stand-comiccon.webp";
+import imgStandStar from "../assets/generated/portfolio-stand-starcon.webp";
+import imgKitAtst from "../assets/generated/portfolio-atst.webp";
+import imgXwing from "../assets/generated/portfolio-xwing.webp";
 import imgGuardianSword from "../assets/portfolio/guardian-sword-3d-print.jpg";
+import processDeliveryIcon from "../assets/generated/process-delivery.webp";
+import processFileIcon from "../assets/generated/process-file.webp";
+import processMaterialIcon from "../assets/generated/process-material.webp";
+import processPrintIcon from "../assets/generated/process-print.webp";
 import filamentSpoolDetail from "../assets/printers/filament-spool-detail-optimized.webp";
 import networkPrintingDetail from "../assets/printers/network-printing-detail.jpg";
 import anycubicKobraFront from "../assets/printers/anycubic-kobra-x-front-optimized.webp";
 import printerImage from "../assets/printers/closed-machine-optimized.webp";
 import remotePrintingDetail from "../assets/printers/remote-printing-detail.jpg";
+import crealityCloudLogo from "../assets/resources/crealitycloud.png";
+import cults3dLogo from "../assets/resources/cults3d.png";
+import makerOnlineLogo from "../assets/resources/makeronline.png";
+import makerWorldLogo from "../assets/resources/makerworld.png";
 import tiktokLogo from "../assets/social/tiktok.png";
 import twitchLogo from "../assets/social/twitch.svg";
 import whatsappLogo from "../assets/social/whatsapp.svg";
@@ -41,6 +54,22 @@ export const assets = {
   },
   inspiration: {
     guardianSword: imgGuardianSword,
+  },
+  generated: {
+    heroWorkshop: generatedHeroWorkshop,
+    contactWorkshop: generatedContactWorkshop,
+  },
+  processIcons: {
+    file: processFileIcon,
+    material: processMaterialIcon,
+    print: processPrintIcon,
+    delivery: processDeliveryIcon,
+  },
+  filaments: {
+    pla: filamentPla,
+    petg: filamentPetg,
+    absAsa: filamentAbsAsa,
+    tpuFlex: filamentTpuFlex,
   },
 } as const;
 
@@ -124,45 +153,49 @@ export const services = [
   {
     title: "Impresión 3D a pedido",
     summary:
-      "Cotización por pieza, tiempo, material y acabado. Puedes enviar STL, enlace o idea inicial.",
+      "STL, enlace, foto, medida o idea inicial convertida en una pieza real.",
     bullets: [
-      "PLA, PETG, ABS, ASA, PC, PA y más",
+      "Material elegido según uso",
       "Piezas decorativas o funcionales",
       "Asesoría antes de imprimir",
     ],
+    image: imgXwing,
     tone: "Molten",
   },
   {
-    title: "Diseño y modelado",
+    title: "Modelado y medidas",
     summary:
-      "Convertimos referencias, bocetos o medidas en archivos listos para fabricar.",
+      "Partimos de fotos o dimensiones cuando todavía no existe el modelo.",
     bullets: [
-      "Modelado para impresión FDM",
+      "Referencia clara antes de fabricar",
       "Ajustes por tolerancia y ensamble",
       "Entrega de archivo cuando aplica",
     ],
+    image: imgMaqueta,
     tone: "Blueprint",
   },
   {
-    title: "Prototipado rápido",
+    title: "Props y colección",
     summary:
-      "Iteraciones ágiles para validar forma, ergonomía y función antes de producir.",
+      "Figuras, cosplay y piezas para exhibir sin explicación técnica.",
     bullets: [
-      "Pruebas de encaje",
-      "Revisión de resistencia",
-      "Versiones sucesivas del diseño",
+      "Detalle visual",
+      "Piezas decorativas",
+      "Acabado de exhibición",
     ],
+    image: imgSlifer,
     tone: "Pulse",
   },
   {
-    title: "Producción para eventos",
+    title: "Eventos y series",
     summary:
-      "Props, stands, medallas, trofeos, souvenirs y piezas temáticas para activaciones.",
+      "Stands, premios, regalos y lotes pequeños listos para entregar.",
     bullets: [
       "Comic Con, Gamer Con y Star Con",
       "Series pequeñas y medianas",
       "Acabado y presentación",
     ],
+    image: imgStandStar,
     tone: "Stage",
   },
 ] as const;
@@ -228,14 +261,6 @@ export const portfolioItems = [
     image: imgStandComic,
   },
   {
-    title: "Stand Gamer Con 2025",
-    category: "Eventos",
-    material: "PLA",
-    description: "Producción de accesorios y props para activación gamer.",
-    accent: "#74a06a",
-    image: imgStandGamer,
-  },
-  {
     title: "Stand Star Con 2025",
     category: "Eventos",
     material: "PLA",
@@ -266,21 +291,25 @@ export const materials = [
     name: "PLA / PLA+",
     bestFor: "Figuras, decoración, maquetas y prototipos visuales.",
     tone: "Ligero, económico y con muy buen detalle.",
+    image: filamentPla,
   },
   {
     name: "PETG",
     bestFor: "Piezas funcionales, soportes y componentes de uso diario.",
     tone: "Más resistente al impacto y a la humedad.",
+    image: filamentPetg,
   },
   {
     name: "ABS / ASA",
     bestFor: "Piezas expuestas a temperatura, exterior o mayor exigencia.",
     tone: "Mayor resistencia térmica y acabado postprocesable.",
+    image: filamentAbsAsa,
   },
   {
-    name: "PC / PA",
-    bestFor: "Proyectos técnicos donde importa rigidez, fuerza o durabilidad.",
-    tone: "Materiales avanzados para requisitos específicos.",
+    name: "TPU / Flex",
+    bestFor: "Apoyos, protectores, agarres y piezas que necesitan flexión.",
+    tone: "Flexible para absorción, contacto y protección.",
+    image: filamentTpuFlex,
   },
 ] as const;
 
@@ -329,7 +358,7 @@ export const capabilityHighlights = [
   },
   {
     title: "Material según uso",
-    text: "PLA para detalle visual, PETG para uso diario, ABS o ASA para calor/exterior y PC o PA para exigencias más técnicas.",
+    text: "PLA para detalle visual, PETG para uso diario, ABS o ASA para calor/exterior y TPU/Flex para piezas con absorción o contacto.",
   },
   {
     title: "Producción con criterio",
@@ -374,24 +403,28 @@ export const designResources = [
     url: "https://makerworld.com/",
     category: "Modelos gratuitos",
     description: "Biblioteca de diseños listos para revisar, ajustar e imprimir.",
+    icon: makerWorldLogo,
   },
   {
     name: "Cults3D",
     url: "https://cults3d.com/",
     category: "Gratis y premium",
     description: "Comunidad con modelos decorativos, funcionales y de colección.",
+    icon: cults3dLogo,
   },
   {
     name: "Maker Online",
     url: "https://www.makeronline.com/en/",
     category: "Ideas y archivos",
     description: "Otra fuente útil para buscar referencias imprimibles.",
+    icon: makerOnlineLogo,
   },
   {
     name: "Creality Cloud",
     url: "https://www.crealitycloud.com/",
     category: "Modelos y herramientas",
     description: "Catálogo para explorar diseños antes de cotizar la pieza.",
+    icon: crealityCloudLogo,
   },
 ] as const;
 
